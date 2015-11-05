@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>登陆</title>
+    <!--  <link rel='stylesheet' href='/stylesheets/style.css' />
+    -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/dist/img/favicon.ico">
+
+    <!--<link href="/stylesheets/sigin.css" rel="stylesheet">-->
+    <link href="/dist/css/flat-ui.css" rel="stylesheet">
+    <link href="/stylesheets/demo.css" rel="stylesheet">
+    <script language="javascript">
+
+
+        function submit1(realname)
+        {
+            alert(realname);
+        }
+    </script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div class="container">
+    <!--<img src="/wp-content/uploads/2014/06/download.png"
+         class="img-circle">-->
+    <!--<form  action ="http://61.153.102.85/push/test" method="POST" >-->
+    <form  action ="http://localhost:3000/client/uploadinfo" method="POST" >
+        <input type="text" name="File" value="1123" />
+        <input type="text" name="Path" value="1123"  />
+
+        <input type="text" name="Event" value="1123"  />
+
+        <input type="text" name="Username" value="1123" />
+
+        <input type="text" name="Declaration" value="1123"  />
+
+
+
+
+        <input type="text" name="Pan" value="1123" />
+        <input type="text" name="merchant_id" value="1"  />
+
+        <input type="text" name="push_version" value="1"  />
+
+        <input type="text" name="imei" value="1" />
+
+        <input type="text" name="imsi" value="1"  />
+
+        <input type="text" name="hd_factory" value="1"  />
+        <input type="text" name="hd_type" value="1"  />
+
+        <input type="text" name="access_type" value="1"  />
+
+        <input type="text" name="third_app" value="1" />
+        <input type="text" name="platform_version" value="1"  />
+
+
+        <input type="text" name="app_name" value="1" />
+
+        <input type="text" name="download_list_version" value="1"  />
+
+        <input type="text" name="push_list_version" value="0"  />
+
+
+        <input type="submit" value="登录" class="btn btn-primary btn-lg btn-block" />
+                    <a class="login-link" href="#">忘记密码?</a>
+
+
+    </form>
+</div>
+
+
+
+</body>
+</html>

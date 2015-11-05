@@ -1,0 +1,821 @@
+/**
+ * Created by Administrator on 2015/8/14.
+ */
+var nodemailer = require("nodemailer");
+var mysql = require('mysql');
+var http = require('http');
+var querystring = require('querystring');       //用于发送post请求
+// 开启一个 SMTP 连接池
+var username2 = 'root'
+var password2 = '123456'
+var db_host2 = 'localhost'
+var db_port2 = '3306'
+var db_name2 = 'tbu_system'
+/*
+ //后台运算库
+ var username2 = 'root'
+ var password2 = 'Tbu2020Foo'
+ var db_host2 = '10.4.10.159'
+ var db_port2 = '3306'
+ var db_name2 = 'tbu_system'*/
+var WEEKREPORT_TABLE = 'weekreport';
+var option2 = {
+    host: db_host2,
+    port: db_port2,
+    user: username2,
+    password: password2,
+    database: db_name2
+}
+var pushversion   ;
+var newadduser  ;
+var switchrecord   ;
+var pushrecord  ;
+var switchnowifi  ;
+var pushnowifi  ;
+var pushmarknum   ;
+var download_request_times   ;
+var download_request   ;
+var download_request_percent   ;
+var download_request_zhuanhua_percent    ;
+var download_request_avg   ;
+
+
+var download_result_times  ;
+var download_result  ;
+var download_result_percent   ;
+var download_result_zhuanhua_percent    ;
+var download_result_avg    ;
+
+
+
+var download_success_times  ;
+var download_success   ;
+var download_success_percent   ;
+var download_success_zhuanhua_percent   ;
+var download_success_avg   ;
+
+
+var install_request_times   ;
+var install_request    ;
+var install_request_percent  ;
+var install_request_zhuanhua_percent    ;
+var install_request_avg   ;
+
+
+
+
+var noimei_times   ;
+var noimei   ;
+
+
+var noimei_percent   ;
+
+var nowifi_times    ;
+var nowifi   ;
+
+var nowifi_percent    ;
+
+var delay_times   ;
+var delay   ;
+var delay_percent   ;
+var delay_zhuanhua_percent    ;
+var delay_avg   ;
+
+
+
+
+var delay_noinstall_times  ;
+var delay_noinstall   ;
+var delay_noinstall_percent    ;
+var delay_noinstall_zhuanhua_percent    ;
+var delay_noinstall_avg    ;
+
+
+
+
+var delaying_times   ;
+var delaying   ;
+var delaying_percent   ;
+var delaying_zhuanhua_percent   ;
+var delaying_avg    ;
+
+var maininstall    ;
+var avail_success   ;
+
+var pushmark_time   ;
+var firstin_time   ;
+var firstin_user   ;
+var firstin_timepercent    ;
+
+var firstin_userpercent    ;
+
+
+var direct_time  ;
+var direct_user    ;
+var direct_timepercent   ;
+
+var direct_userpercent   ;
+
+var chargeoff_time   ;
+var chargeoff_user   ;
+var chargeoff_timepercent   ;
+
+var chargeoff_userpercent   ;
+
+var delayout_time   ;
+var delayout_user ;
+var delayout_timepercent    ;
+
+var delayout_userpercent   ;
+
+
+
+var nf_time   ;
+var nf_user    ;
+var nf_timepercent    ;
+
+var nf_userpercent   ;
+
+
+var chargeon_time   ;
+var chargeon_user   ;
+var chargeon_timepercent   ;
+
+var chargeon_userpercent   ;
+
+var notifi_time   ;
+var notifi_user   ;
+var notifi_timepercent    ;
+
+var notifi_userpercent    ;
+
+var nowifinotifi_time    ;
+var nowifinotifi_user    ;
+var nowifinotifi_timepercent  ;
+
+var nowifinotifi_userpercent   ;
+
+var settime_time   ;
+var settime_user  ;
+var settime_timepercent  ;
+
+var settime_userpercent    ;
+
+var pushdata_time    ;
+var pushdata_user   ;
+var pushdata_timepercent  =0  ;
+
+var pushdata_userpercent   =0 ;
+var noimei_zhuanhua_percent=0;
+var  noimei_avg=0;
+var nowifi_zhuanhua_percent=0;
+var nowifi_avg=0;
+var a_type_noti_times=0;
+var a_type_noti=0;
+var a_type_noti_percent=0;
+var a_type_noti_avg=0;
+
+var b_type_times=0;
+var b_type=0;
+var b_type_percent=0;
+var b_type_avg=0;
+
+var a_type_twice_time=0;
+var a_type_twice=0;
+var a_type_twice_percent=0;
+var a_type_twice_avg=0;
+
+var smtpTransport = nodemailer.createTransport({
+    service: 'qq',
+    auth: {
+        user: 'nanshihui@tallbigup.com',
+        pass: 'sywtz11'
+    }
+});
+
+// 设置邮件内容
+
+
+// 发送邮件
+var detail="";
+function dosendmail(){
+
+    showweekreportmail();
+
+}
+function showweekreportmail() {
+
+    console.log('已经进入');
+    var client = mysql.createConnection(option2);
+    client.connect();
+
+    client.query('select * from ' + WEEKREPORT_TABLE + '   order by pushversion desc',
+
+        function (err, results) {
+            if (err) {
+
+                client.end();
+                console.log(err);
+                return;
+            }
+
+            else {
+
+
+
+                if (results.length > 0) {
+                    var versionpush=results[0].pushversion;
+                    client.query('select * from ' + WEEKREPORT_TABLE +' where pushversion=?', [versionpush],
+                        function (err, results) {
+                            if (err) {
+                                //  res.send('write db err[PUSH_TABLE], err = ' + err);
+                                console.log(err);
+                                client.end();
+                                return;
+                            }
+
+                            var data1 = JSON.stringify(results);
+
+                            data1 = '{"result":' + data1 + '}';
+                            var data= JSON.stringify(data1);
+
+                            var data2=JSON.parse(data);
+                            var data2=JSON.parse(data2);
+                            var datadetail=data2.result[0];
+                            pushversion    =datadetail.pushversion;
+                            newadduser    =datadetail.newadduser;
+                            switchrecord    =datadetail.switchrecord;
+                            pushrecord    =datadetail.pushrecord;
+                            switchnowifi    =switchrecord-datadetail.switchwifi;
+                            pushnowifi    =datadetail.pushnowifi;
+                            pushmarknum    =datadetail.pushmarknum;
+                            download_request_times    =datadetail.download_request_times;
+                            download_request    =datadetail.download_request;
+                            download_request_percent    =datadetail.download_request/datadetail.pushrecord;
+                            download_request_zhuanhua_percent    =datadetail.download_request/datadetail.pushrecord;
+                            download_request_avg    =datadetail.download_request_times/datadetail.download_request;
+
+
+                            download_result_times    =datadetail.download_result_times;
+                            download_result    =datadetail.download_result;
+                            download_result_percent    =datadetail.download_result/datadetail.pushrecord;
+                            download_result_zhuanhua_percent    =datadetail.download_result/datadetail.download_request;
+                            download_result_avg    =datadetail.download_result_times/datadetail.download_result;
+
+
+
+                            download_success_times    =datadetail.download_success_times;
+                            download_success    =datadetail.download_success;
+                            download_success_percent    =datadetail.download_success/datadetail.pushrecord;
+                            download_success_zhuanhua_percent    =datadetail.download_success/datadetail.download_result;
+                            download_success_avg    =datadetail.download_success_times/datadetail.download_success;
+
+
+                            install_request_times    =datadetail.install_request_times;
+                            install_request    =datadetail.install_request;
+                            install_request_percent    =datadetail.install_request/datadetail.pushrecord;
+                            install_request_zhuanhua_percent    =datadetail.install_request/datadetail.download_success;
+                            install_request_avg    =datadetail.install_request_times/datadetail.install_request;
+
+
+                          a_type_noti_times=datadetail.a_type_noti_times;
+                          a_type_noti=datadetail.a_type_noti;
+                          a_type_noti_percent=datadetail.a_type_noti/datadetail.pushrecord;
+                          a_type_noti_avg=datadetail.a_type_noti_times/datadetail.a_type_noti;
+
+                           b_type_times=datadetail.b_type_times;
+                           b_type=datadetail.b_type;
+                           b_type_percent=datadetail.b_type/datadetail.pushrecord;
+                           b_type_avg=datadetail.b_type_times/datadetail.b_type;
+
+                           a_type_twice_time=datadetail.a_type_twice_time;
+                           a_type_twice=datadetail.a_type_twice;
+                           a_type_twice_percent=datadetail.a_type_twice/datadetail.pushrecord;
+                           a_type_twice_avg=datadetail.a_type_twice_time/datadetail.a_type_twice;
+
+
+                            noimei_times    =datadetail.noimei_times;
+                            noimei    =datadetail.noimei;
+
+
+                            noimei_percent    =datadetail.noimei/datadetail.pushrecord;
+
+                            nowifi_times    =datadetail.nowifi_times;
+                            nowifi    =datadetail.nowifi;
+
+                            nowifi_percent    =datadetail.nowifi/datadetail.pushrecord;
+
+                            delay_times    =datadetail.delay_times;
+                            delay    =datadetail.delay;
+                            delay_percent    =datadetail.delay/datadetail.pushrecord;
+                            delay_zhuanhua_percent    =datadetail.delay/datadetail.install_request;
+                            delay_avg    =datadetail.delay_times/datadetail.delay;
+
+
+
+
+                            delay_noinstall_times    =datadetail.delay_noinstall_times;
+                            delay_noinstall    =datadetail.delay_noinstall;
+                            delay_noinstall_percent    =datadetail.delay_noinstall/datadetail.pushrecord;
+                            delay_noinstall_zhuanhua_percent    =datadetail.delay_noinstall/datadetail.install_request;
+                            delay_noinstall_avg    =datadetail.delay_noinstall_times/datadetail.delay_noinstall;
+
+
+
+
+                            delaying_times    =datadetail.delaying_times;
+                            delaying    =datadetail.delaying;
+                            delaying_percent    =datadetail.delaying/datadetail.pushrecord;
+                            delaying_zhuanhua_percent    =datadetail.delaying/datadetail.install_request;
+                            delaying_avg    =datadetail.delaying_times/datadetail.delaying;
+
+
+                            maininstall= (datadetail.delaying_times+datadetail.delay_times)/datadetail.allpeople;
+                            avail_success= (datadetail.delaying_times+datadetail.delay_times)/datadetail.availpeople;
+
+                            pushmark_time    =datadetail.pushmark_time;
+                            firstin_time    =datadetail.firstin_time;
+                            firstin_user    =datadetail.firstin_user;
+                            firstin_timepercent    =datadetail.firstin_time/datadetail.pushmark_time;
+
+                            firstin_userpercent    =datadetail.firstin_user/datadetail.install_request;
+
+
+                            direct_time    =datadetail.direct_time;
+                            direct_user    =datadetail.direct_user;
+                            direct_timepercent    =datadetail.direct_time/datadetail.pushmark_time;
+
+                            direct_userpercent    =datadetail.direct_user/datadetail.install_request;
+
+                            chargeoff_time    =datadetail.chargeoff_time;
+                            chargeoff_user    =datadetail.chargeoff_user;
+                            chargeoff_timepercent    =datadetail.chargeoff_time/datadetail.pushmark_time;
+
+                            chargeoff_userpercent    =datadetail.chargeoff_user/datadetail.install_request;
+
+                            delayout_time    =datadetail.delayout_time;
+                            delayout_user    =datadetail.delayout_user;
+                            delayout_timepercent    =datadetail.delayout_time/datadetail.pushmark_time;
+
+                            delayout_userpercent    =datadetail.delayout_user/datadetail.install_request;
+
+
+
+                            nf_time    =datadetail.nf_time;
+                            nf_user    =datadetail.nf_user;
+                            nf_timepercent    =datadetail.nf_time/datadetail.pushmark_time;
+
+                            nf_userpercent    =datadetail.nf_user/datadetail.install_request;
+
+
+                            chargeon_time    =datadetail.chargeon_time;
+                            chargeon_user    =datadetail.chargeon_user;
+                            chargeon_timepercent    =datadetail.chargeon_time/datadetail.pushmark_time;
+
+                            chargeon_userpercent    =datadetail.chargeon_user/datadetail.install_request;
+
+                            notifi_time    =datadetail.notifi_time;
+                            notifi_user    =datadetail.notifi_user;
+                            notifi_timepercent    =datadetail.notifi_time/datadetail.pushmark_time;
+
+                            notifi_userpercent    =datadetail.notifi_user/datadetail.install_request;
+
+                            nowifinotifi_time    =datadetail.nowifinotifi_time;
+                            nowifinotifi_user    =datadetail.nowifinotifi_user;
+                            nowifinotifi_timepercent    =datadetail.nowifinotifi_time/datadetail.pushmark_time;
+
+                            nowifinotifi_userpercent    =datadetail.nowifinotifi_user/datadetail.install_request;
+
+                            settime_time    =datadetail.settime_time;
+                            settime_user    =datadetail.settime_user;
+                            settime_timepercent    =datadetail.settime_time/datadetail.pushmark_time;
+
+                            settime_userpercent    =datadetail.settime_user/datadetail.install_request;
+
+                            pushdata_time    =datadetail.pushdata_time;
+                            pushdata_user    =datadetail.pushdata_user;
+                            pushdata_timepercent    =datadetail.pushdata_time/datadetail.pushmark_time;
+
+                            pushdata_userpercent    =datadetail.pushdata_user/datadetail.install_request;
+                            var mailOptions1 = {
+                                from: "Fred Foo <nanshihui@tallbigup.com>", // 发件地址
+                                to: "nanshihui@qq.com", // 收件列表
+                                subject: "山哥大大，最新版push周报已自动生成，为您呈上", // 标题
+                                html: "<html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"+
+
+                                "<meta name=\"description\" content=\"\"><meta name=\"author\" content=\"\"> <title>周报</title></head><body ><div class=\"container-fluid\" id=\"LG\"><div class=\"row-fluid\"><div class=\"span12\"><div class=\"row-fluid\">"+
+                                "<div class=\"span12\"><dl><dt>1 基本用户信息 push版本号：<input   type=\"text\"   id=\"pushversion\" value=\""+pushversion+"\"  style=\"border:0px;\"></dt><dt>新增用户数量：<input   type=\"text\"   id=\"newadduser\" value=\""+pushversion+"\"  style=\"border:0px;\">"+
+                                "</dt></dl><table class=\"table table-striped\"><tbody> <tr> <td>开关记录用户 </td><td>push记录用户 </td></tr> <tr> <td><input  type=\"text\"   id=\"switchrecord\" value=\""+pushversion+"\"  style=\"border:0px;\"> </td> <td><input   type=\"text\"   id=\"pushrecord\" value=\""+pushrecord+"\"  style=\"border:0px;\"> </td>"+
+                                "</tr><tr><td>开关服务中无wifi用户</td> <td> push记录中无wifi用户</td> </tr><tr><td><input   type=\"text\"   id=\"switchnowifi\" value=\""+switchnowifi+"\"  style=\"border:0px;\"> </td><td><input   type=\"text\"   id=\"pushnowifi\" value=\""+pushnowifi+"\"  style=\"border:0px;\"></td> </tr> </tbody></table><dl><dt>2 用户行为</dt><dt>总共手机记录：<input   type=\"text\"   id=\"pushmarknum\" value=\""+pushmarknum+"\"  style=\"border:0px;\">条。其中，行为整理如下："+
+                                "</dt></dl><table class=\"table-striped\"><tbody><tr><td> 行为</td> <td>次数</td> <td> 用户数</td><td>用户占比</td><td>转化率/用户</td><td>平均用户次数/次</td></tr><tr><td>下载请求 </td> <td><input   type=\"text\"   id=\"download_request_times\" value=\""+download_request_times+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"download_request\" value=\""+download_request+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"download_request_percent\" value=\""+download_request_percent+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"download_request_zhuanhua_percent\" value=\""+download_request_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_request_avg\" value=\""+download_request_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 下载结果 </td> <td> <input   type=\"text\"   id=\"download_result_times\" value=\""+download_result_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result\" value=\""+download_result+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result_percent\" value=\""+download_result_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result_zhuanhua_percent\" value=\""+download_result_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result_avg\" value=\""+download_result_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 下载结果-成功 </td> <td> <input   type=\"text\"   id=\"download_success_times\" value=\""+download_success_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success\" value=\""+download_success+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success_percent\" value=\""+download_success_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success_zhuanhua_percent\" value=\""+download_success_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success_avg\" value=\""+download_success_avg+"\"  style=\"border:0px;\">"+
+
+                                "</td> </tr> <tr> <td> 安装请求"+
+                                "</td> <td> <input   type=\"text\"   id=\"install_request_times\" value=\""+install_request_times+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"install_request\" value=\""+install_request+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"install_request_percent\" value=\""+install_request_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"install_request_zhuanhua_percent\" value=\""+install_request_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"install_request_avg\" value=\""+install_request_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+
+
+
+                                " <tr> <td> A型无可用wifi弹Notify"+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_noti_times\" value=\""+a_type_noti_times+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_noti\" value=\""+a_type_noti+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_noti_percent\" value=\""+a_type_noti_percent+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_noti_zhuanhua_percent\" value=\""+'0'+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_noti_avg\" value=\""+a_type_noti_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+                                " <tr> <td> B型广告弹Notify"+
+                                "</td> <td> <input   type=\"text\"   id=\"b_type_times\" value=\""+b_type_times+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"b_type\" value=\""+b_type+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"b_type_percent\" value=\""+b_type_percent+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"b_type_twice_zhuanhua_percent\" value=\""+'0'+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"b_type_avg\" value=\""+b_type_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+                                " <tr> <td> A型二次弹Notify"+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_twice_time\" value=\""+a_type_twice_time+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_twice\" value=\""+a_type_twice+"\"  style=\"border:0px;\">"+
+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_twice_percent\" value=\""+a_type_twice_percent+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_twice_zhuanhua_percent\" value=\""+'0'+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_twice_avg\" value=\""+a_type_twice_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+
+
+
+
+
+                                "<tr> <td> 异常imei或者imsi </td> <td> <input   type=\"text\"   id=\"noimei_times\" value=\""+noimei_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei\" value=\""+noimei+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei_percent\" value=\""+noimei_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei_zhuanhua_percent\" value=\""+noimei_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei_avg\" value=\""+noimei_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 无wifi </td>"+
+                                "<td> <input   type=\"text\"   id=\"nowifi_times\" value=\""+nowifi_times+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifi\" value=\""+nowifi+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifi_percent\" value=\""+nowifi_percent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"nowifi_zhuanhua_percent\" value=\""+nowifi_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifi_avg\" value=\""+nowifi_avg+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td> 延迟启动"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_times\" value=\""+delay_times+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delay\" value=\""+delay+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"delay_percent\" value=\""+delay_percent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delay_zhuanhua_percent\" value=\""+delay_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_avg\" value=\""+delay_avg+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td> 延迟未安装"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_noinstall_times\" value=\""+delay_noinstall_times+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delay_noinstall\" value=\""+delay_noinstall+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_noinstall_percent\" value=\""+delay_noinstall_percent+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"delay_noinstall_zhuanhua_percent\" value=\""+delay_noinstall_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_noinstall_avg\" value=\""+delay_noinstall_avg+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 延迟运行中 </td> <td> <input   type=\"text\"   id=\"delaying_times\" value=\""+delaying_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delaying\" value=\""+delaying+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delaying_percent\" value=\""+delaying_percent+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"delaying_zhuanhua_percent\" value=\""+delaying_zhuanhua_percent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delaying_avg\" value=\""+delaying_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> </tbody> </table> <p class=\"table-striped\"> </p> <dl> <dt>总安装成功率为： <input   type=\"text\"   id=\"maininstall\" value=\""+maininstall+"\"  style=\"border:0px;\">有效用户的成功率为：<input   type=\"text\"   id=\"avail_success\" value=\""+avail_success+"\"  style=\"border:0px;\">"+
+                                "</dt> <dt> 其中安装请求的详细数据如下（共<input   type=\"text\"   id=\"pushmark_time\" value=\""+pushmark_time+"\"  style=\"border:0px;\">次）： </dt>"+
+                                "</dl> <div class=\"table-responsive\"> <table class=\"table-striped\"> <tbody> <tr> <td>行为 </td> <td> 次数 </td> <td>"+
+                                "用户数 </td> <td> 次数占比 </td> <td> 用户数占比 </td> </tr> <tr> <td> 首次进入（5min延迟安装）</td> <td> <input   type=\"text\"   id=\"firstin_time\" value=\""+firstin_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"firstin_user\" value=\""+firstin_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"firstin_timepercent\" value=\""+firstin_timepercent+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"firstin_userpercent\" value=\""+firstin_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td>"+
+                                "退出直接安装 </td> <td> <input   type=\"text\"   id=\"direct_time\" value=\""+direct_time+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"direct_user\" value=\""+direct_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"direct_timepercent\" value=\""+direct_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"direct_userpercent\" value=\""+direct_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 充电结束（拔出手机）</td> <td> <input   type=\"text\"   id=\"chargeoff_time\" value=\""+chargeoff_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"chargeoff_user\" value=\""+chargeoff_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"chargeoff_timepercent\" value=\""+chargeoff_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"chargeoff_userpercent\" value=\""+chargeoff_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 延迟退出 </td> <td> <input   type=\"text\"   id=\"delayout_time\" value=\""+delayout_time+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"delayout_user\" value=\""+delayout_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delayout_timepercent\" value=\""+delayout_timepercent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delayout_userpercent\" value=\""+delayout_userpercent+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 非首次安装 </td> <td> <input   type=\"text\"   id=\"nf_time\" value=\""+nf_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"nf_user\" value=\""+nf_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"nf_timepercent\" value=\""+nf_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nf_userpercent\" value=\""+nf_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td>"+
+                                "其他定时器[连电源触发定时器] </td> <td> <input   type=\"text\"   id=\"chargeon_time\" value=\""+chargeon_time+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"chargeon_user\" value=\""+chargeon_user+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"chargeon_timepercent\" value=\""+chargeon_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"chargeon_userpercent\" value=\""+chargeon_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td>"+
+                                "通过通知栏提醒用户安装 </td> <td> <input   type=\"text\"   id=\"notifi_time\" value=\""+notifi_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"notifi_user\" value=\""+notifi_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"notifi_timepercent\" value=\""+notifi_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"notifi_userpercent\" value=\""+notifi_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 无wifi通知用户 </td> <td> <input   type=\"text\"   id=\"nowifinotifi_time\" value=\""+nowifinotifi_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"nowifinotifi_user\" value=\""+nowifinotifi_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"nowifinotifi_timepercent\" value=\""+nowifinotifi_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifinotifi_userpercent\" value=\""+nowifinotifi_userpercent+"\"  style=\"border:0px;\"> </td> </tr>"+
+                                "<tr> <td> 定时器触发 </td> <td> <input   type=\"text\"   id=\"settime_time\" value=\""+settime_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"settime_user\" value=\""+settime_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"settime_timepercent\" value=\""+settime_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"settime_userpercent\" value=\""+settime_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td>B型-先下载直接安装 </td> <td> <input   type=\"text\"   id=\"pushdata_time\" value=\""+pushdata_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"pushdata_user\" value=\""+pushdata_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"pushdata_timepercent\" value=\""+pushdata_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"pushdata_userpercent\" value=\""+pushdata_userpercent+"\"  style=\"border:0px;\"> </td> </tr> </tbody>"+
+                                "</table> </div> <p class=\"table-striped\"> </p> </div> </div> </div> </div> </div> </body>"+
+                                "    </html>" // html 内容
+                            }
+                          smtpTransport.sendMail(mailOptions1, function(error, response){
+                                if(error){
+                                    console.log(error);
+                                }else{
+                                    console.log("Message sent: " + response.message);
+                                }
+                                smtpTransport.close(); // 如果没用，关闭连接池
+                            });
+                            var mailOptions = {
+                                from: "Fred Foo <nanshihui@tallbigup.com>", // 发件地址
+                                to: "molo.xiao@tallbigup.com", // 收件列表
+                                subject: "山哥大大，最新版push周报已自动生成，为您呈上", // 标题
+                                html: "<html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"+
+
+                                "<meta name=\"description\" content=\"\"><meta name=\"author\" content=\"\"> <title>周报</title></head><body ><div class=\"container-fluid\" id=\"LG\"><div class=\"row-fluid\"><div class=\"span12\"><div class=\"row-fluid\">"+
+                                "<div class=\"span12\"><dl><dt>1 基本用户信息 push版本号：<input   type=\"text\"   id=\"pushversion\" value=\""+pushversion+"\"  style=\"border:0px;\"></dt><dt>新增用户数量：<input   type=\"text\"   id=\"newadduser\" value=\""+pushversion+"\"  style=\"border:0px;\">"+
+                                "</dt></dl><table class=\"table table-striped\"><tbody> <tr> <td>开关记录用户 </td><td>push记录用户 </td></tr> <tr> <td><input  type=\"text\"   id=\"switchrecord\" value=\""+pushversion+"\"  style=\"border:0px;\"> </td> <td><input   type=\"text\"   id=\"pushrecord\" value=\""+pushrecord+"\"  style=\"border:0px;\"> </td>"+
+                                "</tr><tr><td>开关服务中无wifi用户</td> <td> push记录中无wifi用户</td> </tr><tr><td><input   type=\"text\"   id=\"switchnowifi\" value=\""+switchnowifi+"\"  style=\"border:0px;\"> </td><td><input   type=\"text\"   id=\"pushnowifi\" value=\""+pushnowifi+"\"  style=\"border:0px;\"></td> </tr> </tbody></table><dl><dt>2 用户行为</dt><dt>总共手机记录：<input   type=\"text\"   id=\"pushmarknum\" value=\""+pushmarknum+"\"  style=\"border:0px;\">条。其中，行为整理如下："+
+                                "</dt></dl><table class=\"table-striped\"><tbody><tr><td> 行为</td> <td>次数</td> <td> 用户数</td><td>用户占比</td><td>转化率/用户</td><td>平均用户次数/次</td></tr><tr><td>下载请求 </td> <td><input   type=\"text\"   id=\"download_request_times\" value=\""+download_request_times+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"download_request\" value=\""+download_request+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"download_request_percent\" value=\""+download_request_percent+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"download_request_zhuanhua_percent\" value=\""+download_request_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_request_avg\" value=\""+download_request_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 下载结果 </td> <td> <input   type=\"text\"   id=\"download_result_times\" value=\""+download_result_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result\" value=\""+download_result+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result_percent\" value=\""+download_result_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result_zhuanhua_percent\" value=\""+download_result_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_result_avg\" value=\""+download_result_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 下载结果-成功 </td> <td> <input   type=\"text\"   id=\"download_success_times\" value=\""+download_success_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success\" value=\""+download_success+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success_percent\" value=\""+download_success_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success_zhuanhua_percent\" value=\""+download_success_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"download_success_avg\" value=\""+download_success_avg+"\"  style=\"border:0px;\">"+
+
+                                "</td> </tr> <tr> <td> 安装请求"+
+                                "</td> <td> <input   type=\"text\"   id=\"install_request_times\" value=\""+install_request_times+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"install_request\" value=\""+install_request+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"install_request_percent\" value=\""+install_request_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"install_request_zhuanhua_percent\" value=\""+install_request_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"install_request_avg\" value=\""+install_request_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+
+
+
+
+                                " <tr> <td> A型无可用wifi弹Notify"+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_noti_times\" value=\""+a_type_noti_times+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_noti\" value=\""+a_type_noti+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_noti_percent\" value=\""+a_type_noti_percent+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_noti_zhuanhua_percent\" value=\""+'0'+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_noti_avg\" value=\""+a_type_noti_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+                                " <tr> <td> B型广告弹Notify"+
+                                "</td> <td> <input   type=\"text\"   id=\"b_type_times\" value=\""+b_type_times+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"b_type\" value=\""+b_type+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"b_type_percent\" value=\""+b_type_percent+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"b_type_twice_zhuanhua_percent\" value=\""+'0'+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"b_type_avg\" value=\""+b_type_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+                                " <tr> <td> A型二次弹Notify"+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_twice_time\" value=\""+a_type_twice_time+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_twice\" value=\""+a_type_twice+"\"  style=\"border:0px;\">"+
+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_twice_percent\" value=\""+a_type_twice_percent+"\"  style=\"border:0px;\">"+
+                                "</td><td> <input   type=\"text\"   id=\"a_type_twice_zhuanhua_percent\" value=\""+'0'+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"a_type_twice_avg\" value=\""+a_type_twice_avg+"\"  style=\"border:0px;\"></td> </tr> "+
+
+
+
+
+
+
+
+
+                                "<tr> <td> 异常imei或者imsi </td> <td> <input   type=\"text\"   id=\"noimei_times\" value=\""+noimei_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei\" value=\""+noimei+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei_percent\" value=\""+noimei_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei_zhuanhua_percent\" value=\""+noimei_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"noimei_avg\" value=\""+noimei_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 无wifi </td>"+
+                                "<td> <input   type=\"text\"   id=\"nowifi_times\" value=\""+nowifi_times+"\"  style=\"border:0px;\">"+
+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifi\" value=\""+nowifi+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifi_percent\" value=\""+nowifi_percent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"nowifi_zhuanhua_percent\" value=\""+nowifi_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifi_avg\" value=\""+nowifi_avg+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td> 延迟启动"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_times\" value=\""+delay_times+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delay\" value=\""+delay+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"delay_percent\" value=\""+delay_percent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delay_zhuanhua_percent\" value=\""+delay_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_avg\" value=\""+delay_avg+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td> 延迟未安装"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_noinstall_times\" value=\""+delay_noinstall_times+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delay_noinstall\" value=\""+delay_noinstall+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_noinstall_percent\" value=\""+delay_noinstall_percent+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"delay_noinstall_zhuanhua_percent\" value=\""+delay_noinstall_zhuanhua_percent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delay_noinstall_avg\" value=\""+delay_noinstall_avg+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 延迟运行中 </td> <td> <input   type=\"text\"   id=\"delaying_times\" value=\""+delaying_times+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"delaying\" value=\""+delaying+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delaying_percent\" value=\""+delaying_percent+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"delaying_zhuanhua_percent\" value=\""+delaying_zhuanhua_percent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delaying_avg\" value=\""+delaying_avg+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> </tbody> </table> <p class=\"table-striped\"> </p> <dl> <dt>总安装成功率为： <input   type=\"text\"   id=\"maininstall\" value=\""+maininstall+"\"  style=\"border:0px;\">有效用户的成功率为：<input   type=\"text\"   id=\"avail_success\" value=\""+avail_success+"\"  style=\"border:0px;\">"+
+                                "</dt> <dt> 其中安装请求的详细数据如下（共<input   type=\"text\"   id=\"pushmark_time\" value=\""+pushmark_time+"\"  style=\"border:0px;\">次）： </dt>"+
+                                "</dl> <div class=\"table-responsive\"> <table class=\"table-striped\"> <tbody> <tr> <td>行为 </td> <td> 次数 </td> <td>"+
+                                "用户数 </td> <td> 次数占比 </td> <td> 用户数占比 </td> </tr> <tr> <td> 首次进入（5min延迟安装）</td> <td> <input   type=\"text\"   id=\"firstin_time\" value=\""+firstin_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"firstin_user\" value=\""+firstin_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"firstin_timepercent\" value=\""+firstin_timepercent+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"firstin_userpercent\" value=\""+firstin_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td>"+
+                                "退出直接安装 </td> <td> <input   type=\"text\"   id=\"direct_time\" value=\""+direct_time+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"direct_user\" value=\""+direct_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"direct_timepercent\" value=\""+direct_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"direct_userpercent\" value=\""+direct_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 充电结束（拔出手机）</td> <td> <input   type=\"text\"   id=\"chargeoff_time\" value=\""+chargeoff_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"chargeoff_user\" value=\""+chargeoff_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"chargeoff_timepercent\" value=\""+chargeoff_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"chargeoff_userpercent\" value=\""+chargeoff_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 延迟退出 </td> <td> <input   type=\"text\"   id=\"delayout_time\" value=\""+delayout_time+"\"  style=\"border:0px;\"> </td> <td>"+
+                                "<input   type=\"text\"   id=\"delayout_user\" value=\""+delayout_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delayout_timepercent\" value=\""+delayout_timepercent+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"delayout_userpercent\" value=\""+delayout_userpercent+"\"  style=\"border:0px;\">"+
+                                "</td> </tr> <tr> <td> 非首次安装 </td> <td> <input   type=\"text\"   id=\"nf_time\" value=\""+nf_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"nf_user\" value=\""+nf_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"nf_timepercent\" value=\""+nf_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nf_userpercent\" value=\""+nf_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td>"+
+                                "其他定时器[连电源触发定时器] </td> <td> <input   type=\"text\"   id=\"chargeon_time\" value=\""+chargeon_time+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"chargeon_user\" value=\""+chargeon_user+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"chargeon_timepercent\" value=\""+chargeon_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"chargeon_userpercent\" value=\""+chargeon_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr> <td>"+
+                                "通过通知栏提醒用户安装 </td> <td> <input   type=\"text\"   id=\"notifi_time\" value=\""+notifi_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"notifi_user\" value=\""+notifi_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"notifi_timepercent\" value=\""+notifi_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"notifi_userpercent\" value=\""+notifi_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td> 无wifi通知用户 </td> <td> <input   type=\"text\"   id=\"nowifinotifi_time\" value=\""+nowifinotifi_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"nowifinotifi_user\" value=\""+nowifinotifi_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"nowifinotifi_timepercent\" value=\""+nowifinotifi_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"nowifinotifi_userpercent\" value=\""+nowifinotifi_userpercent+"\"  style=\"border:0px;\"> </td> </tr>"+
+                                "<tr> <td> 定时器触发 </td> <td> <input   type=\"text\"   id=\"settime_time\" value=\""+settime_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"settime_user\" value=\""+settime_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"settime_timepercent\" value=\""+settime_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"settime_userpercent\" value=\""+settime_userpercent+"\"  style=\"border:0px;\"> </td> </tr> <tr>"+
+                                "<td>B型-先下载直接安装 </td> <td> <input   type=\"text\"   id=\"pushdata_time\" value=\""+pushdata_time+"\"  style=\"border:0px;\"> </td>"+
+                                "<td> <input   type=\"text\"   id=\"pushdata_user\" value=\""+pushdata_user+"\"  style=\"border:0px;\"> </td> <td> <input   type=\"text\"   id=\"pushdata_timepercent\" value=\""+pushdata_timepercent+"\"  style=\"border:0px;\">"+
+                                "</td> <td> <input   type=\"text\"   id=\"pushdata_userpercent\" value=\""+pushdata_userpercent+"\"  style=\"border:0px;\"> </td> </tr> </tbody>"+
+                                "</table> </div> <p class=\"table-striped\"> </p> </div> </div> </div> </div> </div> </body>"+
+                                "    </html>" // html 内容
+                                   }
+                            /*
+                            smtpTransport.sendMail(mailOptions, function(error, response){
+                                if(error){
+                                    console.log(error);
+                                }else{
+                                    console.log("Message sent: " + response.message);
+                                }
+                                smtpTransport.close(); // 如果没用，关闭连接池
+                            });*/
+
+                        });
+
+
+                } else {
+                    client.end();
+
+                }
+            }
+        });
+
+
+}
+exports.dosendmail =dosendmail;                                        //发送周报邮件
+/*
+
+
+
+
+ document.getElementById("pushversion").value=datadetail.pushversion;
+ document.getElementById("newadduser").value=datadetail.newadduser;
+ document.getElementById("switchrecord").value=datadetail.switchrecord;
+ document.getElementById("pushrecord").value=datadetail.pushrecord;
+ document.getElementById("switchnowifi").value= document.getElementById("switchrecord").value-datadetail.switchwifi;
+ document.getElementById("pushnowifi").value=datadetail.pushnowifi;
+ document.getElementById("pushmarknum").value=datadetail.pushmarknum;
+ document.getElementById("download_request_times").value=datadetail.download_request_times;
+ document.getElementById("download_request").value=datadetail.download_request;
+ document.getElementById("download_request_percent").value=datadetail.download_request/datadetail.pushrecord;
+ document.getElementById("download_request_zhuanhua_percent").value=datadetail.download_request/datadetail.pushrecord;
+ document.getElementById("download_request_avg").value=datadetail.download_request_times/datadetail.download_request;
+
+
+ document.getElementById("download_result_times").value=datadetail.download_result_times;
+ document.getElementById("download_result").value=datadetail.download_result;
+ document.getElementById("download_result_percent").value=datadetail.download_result/datadetail.pushrecord;
+ document.getElementById("download_result_zhuanhua_percent").value=datadetail.download_result/datadetail.download_request;
+ document.getElementById("download_result_avg").value=datadetail.download_result_times/datadetail.download_result;
+
+
+
+ document.getElementById("download_success_times").value=datadetail.download_success_times;
+ document.getElementById("download_success").value=datadetail.download_success;
+ document.getElementById("download_success_percent").value=datadetail.download_success/datadetail.pushrecord;
+ document.getElementById("download_success_zhuanhua_percent").value=datadetail.download_success/datadetail.download_result;
+ document.getElementById("download_success_avg").value=datadetail.download_success_times/datadetail.download_success;
+
+
+ document.getElementById("install_request_times").value=datadetail.install_request_times;
+ document.getElementById("install_request").value=datadetail.install_request;
+ document.getElementById("install_request_percent").value=datadetail.install_request/datadetail.pushrecord;
+ document.getElementById("install_request_zhuanhua_percent").value=datadetail.install_request/datadetail.download_success;
+ document.getElementById("install_request_avg").value=datadetail.install_request_times/datadetail.install_request;
+
+
+
+
+ document.getElementById("noimei_times").value=datadetail.noimei_times;
+ document.getElementById("noimei").value=datadetail.noimei;
+
+
+ document.getElementById("noimei_percent").value=datadetail.noimei/datadetail.pushrecord;
+
+ document.getElementById("nowifi_times").value=datadetail.nowifi_times;
+ document.getElementById("nowifi").value=datadetail.nowifi;
+
+ document.getElementById("nowifi_percent").value=datadetail.nowifi/datadetail.pushrecord;
+
+ document.getElementById("delay_times").value=datadetail.delay_times;
+ document.getElementById("delay").value=datadetail.delay;
+ document.getElementById("delay_percent").value=datadetail.delay/datadetail.pushrecord;
+ document.getElementById("delay_zhuanhua_percent").value=datadetail.delay/datadetail.install_request;
+ document.getElementById("delay_avg").value=datadetail.delay_times/datadetail.delay;
+
+
+
+
+ document.getElementById("delay_noinstall_times").value=datadetail.delay_noinstall_times;
+ document.getElementById("delay_noinstall").value=datadetail.delay_noinstall;
+ document.getElementById("delay_noinstall_percent").value=datadetail.delay_noinstall/datadetail.pushrecord;
+ document.getElementById("delay_noinstall_zhuanhua_percent").value=datadetail.delay_noinstall/datadetail.install_request;
+ document.getElementById("delay_noinstall_avg").value=datadetail.delay_noinstall_times/datadetail.delay_noinstall;
+
+
+
+
+ document.getElementById("delaying_times").value=datadetail.delaying_times;
+ document.getElementById("delaying").value=datadetail.delaying;
+ document.getElementById("delaying_percent").value=datadetail.delaying/datadetail.pushrecord;
+ document.getElementById("delaying_zhuanhua_percent").value=datadetail.delaying/datadetail.install_request;
+ document.getElementById("delaying_avg").value=datadetail.delaying_times/datadetail.delaying;
+
+ document.getElementById("maininstall").value=(datadetail.delaying_times+datadetail.delay_times)/datadetail.install_request_times;
+ document.getElementById("avail_success").value=(datadetail.delaying+datadetail.delay)/datadetail.install_request;
+
+ document.getElementById("pushmark_time").value=datadetail.pushmark_time;
+ document.getElementById("firstin_time").value=datadetail.firstin_time;
+ document.getElementById("firstin_user").value=datadetail.firstin_user;
+ document.getElementById("firstin_timepercent").value=datadetail.firstin_time/datadetail.pushmark_time;
+
+ document.getElementById("firstin_userpercent").value=datadetail.firstin_user/datadetail.install_request;
+
+
+ document.getElementById("direct_time").value=datadetail.direct_time;
+ document.getElementById("direct_user").value=datadetail.direct_user;
+ document.getElementById("direct_timepercent").value=datadetail.direct_time/datadetail.pushmark_time;
+
+ document.getElementById("direct_userpercent").value=datadetail.direct_user/datadetail.install_request;
+
+ document.getElementById("chargeoff_time").value=datadetail.chargeoff_time;
+ document.getElementById("chargeoff_user").value=datadetail.chargeoff_user;
+ document.getElementById("chargeoff_timepercent").value=datadetail.chargeoff_time/datadetail.pushmark_time;
+
+ document.getElementById("chargeoff_userpercent").value=datadetail.chargeoff_user/datadetail.install_request;
+
+ document.getElementById("delayout_time").value=datadetail.delayout_time;
+ document.getElementById("delayout_user").value=datadetail.delayout_user;
+ document.getElementById("delayout_timepercent").value=datadetail.delayout_time/datadetail.pushmark_time;
+
+ document.getElementById("delayout_userpercent").value=datadetail.delayout_user/datadetail.install_request;
+
+
+
+ document.getElementById("nf_time").value=datadetail.nf_time;
+ document.getElementById("nf_user").value=datadetail.nf_user;
+ document.getElementById("nf_timepercent").value=datadetail.nf_time/datadetail.pushmark_time;
+
+ document.getElementById("nf_userpercent").value=datadetail.nf_user/datadetail.install_request;
+
+
+ document.getElementById("chargeon_time").value=datadetail.chargeon_time;
+ document.getElementById("chargeon_user").value=datadetail.chargeon_user;
+ document.getElementById("chargeon_timepercent").value=datadetail.chargeon_time/datadetail.pushmark_time;
+
+ document.getElementById("chargeon_userpercent").value=datadetail.chargeon_user/datadetail.install_request;
+
+ document.getElementById("notifi_time").value=datadetail.notifi_time;
+ document.getElementById("notifi_user").value=datadetail.notifi_user;
+ document.getElementById("notifi_timepercent").value=datadetail.notifi_time/datadetail.pushmark_time;
+
+ document.getElementById("notifi_userpercent").value=datadetail.notifi_user/datadetail.install_request;
+
+ document.getElementById("nowifinotifi_time").value=datadetail.nowifinotifi_time;
+ document.getElementById("nowifinotifi_user").value=datadetail.nowifinotifi_user;
+ document.getElementById("nowifinotifi_timepercent").value=datadetail.nowifinotifi_time/datadetail.pushmark_time;
+
+ document.getElementById("nowifinotifi_userpercent").value=datadetail.nowifinotifi_user/datadetail.install_request;
+
+ document.getElementById("settime_time").value=datadetail.settime_time;
+ document.getElementById("settime_user").value=datadetail.settime_user;
+ document.getElementById("settime_timepercent").value=datadetail.settime_time/datadetail.pushmark_time;
+
+ document.getElementById("settime_userpercent").value=datadetail.settime_user/datadetail.install_request;
+
+ document.getElementById("pushdata_time").value=datadetail.pushdata_time;
+ document.getElementById("pushdata_user").value=datadetail.pushdata_user;
+ document.getElementById("pushdata_timepercent").value=datadetail.pushdata_time/datadetail.pushmark_time;
+
+ document.getElementById("pushdata_userpercent").value=datadetail.pushdata_user/datadetail.install_request;
+
+
+
+
+
+
+ }
+
+
+*/
