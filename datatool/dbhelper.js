@@ -40,11 +40,11 @@ function init()  {
             console.log('db error70', err);
         }
     });
-
+     return client;
 
 }
 
-init();
+var clientinstance =init();
 
 
 
