@@ -2,15 +2,16 @@
 var nodemailer = require("nodemailer");
 var http = require('http');
 var querystring = require('querystring');       //用于发送post请求
-var smtpTransport = require('nodemailer-smtp-transport');
-var Transport = nodemailer.createTransport(smtpTransport({
-    service: 'qq',
-    host: "smtp.qq.com", // 主机
+//var smtpTransport = require('nodemailer-smtp-transport');
+var Transport = nodemailer.createTransport("SMTP",({
+    service: 'gmail',
+    secureConnection: true, // 使用 SSL
+    host: "smtp.gmail.com", // 主机
     secure: true, // 使用 SSL
     port: 465, // SMTP 端口
     auth: {
-        user: '13392137777@qq.com',
-        pass: '13311713555'
+        user: '123123@qq.com',
+        pass: 'syw123t123ztaw'
     }
 }));
 
