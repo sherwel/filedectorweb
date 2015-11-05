@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var client = require('./routes/client');
+var session = require('express-session');
 var app = express();
 
 // view engine setup
@@ -19,11 +20,20 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('test'));
+
+app.use(session({ resave: false,
+  saveUninitialized: true,
+  cookie: {maxAge:15*60*1000},
+  secret:'test'
+
+
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/client', client);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
