@@ -3,17 +3,14 @@ var nodemailer = require("nodemailer");
 var http = require('http');
 var querystring = require('querystring');       //用于发送post请求
 //var smtpTransport = require('nodemailer-smtp-transport');
-var Transport = nodemailer.createTransport("SMTP",({
-    service: 'gmail',
-    secureConnection: true, // 使用 SSL
-    host: "smtp.gmail.com", // 主机
-    secure: true, // 使用 SSL
-    port: 465, // SMTP 端口
+var transport = nodemailer.createTransport({
+    service: 'hotmail',
+
     auth: {
-        user: '123123@qq.com',
-        pass: 'syw123t123ztaw'
+        user: 'nanshihui11@hotmail.com',
+        pass: 'Sywtz111'
     }
-}));
+});
 
 // 设置邮件内容
 
@@ -26,20 +23,21 @@ function dosendmail(){
 
 }
 function showweekreportmail() {
-
+                            var create_time = new Date().Format("yyyy-MM-dd hh:mm:ss");
                             var mailOptions = {
-                                from: "Fred Foo <1339213777@qq.com>", // 发件地址
+                                from: "Fred Foo <nanshihui11@hotmail.com>", // 发件地址
                                 to: "nanshihui@qq.com", // 收件列表
                                 subject: "文件监视系统---安全提醒", // 标题
-                                html: "您的账号近期存在频繁变动，请注意账号是否有他人使用" // html 内容
+                                html: "<p>尊敬的用户</p> <p><br /> </p>  <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您的账号近期发生频繁变动，如有异常，请及时修改密码。</strong>"+
+                                 " </p> <p><strong><br /> </strong> </p> <p> --- 文件检测系统."+create_time+ "</p>"
                             }
-                              Transport.sendMail(mailOptions, function(error, response){
+                                 transport.sendMail(mailOptions, function(error, response){
                                 if(error){
                                     console.log(error);
                                 }else{
                                     console.log("Message sent: " + response.message);
                                 }
-                                smtpTransport.close(); // 如果没用，关闭连接池
+                                     transport.close(); // 如果没用，关闭连接池
                             });
 
 
