@@ -66,8 +66,8 @@ $(function () {
             dataSource: cpuData,
             width: "700px",
             height: "500px",
-            title: "System Performance",
-            subtitle: "CPU utilization over time until present",
+            title: "系统性能",
+            subtitle: "当前CPU实时数据",
             horizontalZoomable: true,
             verticalZoomable: true,
             rightMargin: 30,
@@ -80,14 +80,14 @@ $(function () {
             }, {
                 type: "numericY",
                 name: "yAxis",
-                title: "CPU Utilization",
+                title: "CPU 数据",
                 minimumValue: 0,
                 maximumValue: 100,
                 formatLabel: toDisplayCPU
             }, {
                 type: "numericY",
                 name: "yAxisMemory",
-                title: "Memory Utilization",
+                title: "内存 数据",
                 labelLocation: "outsideRight",
                 minimumValue: 0,
                 maximumValue: 8 * 1024 * 1024 * 1024,
@@ -104,7 +104,7 @@ $(function () {
                 showTooltip: true,
                 tooltipTemplate:
         "<div><em>CPU:</em>&nbsp<span>${item.displayCPU}</span></div>",
-                title: "CPU Utilization"
+                title: "CPU 数据"
             }, {
                 name: "mem",
                 type: "line",
@@ -114,7 +114,7 @@ $(function () {
                 showTooltip: true,
                 tooltipTemplate:
         "<div><em>Memory:</em>&nbsp<span>${item.displayMem}</span></div>",
-                title: "Memory Utilization"
+                title: "Memory 数据"
             }, {
                 name: "itemToolTips",
                 type: "itemToolTipLayer",
@@ -132,6 +132,7 @@ $(function () {
     var socket = io.connect("http://localhost:3000");
 
     socket.on("cpuUpdate", function (update) {
+       
         var currTime = new Date();
         var displayString = currTime.toLocaleTimeString();
         update.displayCPU = toDisplayCPU(update.cpuUsage);
