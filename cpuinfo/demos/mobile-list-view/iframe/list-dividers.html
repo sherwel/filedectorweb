@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="../../css/jqm/jquery.mobile.structure.min.css" rel="stylesheet"></link>
+
+    <!-- Required Ignite UI Mobile Combined CSS Files -->
+    <link href="../../../mobile/css/structure/infragistics.mobile.css" rel="stylesheet"></link>
+    <link href="../../../mobile/css/themes/ios/infragistics.mobile.theme.css" rel="stylesheet"></link>
+
+    <script src="../../js/jqm/jquery.min.js" type="text/javascript"></script>
+    <script src="../../js/jqm/jquery.mobile.min.js" type="text/javascript"></script>
+
+    <!-- Required Ignite UI Mobile Combined JavaScript File -->
+    <script src="../../../mobile/js/infragistics.mobile.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).on("pageinit", "div:jqmData(role='page')", function (e) {
+ $(e.target).on("focus", function (e) {
+ e.preventDefault(); 
+}); 
+});
+</script>
+<script type="text/javascript" src="../../js/modernizr.min.js"></script>
+<script type="text/javascript" src="../../js/infragistics.ui.sbscroll.js"></script></head>
+<body>
+    <div data-role="page">
+
+        <div data-role="content">
+
+            <ul id="listDividersListView" data-role="iglistview" data-image-mode="icon">
+                <li data-role="list-divider">Primary Colors</li>
+                <li><img alt="Red" src="../../images/samples/colors/red.png"></img>Red</li>
+                <li><img alt="Blue" src="../../images/samples/colors/blue.png"></img>Blue</li>
+                <li><img alt="Yellow" src="../../images/samples/colors/yellow.png"></img>Yellow</li>
+                <li data-role="list-divider">Secondary Colors</li>
+                <li><img alt="Green" src="../../images/samples/colors/green.png"></img>Green</li>
+                <li><img alt="Orange" src="../../images/samples/colors/orange.png"></img>Orange</li>
+                <li><img alt="Purple" src="../../images/samples/colors/purple.png"></img>Purple</li>
+                <li data-role="list-divider">Neutral Colors</li>
+                <li><img alt="Brown" src="../../images/samples/colors/brown.png"></img>Brown</li>
+                <li><img alt="Black" src="../../images/samples/colors/black.png"></img>Black</li>
+                <li><img alt="White" src="../../images/samples/colors/white.png"></img>White</li>
+            </ul>
+
+        </div>
+    </div>
+
+</body>
+</html>

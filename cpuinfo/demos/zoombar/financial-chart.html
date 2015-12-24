@@ -1,0 +1,4153 @@
+﻿<!DOCTYPE html>
+<!--[if lte IE 8]>
+<html class="OldIE no-js">
+<![endif]-->
+<html class="no-js">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta charset='utf-8'>
+        <meta http-equiv="x-ua-compatible" content="IE=Edge">
+        <title>Zoombar Financial Chart Sample - Zoombar Financial Chart with Zoombar Control - Ignite UI™</title>
+        <meta name="description" content="This sample demonstrates the basic Zoombar functionality along an igDataChart with financial series. Additional controls enable resizing of the zoom window to a specific period of time and show popovers with date information for the left and right borders of it.">
+        <meta name="keywords" content="Zoombar Financial Chart, Zoombar, HTML5, html 5, javascript, Infragistics, user experience, user interface, presentation layer, asp.net mvc controls, web applications, NetAdvantage jQuery controls, IgniteUI, Ignite UI, client-side JavaScript, data visualization, ui components, ui controls, user interface, jQuery Controls">
+        <link rel="shortcut icon" type="image/ico" href="./../images/favicon.ico"></link>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'></link>    
+        <link href="./../../css/themes/infragistics/infragistics.theme.css" rel="stylesheet"></link>
+        <link href="./../../css/structure/infragistics.css" rel="stylesheet"></link>
+
+        <link href="./../css/all.css" rel="stylesheet"></link>
+        
+
+        <!--[if lte IE 7]>
+            <link href="./../css/sb-legacy.css" rel="stylesheet" />
+            <script src="./../js/json2.js"></script> 
+        <![endif]-->
+
+        <script type="text/javascript" src="./../js/all.js"></script>
+        
+
+        <script type="text/javascript">
+            var MyAppUrlSettings = {
+                SampleContentURL: '/aspnet/Home/Sample',
+                hostname: '/'
+            }
+        </script>
+        
+    <script type="text/javascript" src="./../js/sb-sample.js"></script>
+
+
+
+	
+
+	
+	
+	
+
+	
+	<link href="./../../css/structure/modules/infragistics.ui.chart.css" rel="stylesheet"></link>
+
+	
+	
+	
+
+	
+	<script src="./../../js/infragistics.core.js" type="text/javascript"></script>
+	<script src="./../../js/infragistics.dv.js" type="text/javascript"></script>
+	<script src="./../../js/infragistics.lob.js" type="text/javascript"></script>
+
+	<style type="text/css">
+		.buttonset
+		{
+			position: absolute;
+			top: 0px;
+			left: 50px;
+			z-index: 10000;
+		}
+		.buttonset > label
+		{
+			width: 60px;
+			height: 26px;
+			margin-right: -4px!important;
+		}
+		.tooltip{
+			font-weight: bold;
+		}
+	</style>
+
+	<script id="tooltipTemplate" type="text/x-jquery-tmpl">
+		<span class="tooltip">${item.DateString}</span><br />
+        <span class="tooltip">Open:&nbsp;</span><span>${item.Open}</span><br />
+		<span class="tooltip">Low:&nbsp;</span><span>${item.Low}</span><br />
+		<span class="tooltip">High:&nbsp;</span><span>${item.High}</span><br />
+		<span class="tooltip">Close:&nbsp;</span><span>${item.Close}</span><br />
+    </script>
+
+
+
+
+
+        
+    </head>
+    <body>
+        <div id="wrapperDiv">
+            <div id="sampleBrowserContainer" class="sbContainer">
+                <header class="ui-helper-clearfix row sbHeader">
+                    <div class="headerIcon headerIcon_click">
+                        <img src="./../images/headerIcon.PNG"></img>
+                    </div>
+                </header>
+                <nav id="controlsMenu" class="hamburgerMenu">
+    <ul>
+                <li class="navSampleApp navSampleTag"><div class="navCategory">
+            <div class="navCategoryTitle"><a href="./../application-samples.html" target="">Application Samples</a></div>
+        </div></li>        
+        <li class="navSampleApp navSampleTag"><div class="navCategory">
+            <div class="navCategoryTitle"><a href="./../getting-started.html" target="">Getting Started</a></div>
+        </div></li>        
+        <li class="navSampleApp navSampleTag"><div class="navCategory">
+            <div class="navCategoryTitle"><a href="http://designer.igniteui.com" target="_blank">Page Designer</a></div>
+        </div></li>        
+        <li><div class="navCategory">
+            <div class="navCategoryTitle igsb-expanded">jQuery Controls<span class="nav-icon"></span></div>
+            <div class="navCategoryFeatures">
+					<div class="searchContainer">
+						<span class="searchFieldContainer" unselectable="on">
+							<span class="searchIcon" unselectable="on"></span><span class="searchHint" unselectable="on">Search samples</span><input id="searchField"></input><span unselectable="on" class="searchClearIcon"></span>
+						</span>
+						<span class="searchToggleContainer">
+							<span class="searchToggleLabel">Show:</span>
+							<span class="searchButtonContainer">
+								<span class="searchToggleButton searchToggleAll searchToggleSelected">All Samples</span><span class="searchToggleButton searchToggleNew">New/Updated</span>
+							</span>
+						</span>
+					</div>
+					<div id="menuSamplesContainer" style="overflow: auto">
+						        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-data-grids"><span class="nav-icon"></span>Data Grids</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Data Binding</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/bind-grid-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Features</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/feature-chooser.html">
+                <span class="igsb-sampleTitle">Feature Chooser</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/feature-persistence.html">
+                <span class="igsb-sampleTitle">Feature Persistence</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/history.html">
+                <span class="igsb-sampleTitle">History.js Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/cell-merging.html">
+                <span class="igsb-sampleTitle">Cell Merging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/unbound-column.html">
+                <span class="igsb-sampleTitle">Unbound Column</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/selection.html">
+                <span class="igsb-sampleTitle">Selection</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/row-selectors.html">
+                <span class="igsb-sampleTitle">Row Selectors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/filtering.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Filtering</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-fixing.html">
+                <span class="igsb-sampleTitle">Column Fixing</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/sorting-local.html">
+                <span class="igsb-sampleTitle">Sorting (Local)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/paging.html">
+                <span class="igsb-sampleTitle">Paging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grouping.html">
+                <span class="igsb-sampleTitle">Grouping with summaries</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grouping-customization.html">
+                <span class="igsb-sampleTitle">Grouping Customization</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/summaries.html">
+                <span class="igsb-sampleTitle">Summaries</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/summaries-custom.html">
+                <span class="igsb-sampleTitle">Custom Summaries</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/tooltips.html">
+                <span class="igsb-sampleTitle">Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-hiding.html">
+                <span class="igsb-sampleTitle">Column Hiding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-resizing.html">
+                <span class="igsb-sampleTitle">Column Resizing</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-moving.html">
+                <span class="igsb-sampleTitle">Column Moving</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/multi-column-headers.html">
+                <span class="igsb-sampleTitle">Multi-Column Headers</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Responsive Web Design</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/responsive-web-design-mode.html">
+                <span class="igsb-sampleTitle">Responsive Web Design Mode</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/responsive-vertical-rendering.html">
+                <span class="igsb-sampleTitle">Responsive Vertical Rendering</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/twitter-bootstrap.html">
+                <span class="igsb-sampleTitle">Twitter Bootstrap</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/responsive-single-column-template.html">
+                <span class="igsb-sampleTitle">Responsive Single Column Template</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Grid Excel Exporter</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-basic-grid.html">
+                <span class="igsb-sampleTitle">Export Basic Grid to Excel</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-feature-rich-grid.html">
+                <span class="igsb-sampleTitle">Exporting Grid to Excel with Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-client-events.html">
+                <span class="igsb-sampleTitle">Customizing Grid Excel Export</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-grid-loading-indicator.html">
+                <span class="igsb-sampleTitle">Exporting Grid to Excel with Progress Indicator</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Templates and Layout</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/row-edit-dialog.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Row Edit Dialog</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/editing-custom-editor-provider.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Editing: Custom Editor Provider</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/jsrender-integration.html">
+                <span class="igsb-sampleTitle">JsRender Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/auto-generate-columns.html">
+                <span class="igsb-sampleTitle">Auto-Generate Columns</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/checkbox-column.html">
+                <span class="igsb-sampleTitle">Checkbox Column</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-template.html">
+                <span class="igsb-sampleTitle">Column Template</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/configure-text-alignment.html">
+                <span class="igsb-sampleTitle">Configure Text Alignment</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grid-layout.html">
+                <span class="igsb-sampleTitle">Grid Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-format-function.html">
+                <span class="igsb-sampleTitle">Column Format Function</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-formats.html">
+                <span class="igsb-sampleTitle">Column Formats</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">API Usage</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/editing-api-events.html">
+                <span class="igsb-sampleTitle">Editing API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grid-api-events.html">
+                <span class="igsb-sampleTitle">Grid API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Performance</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/virtualization-fixed.html">
+                <span class="igsb-sampleTitle">Virtualization (Fixed)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/virtualization-continuous.html">
+                <span class="igsb-sampleTitle">Virtualization (Continuous)</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Hierarchical Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../hierarchical-grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Data Binding</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/bind-hgrid-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Features</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/cell-merging.html">
+                <span class="igsb-sampleTitle">Cell Merging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/unbound-column.html">
+                <span class="igsb-sampleTitle">Unbound Column</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/row-edit-dialog.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Row Edit Dialog</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/selection.html">
+                <span class="igsb-sampleTitle">Selection</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/row-selectors.html">
+                <span class="igsb-sampleTitle">Row Selectors</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">API Usage</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/hgrid-api-events.html">
+                <span class="igsb-sampleTitle">Hierarchical Grid API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Grid Excel Exporter</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/export-hierarchical-grid.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Export Hierarchical Grid to Excel</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Tree Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../tree-grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/file-explorer.html">
+                <span class="igsb-sampleTitle">File Explorer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/balance-sheet.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Balance Sheet</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/row-selectors.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Row Selectors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/paging.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Paging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/export-to-excel.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Export TreeGrid to Excel</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-olap-pivot"><span class="nav-icon"></span>OLAP Pivot</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Pivot Data Selector</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pivot-data-selector/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pivot-data-selector/binding-to-flat-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-data-selector/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Pivot Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pivot-grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/binding-to-flat-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/binding-to-xmla-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Xmla Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/custom-drag-drop-validation.html">
+                <span class="igsb-sampleTitle">Custom Move Validation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/drag-drop-custom-elements.html">
+                <span class="igsb-sampleTitle">Drag Drop Custom Elements</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/expand-members.html">
+                <span class="igsb-sampleTitle">Expand Members</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/chart-integration.html">
+                <span class="igsb-sampleTitle">Presenting Olap data with igDataChart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/layout-modes.html">
+                <span class="igsb-sampleTitle">Layout Modes</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/sorting.html">
+                <span class="igsb-sampleTitle">Sorting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/all-grid-features.html">
+                <span class="igsb-sampleTitle">All Grid Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/angular-with-flat-data-source.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS with Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/angular-with-xmla-data-source.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS with XMLA Data Source</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Pivot View</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pivot-view/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pivot-view/binding-to-flat-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-view/binding-to-xmla-data-source.html">
+                <span class="igsb-sampleTitle">Binding to XMLA to Show KPIs</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-view/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-data-visualization"><span class="nav-icon"></span>Data Visualization</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Data Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../data-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/binding-real-time-data.html">
+                <span class="igsb-sampleTitle">Binding Real-Time Data</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/binding-high-volume-data.html">
+                <span class="igsb-sampleTitle">Binding High Volume Data</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/bind-data-chart-with-ko.html">
+                <span class="igsb-sampleTitle">Bind Data Chart with KnockoutJS</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/edit-chart-items-with-knockout.html">
+                <span class="igsb-sampleTitle">Edit Chart Items with KnockoutJS</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/axis-title.html">
+                <span class="igsb-sampleTitle">Axis Title</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/bar-and-column-series.html">
+                <span class="igsb-sampleTitle">Bar and Column Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-series.html">
+                <span class="igsb-sampleTitle">Category Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-highlight-layer.html">
+                <span class="igsb-sampleTitle">Category Highlight Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-item-highlight-layer.html">
+                <span class="igsb-sampleTitle">Category Item Highlight Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-tooltip-layer.html">
+                <span class="igsb-sampleTitle">Category Tooltip Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/crosshair-layer.html">
+                <span class="igsb-sampleTitle">Crosshair Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/item-tooltip-layer.html">
+                <span class="igsb-sampleTitle">Item Tooltip Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/multiple-layers.html">
+                <span class="igsb-sampleTitle">Multiple Layers</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-xaxis-intervals.html">
+                <span class="igsb-sampleTitle">CategoryXAxis Intervals</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/numeric-xaxis-intervals.html">
+                <span class="igsb-sampleTitle">NumericXAxis Intervals</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/series-tooltips.html">
+                <span class="igsb-sampleTitle">Series Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/series-highlighting.html">
+                <span class="igsb-sampleTitle">Series Highlighting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/series-highlighting-financial.html">
+                <span class="igsb-sampleTitle">Series Highlighting (Financial)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/custom-series-highlighting.html">
+                <span class="igsb-sampleTitle">Custom Series Highlighting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/polar-series.html">
+                <span class="igsb-sampleTitle">Polar Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/radial-series.html">
+                <span class="igsb-sampleTitle">Radial Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/range-category-series.html">
+                <span class="igsb-sampleTitle">Range Category Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/scatter-series.html">
+                <span class="igsb-sampleTitle">Scatter Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/financial-indicators.html">
+                <span class="igsb-sampleTitle">Financial Indicators</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/financial-series.html">
+                <span class="igsb-sampleTitle">Financial Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/stacked-series.html">
+                <span class="igsb-sampleTitle">Stacked Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-title.html">
+                <span class="igsb-sampleTitle">Chart Title and Subtitle</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-navigation.html">
+                <span class="igsb-sampleTitle">Chart Navigation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-elements.html">
+                <span class="igsb-sampleTitle">Chart Elements</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-fill-gradients.html">
+                <span class="igsb-sampleTitle">Chart Fill Gradients</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/composite-chart.html">
+                <span class="igsb-sampleTitle">Composite Chart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/drop-shadows.html">
+                <span class="igsb-sampleTitle">Drop Shadows</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/motion-framework.html">
+                <span class="igsb-sampleTitle">Motion Framework</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/transition-animation.html">
+                <span class="igsb-sampleTitle">Transition Animation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/transition-animation-financial.html">
+                <span class="igsb-sampleTitle">Transition Animation (Financial)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Pie Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pie-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/layout-configuration.html">
+                <span class="igsb-sampleTitle">Layout Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Doughnut Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../doughnut-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/bind-json.html">
+                <span class="igsb-sampleTitle">Bind to JSON</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/configure-legend.html">
+                <span class="igsb-sampleTitle">Configure Legend</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/other-category.html">
+                <span class="igsb-sampleTitle">Other Category</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/labels-tooltips.html">
+                <span class="igsb-sampleTitle">Labels and Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Funnel Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../funnel-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/funnel-chart.html">
+                <span class="igsb-sampleTitle">Funnel Chart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/slice-selection.html">
+                <span class="igsb-sampleTitle">Slice Selection</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/styling.html">
+                <span class="igsb-sampleTitle">Styling</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/bezier-curve-and-tooltips.html">
+                <span class="igsb-sampleTitle">Bezier Curve And Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Radial Gauge</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../radial-gauge/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/api-usage.html">
+                <span class="igsb-sampleTitle">API Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/drag-needle.html">
+                <span class="igsb-sampleTitle">Needle Dragging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/motion-framework.html">
+                <span class="igsb-sampleTitle">Gauge Animation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/gauge-needle.html">
+                <span class="igsb-sampleTitle">Gauge Needle</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/label-settings.html">
+                <span class="igsb-sampleTitle">Label Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/range.html">
+                <span class="igsb-sampleTitle">Range</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/scale-settings.html">
+                <span class="igsb-sampleTitle">Scale Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/tickmarks.html">
+                <span class="igsb-sampleTitle">Tickmarks</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Sparkline</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../sparkline/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/bind-json.html">
+                <span class="igsb-sampleTitle">Bind to JSON</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/bind-to-remote-data.html">
+                <span class="igsb-sampleTitle">Bind to Remote Data</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/chart-types.html">
+                <span class="igsb-sampleTitle">Chart Types</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/sparkline-in-grid.html">
+                <span class="igsb-sampleTitle">Sparkline in Grid</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/normal-range-and-trend-lines.html">
+                <span class="igsb-sampleTitle">Normal Range and Trend Lines</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/tooltips-and-markers.html">
+                <span class="igsb-sampleTitle">Tooltips and Markers</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/visual-customization.html">
+                <span class="igsb-sampleTitle">Visual Customization</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Bullet Graph</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../bullet-graph/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/basic-configuration.html">
+                <span class="igsb-sampleTitle">Basic Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/animated-transitions.html">
+                <span class="igsb-sampleTitle">Animated Transitions</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/scale-labeling-settings.html">
+                <span class="igsb-sampleTitle">Scale Labeling Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/tick-marks-settings.html">
+                <span class="igsb-sampleTitle">Tick Marks Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/range-settings.html">
+                <span class="igsb-sampleTitle">Range Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/performance-bar-settings.html">
+                <span class="igsb-sampleTitle">Performance Bar Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/vertical-orientation.html">
+                <span class="igsb-sampleTitle">Vertical Orientation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/grid-integration.html">
+                <span class="igsb-sampleTitle">Grid Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/tooltip-settings.html">
+                <span class="igsb-sampleTitle">ToolTip Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Linear Gauge</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../linear-gauge/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/basic-configuration.html">
+                <span class="igsb-sampleTitle">Basic Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/scale-settings.html">
+                <span class="igsb-sampleTitle">Scale Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/range-settings.html">
+                <span class="igsb-sampleTitle">Range Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/grid-integration.html">
+                <span class="igsb-sampleTitle">Grid Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/animated-transitions.html">
+                <span class="igsb-sampleTitle">Animated Transitions</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/needle-settings.html">
+                <span class="igsb-sampleTitle">Needle Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/vertical-horizontal-orientation.html">
+                <span class="igsb-sampleTitle">Vertical Orientation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/needle-dragging.html">
+                <span class="igsb-sampleTitle">Needle Dragging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Map</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../map/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../map/bing-maps.html">
+                <span class="igsb-sampleTitle">Bing Maps</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/openstreet-maps.html">
+                <span class="igsb-sampleTitle">OpenStreet Maps</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-high-density-scatter-series.html">
+                <span class="igsb-sampleTitle">Geographic High Density Scatter Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-symbol-series.html">
+                <span class="igsb-sampleTitle">Geographic Symbol Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-shapes-series.html">
+                <span class="igsb-sampleTitle">Geographic Shapes Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-polyline-series.html">
+                <span class="igsb-sampleTitle">Geographic Polyline Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-scatter-area.html">
+                <span class="igsb-sampleTitle">Geographic Scatter Area Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-contour-line.html">
+                <span class="igsb-sampleTitle">Geographic Contour Line Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/map-tooltips.html">
+                <span class="igsb-sampleTitle">Map Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/marker-template.html">
+                <span class="igsb-sampleTitle">Marker Template</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Barcode</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../barcode/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../barcode/basic-configuration.html">
+                <span class="igsb-sampleTitle">Basic Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/configuring-the-qr-code-specific-settings.html">
+                <span class="igsb-sampleTitle">Configuring the QR-Code-Specific Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/qr-barcode-dimensions.html">
+                <span class="igsb-sampleTitle">QR Barcode Dimensions</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/configuring-colors.html">
+                <span class="igsb-sampleTitle">Configuring Colors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Zoombar</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../zoombar/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../zoombar/financial-chart.html">
+                <span class="igsb-sampleTitle">Zoombar Financial Chart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../zoombar/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-layout"><span class="nav-icon"></span>Layout</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Layout Manager</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../layout-manager/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/border-layout-markup.html">
+                <span class="igsb-sampleTitle">Border Layout from HTML markup</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/border-layout.html">
+                <span class="igsb-sampleTitle">Border Layout - Initializing with JavaScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/column-layout-markup.html">
+                <span class="igsb-sampleTitle">Responsive Column Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/flow-layout.html">
+                <span class="igsb-sampleTitle">Responsive Flow Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/grid-layout.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Grid Layout with colspan and rowspan Support</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/vertical-layout.html">
+                <span class="igsb-sampleTitle">Responsive Vertical Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Splitter</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../splitter/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../splitter/basic-vertical-splitter.html">
+                <span class="igsb-sampleTitle">Basic Vertical Splitter</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/basic-horizontal-splitter.html">
+                <span class="igsb-sampleTitle">Basic Horizontal Splitter</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/nested-splitters.html">
+                <span class="igsb-sampleTitle">Nested Splitters</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/api-events-splitter.html">
+                <span class="igsb-sampleTitle">Splitter API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Tile Manager</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../tile-manager/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/leading-tile.html">
+                <span class="igsb-sampleTitle">Leading Tile Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/bind-json.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Binding to JSON</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/item-configurations.html">
+                <span class="igsb-sampleTitle">Item Configurations</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-editors"><span class="nav-icon"></span>Editors</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Combo Box</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../combo/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../combo/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/bind-combo-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/selection-and-checkboxes.html">
+                <span class="igsb-sampleTitle">Selection and Checkboxes</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/editing.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Editing</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/filtering.html">
+                <span class="igsb-sampleTitle">Filtering</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/load-on-demand.html">
+                <span class="igsb-sampleTitle">Load-On-Demand</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/virtualization.html">
+                <span class="igsb-sampleTitle">Virtualization</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/templates.html">
+                <span class="igsb-sampleTitle">Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/cascading-combos.html">
+                <span class="igsb-sampleTitle">Cascading Combos</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/keyboard-navigation.html">
+                <span class="igsb-sampleTitle">Keyboard Navigation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/grid-with-combo-editor.html">
+                <span class="igsb-sampleTitle">Grid with Combo Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/grouping.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Grouping</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Editors</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../editors/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../editors/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/currency-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Currency Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/percent-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Percent Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-and-time-formats.html">
+                <span class="igsb-sampleTitle">Date and Time Formats</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/localizing-editors.html">
+                <span class="igsb-sampleTitle">Localizing Editors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/bind-editors-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/text-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">New Text Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/credit.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Credit</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/numeric-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Numeric Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/mask-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Mask Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/mask-editor-basic.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Mask Editor Basic Sample</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/checkbox-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Checkbox Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Date Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-picker-new.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Reservation Form</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-picker-overview.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">DatePicker Overview</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">HTML Editor</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../html-editor/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/custom-icons-and-styles.html">
+                <span class="igsb-sampleTitle">Custom Icons and Styles</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/custom-toolbars-and-buttons.html">
+                <span class="igsb-sampleTitle">Custom Toolbars and Buttons</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/standalone-toolbar.html">
+                <span class="igsb-sampleTitle">Standalone Toolbar</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/edit-content.html">
+                <span class="igsb-sampleTitle">Edit Content</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Split Button</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../split-button/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../split-button/change-shapes.html">
+                <span class="igsb-sampleTitle">Split button basics</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../split-button/api-and-events.html">
+                <span class="igsb-sampleTitle">Api and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../split-button/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Notifier</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../notifier/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../notifier/basic-usage.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../notifier/inline-messages.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Inline messages</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../notifier/with-igEditors.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Notifier with igEditors</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Validator</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../validator/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../validator/basic-usage.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-frameworks"><span class="nav-icon"></span>Frameworks</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Infragistics Loader</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../loader/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../loader/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/download-all-features.html">
+                <span class="igsb-sampleTitle">Download All Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/dynamic-download.html">
+                <span class="igsb-sampleTitle">Dynamic Download</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/multiple-resources.html">
+                <span class="igsb-sampleTitle">Multiple Resources</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Data Source</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../data-source/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../data-source/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/mashup.html">
+                <span class="igsb-sampleTitle">Mashup</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/odata.html">
+                <span class="igsb-sampleTitle">OData</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Javascript Excel</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../javascript-excel-library/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../javascript-excel-library/excel-table.html">
+                <span class="igsb-sampleTitle">Excel Table</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../javascript-excel-library/excel-formatting.html">
+                <span class="igsb-sampleTitle">Excel Formatting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../javascript-excel-library/excel-formulas.html">
+                <span class="igsb-sampleTitle">Excel Formulas</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Templating Engine</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../templating-engine/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/grid-column-template.html">
+                <span class="igsb-sampleTitle">Grid Column Template</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/conditional-templates.html">
+                <span class="igsb-sampleTitle">Conditional Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/nested-templates.html">
+                <span class="igsb-sampleTitle">Nested Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-interactions"><span class="nav-icon"></span>Interactions</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Tree</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../tree/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../tree/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/bind-tree-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/drag-and-drop-single-tree.html">
+                <span class="igsb-sampleTitle">Drag and Drop - Single Tree</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/drag-and-drop-multiple-trees.html">
+                <span class="igsb-sampleTitle">Drag and Drop - Multiple Trees</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Dialog Window</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../dialog-window/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/icons.html">
+                <span class="igsb-sampleTitle">Icons</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/loading-external-page.html">
+                <span class="igsb-sampleTitle">Loading External Page</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/modal-dialog.html">
+                <span class="igsb-sampleTitle">Modal Dialog</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">File Upload</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../file-upload/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/multiple-upload.html">
+                <span class="igsb-sampleTitle">Multiple Upload</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/progress-information.html">
+                <span class="igsb-sampleTitle">Progress Information</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/api-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Popover</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../popover/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../popover/basic-popover.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../popover/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Rating</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../rating/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../rating/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/precision.html">
+                <span class="igsb-sampleTitle">Precision</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/custom-items.html">
+                <span class="igsb-sampleTitle">Custom Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/custom-styles.html">
+                <span class="igsb-sampleTitle">Custom Styles</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Video Player</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../video-player/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../video-player/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/common-features.html">
+                <span class="igsb-sampleTitle">Common Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/related-videos.html">
+                <span class="igsb-sampleTitle">Related Videos</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/bookmarks.html">
+                <span class="igsb-sampleTitle">Bookmarks</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/banner-advertisements.html">
+                <span class="igsb-sampleTitle">Banner Advertisements</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/commercials-support.html">
+                <span class="igsb-sampleTitle">Commercials Support</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Radial Menu</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../radial-menu/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/button-items.html">
+                <span class="igsb-sampleTitle">Button Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/color-items.html">
+                <span class="igsb-sampleTitle">Color Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/configure-items.html">
+                <span class="igsb-sampleTitle">Configure Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/numeric-items.html">
+                <span class="igsb-sampleTitle">Numeric Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-mobile-phone"><span class="nav-icon"></span>Mobile Phone</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">List View</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../mobile-list-view/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/bind-to-rest-service.html">
+                <span class="igsb-sampleTitle">Bind to REST Service</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/dynamic-binding.html">
+                <span class="igsb-sampleTitle">Dynamic Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/list-dividers.html">
+                <span class="igsb-sampleTitle">List Dividers</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/sort-group-presets.html">
+                <span class="igsb-sampleTitle">Sort and Group Presets</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/search.html">
+                <span class="igsb-sampleTitle">Search</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/filter-presets.html">
+                <span class="igsb-sampleTitle">Filter Presets</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/remote-features.html">
+                <span class="igsb-sampleTitle">Remote Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/custom-groups.html">
+                <span class="igsb-sampleTitle">Custom Groups</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/templates.html">
+                <span class="igsb-sampleTitle">Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/api-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Rating</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../mobile-rating/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../mobile-rating/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-rating/custom-items.html">
+                <span class="igsb-sampleTitle">Custom Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-rating/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-theming"><span class="nav-icon"></span>Theming</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Themes</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../themes/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../themes/metro.html">
+                <span class="igsb-sampleTitle">Metro theme</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/ios.html">
+                <span class="igsb-sampleTitle">iOS theme</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-default.html">
+                <span class="igsb-sampleTitle">Bootstrap Default</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-superhero.html">
+                <span class="igsb-sampleTitle">Bootstrap Superhero</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-flatly.html">
+                <span class="igsb-sampleTitle">Bootstrap Flatly</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-yeti.html">
+                <span class="igsb-sampleTitle">Bootstrap Yeti</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+
+					</div>
+            </div>
+        </div></li>
+
+    </ul>
+</nav>
+
+                <div id="contentLayer" style="display: none;"></div>
+                <div id="mainContainer" class="sb-layout ui-helper-clearfix">
+                    <div class="tempContainer"></div>
+                    <div class="menu-bar">
+                        <div id="hamburger_click">
+                            <div id="hamburger">
+                                <img src="./../images/hamburgerIcon.png"></img>
+                            </div>
+                            <label>Menu</label>
+                        </div>
+                        
+                        <a href="#" class="tablet-size-logo headerIcon_click"></a>
+                        <a href="#" class="phone-size-logo headerIcon_click"></a>
+                        
+                    </div>
+                    
+
+<section class="row sample-page main-content ui-helper-clearfix">
+    <div id="controlInfo">        
+<span id="sampleControlIcon" class="igsb-sampleControlIcon igsb-zoombar"></span>
+
+        <span id="control-title">Zoombar</span>        
+    </div>
+<article class="ui-helper-clearfix">
+    <div id="sample">
+        <section>
+            <div id="sampleNavigation" class="ui-helper-clearfix">
+                <div id="sbPrevNextButtons">
+                    <span id="sampleNavigatePrev"></span>
+                    <span id="sampleNavigateNext"></span>
+                </div>                
+                    <h1 id="sample-title" class="pageTitle">Zoombar Financial Chart</h1>
+			</div>
+            <div id="dvLoading" class="loaderCss" style="display: none"></div>
+
+            <div class="sampleCtpLabel" style="display: none">This sample uses CTP (Community Technical Preview) features. The API and behavior may change when these features are released with full support.</div>
+            <div id="sampleContainer" class="ui-helper-clearfix">
+                <div class="igsb-running-sample sb-min-phone-landscape">
+
+	<div id="chart"></div>
+	<div id="zoom"></div>
+	<div id="buttonset" class="buttonset">
+		<input type="radio" id="day" name="radio"></input><label for="day">Day</label>
+		<input type="radio" id="week" name="radio"></input><label for="week">Week</label>
+		<input type="radio" id="month" name="radio"></input><label for="month">Month</label>
+	</div>
+	<div id="date">
+	</div>
+	<div id="popoverLeft"></div>
+	<div id="popoverRight"></div>
+	<script src="./../js-data/financial-data-random.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var chart = $("#chart"),
+				zoombar = $("#zoom"),
+				popoverTimeout = 0,
+				popoverLeft,
+				popoverRight,
+				lastTarget,
+				currentlyDragged,
+				zoomParams;
+			chart.igDataChart({
+				width: "100%",
+				height: "300px",
+				axes: [
+					{
+						name: "xAxis",
+						type: "categoryDateTimeX",
+						dataSource: financialData1,
+						dateTimeMemberPath: "Date",
+						labelVisibility: "visible"
+					},
+					{
+						name: "yAxis",
+						type: "numericY"
+					}
+				],
+				series: [
+					{
+						name: "series1",
+						dataSource: financialData1,
+						title: "Price Series",
+						type: "financial",
+						isTransitionInEnabled: true,
+						displayType: "ohlc",
+						xAxis: "xAxis",
+						yAxis: "yAxis",
+						openMemberPath: "Open",
+						highMemberPath: "High",
+						lowMemberPath: "Low",
+						showTooltip: true,
+						tooltipTemplate: "tooltipTemplate",
+						closeMemberPath: "Close",
+						thickness: 2,
+						trendLineBrush: "rgba(68, 172, 214, .8)",
+						trendLineThickness: 5,
+						trendLineType: "exponentialAverage",
+						negativeBrush: "rgba(198, 45, 54, .8)"
+					},
+					{
+						name: "series2",
+						dataSource: financialData2,
+						title: "Price Series",
+						type: "financial",
+						isTransitionInEnabled: true,
+						xAxis: "xAxis",
+						yAxis: "yAxis",
+						openMemberPath: "Open",
+						highMemberPath: "High",
+						lowMemberPath: "Low",
+						closeMemberPath: "Close",
+						thickness: 2,
+						showTooltip: true,
+						tooltipTemplate: "tooltipTemplate",
+						trendLineBrush: "rgba(73, 73, 73, .8)",
+						trendLineThickness: 5,
+						trendLineType: "exponentialAverage",
+						negativeBrush: "rgba(198, 45, 54, .8)",
+						displayType: "ohlc"
+					}
+				],
+				horizontalZoomable: true,
+				verticalZoomable: false,
+				windowResponse: "immediate",
+				refreshCompleted: function (e, ui) {
+					var viewport = chart.igDataChart("option", "gridAreaRect"),
+						leftMostValue = chart.igDataChart("unscaleValue", "xAxis", viewport.left),
+						rightMostValue = $("#chart").igDataChart("unscaleValue", "xAxis", viewport.left + viewport.width);
+					// get the dates corresponding to the values
+					leftMostValue = new Date(leftMostValue);
+					rightMostValue = new Date(rightMostValue);
+					// set the dates to the popover
+					if (popoverLeft.data("igPopover")) {
+						popoverLeft.igPopover("setContent", $.ig.formatter(leftMostValue, "date", "date"));
+					}
+					if (popoverRight.data("igPopover")) {
+						popoverRight.igPopover("setContent", $.ig.formatter(rightMostValue, "date", "date"));
+					}
+					zoomParams = {
+						left: ui.chart.actualWindowRect ? ui.chart.actualWindowRect.left : 0.35,
+						width: ui.chart.actualWindowRect ? ui.chart.actualWindowRect.width : 0.30
+					};
+				}
+			});
+			$("#zoom").igZoombar({
+				target: "#chart",
+				zoomWindowMinWidth: 1.2,
+				windowResized: function (evt, ui) {
+					var target = $(evt.originalEvent.target),
+						handle = target.hasClass("ui-igzoombar-window-handle") ?
+						target : lastTarget,
+						container = handle.igPopover("container").parent().parent();
+					if (target.hasClass("ui-igzoombar-window-handle")) {
+						lastTarget = target;
+					}
+					if (currentlyDragged && handle[0] !== currentlyDragged[0]) {
+						currentlyDragged.igPopover("hide");
+					}
+					// show the popover if it's not already visible
+					if (!container.is(":visible")) {
+						handle.igPopover("show");
+					}
+					// update popovers position
+					handle.igPopover("setCoordinates", {
+						top: handle.offset().top - container.outerHeight(),
+						left: handle.offset().left - container.outerWidth() / 2 + 5
+					});
+					currentlyDragged = handle;
+					if (popoverTimeout > 0) {
+						clearTimeout(popoverTimeout);
+					}
+					popoverTimeout = setTimeout(function () {
+						popoverLeft.igPopover("hide");
+						popoverRight.igPopover("hide");
+						popoverTimeout = 0;
+					}, 2000);
+					// finally reset the buttonset
+					$("#buttonset input").removeAttr("checked");               
+					$("#buttonset").buttonset("refresh");
+				}
+			});
+			var lastSelectedButton;
+			function onClick(button, label) {
+				var newWidth,
+					activeCss = "ui-state-active",
+					viewport = chart.igDataChart("option", "gridAreaRect"),
+					leftMostValue = chart.igDataChart("unscaleValue", "xAxis", viewport.left);
+				if (button === "day") {
+					newWidth = 24 * 60 * 60 * 1000;
+				} else if (button === "week") {
+					newWidth = 7 * 24 * 60 * 60 * 1000;
+				} else if (button === "month") {
+					newWidth = 30 * 24 * 60 * 60 * 1000;
+				}
+				// do not process same selected button twice
+				if (!newWidth || lastSelectedButton === button)
+					return;
+				lastSelectedButton = button;
+				newWidth = chart.igDataChart("scaleValue", "xAxis", new Date(leftMostValue + newWidth));
+				zoombar.igZoombar("zoom", zoomParams.left * 100, (newWidth * zoomParams.width / viewport.width) * 100);
+				// verify/fix appearance of active button
+				if (label) {
+					setTimeout(function () {
+						// condition when mouse-click of buttonset failed
+						if (label.className.indexOf(activeCss) < 0) {
+							var old = $("#buttonset").find("." + activeCss);
+							old.removeClass(activeCss).removeClass("ui-state-focus");
+							label.className += " " + activeCss;
+						}
+					}, 40);
+				}
+			}
+			// Note: buttonset has a bug with raising click events.
+			// To get around, use mouseup with check for "LABEL.htmlFor"
+			$("#buttonset").buttonset().click(function (evt) {
+				onClick(evt.target.id);
+			}).mouseup(function(evt) {
+				var label = evt.target;
+				if (label.nodeName !== "LABEL")
+					label = label.parentNode;
+				onClick(label.htmlFor, label);
+			});
+			popoverLeft = $("#zoom_zoombar_mask_left_handle");
+			popoverRight = $("#zoom_zoombar_mask_right_handle");
+			popoverLeft.igPopover({
+				direction: "top",
+				showOn: "focus"
+			});
+			popoverRight.igPopover({
+				direction: "top",
+				showOn: "focus"
+			});
+		});
+	</script>
+    </div>
+    <div class="igsb-width-msg sb-min-phone-landscape">
+        <div class="igsb-width-msg-inner">
+            <p>This sample is designed for a larger screen size.</p>
+            <br>
+            <p>On mobile, try rotating your screen, <a href="./../htmlsamples/zoombar/financial-chart.html">view full size</a>, or <a href="mailto:?subject=Zoombar Financial Chart Sample - Zoombar Financial Chart with Zoombar Control - Ignite UI™&body=http://localhost:10666/zoombar/financial-chart.html">email to another device.</a></p>
+        </div>
+    </div>
+
+            </div>
+            <div class="igsb-sample-desc">
+                This sample demonstrates the basic Zoombar functionality along an igDataChart with financial series. Additional controls enable resizing of the zoom window to a specific period of time and show popovers with date information for the left and right borders of it.
+            </div>
+            
+			<div id="bottomSection">			    
+                <h2 class="pageTitle">Code View</h2>
+                <div class="jq-ui-tabs igsb-tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <div id="JSFiddle">
+            <a href="http://jsfiddle.net/gh/get/jquery/1.9.1/igniteuisamples/jsfiddle-samples/tree/master/EN/HtmlSamples/zoombar/financial-chart/" target="_blank">Show In JsFiddle</a>
+        </div>
+	 <span class="codeViewerSelectAll" onclick="selectAllClick(this)">Select All</span>
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                        <li class="ui-state-default ui-corner-top"><a href="#zoombarFinancialChartFullHtml">HTML</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#zoombarFinancialChartData">Data</a></li>
+                    </ul>
+    
+                    <div id="zoombarFinancialChartFullHtml" class="code-viewer" style="display:none">
+            <pre class="prettyprint lang-html">
+                    &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;&lt;/title&gt;
+
+	&lt;!-- Ignite UI Required Combined CSS Files --&gt;
+	&lt;link href=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/css/themes/infragistics/infragistics.theme.css&quot; rel=&quot;stylesheet&quot; /&gt;
+	&lt;link href=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/css/structure/infragistics.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+	&lt;!--CSS file specific for chart styling --&gt;
+	&lt;link href=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/css/structure/modules/infragistics.ui.chart.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+	&lt;script src=&quot;http://modernizr.com/downloads/modernizr-latest.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/ui/1.10.3/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
+
+	&lt;!-- Ignite UI Required Combined JavaScript Files --&gt;
+	&lt;script src=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/js/infragistics.core.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/js/infragistics.dv.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/js/infragistics.lob.js&quot;&gt;&lt;/script&gt;
+
+	&lt;style type=&quot;text/css&quot;&gt;
+		.buttonset
+		{
+			position: absolute;
+			top: 0px;
+			left: 50px;
+			z-index: 10000;
+		}
+		.buttonset &gt; label
+		{
+			width: 60px;
+			height: 26px;
+			margin-right: -4px!important;
+		}
+		.tooltip{
+			font-weight: bold;
+		}
+	&lt;/style&gt;
+
+	&lt;script id=&quot;tooltipTemplate&quot; type=&quot;text/x-jquery-tmpl&quot;&gt;
+		&lt;span class=&quot;tooltip&quot;&gt;${item.DateString}&lt;/span&gt;&lt;br /&gt;
+        &lt;span class=&quot;tooltip&quot;&gt;Open:&amp;nbsp;&lt;/span&gt;&lt;span&gt;${item.Open}&lt;/span&gt;&lt;br /&gt;
+		&lt;span class=&quot;tooltip&quot;&gt;Low:&amp;nbsp;&lt;/span&gt;&lt;span&gt;${item.Low}&lt;/span&gt;&lt;br /&gt;
+		&lt;span class=&quot;tooltip&quot;&gt;High:&amp;nbsp;&lt;/span&gt;&lt;span&gt;${item.High}&lt;/span&gt;&lt;br /&gt;
+		&lt;span class=&quot;tooltip&quot;&gt;Close:&amp;nbsp;&lt;/span&gt;&lt;span&gt;${item.Close}&lt;/span&gt;&lt;br /&gt;
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id=&quot;chart&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;zoom&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;buttonset&quot; class=&quot;buttonset&quot;&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;day&quot; name=&quot;radio&quot; /&gt;&lt;label for=&quot;day&quot;&gt;Day&lt;/label&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;week&quot; name=&quot;radio&quot; /&gt;&lt;label for=&quot;week&quot;&gt;Week&lt;/label&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;month&quot; name=&quot;radio&quot; /&gt;&lt;label for=&quot;month&quot;&gt;Month&lt;/label&gt;
+	&lt;/div&gt;
+	&lt;div id=&quot;date&quot;&gt;
+	&lt;/div&gt;
+	&lt;div id=&quot;popoverLeft&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;popoverRight&quot;&gt;&lt;/div&gt;
+	&lt;script src=&quot;../../data-files/financial-data-random.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot;&gt;
+		$(document).ready(function () {
+			var chart = $(&quot;#chart&quot;),
+				zoombar = $(&quot;#zoom&quot;),
+				popoverTimeout = 0,
+				popoverLeft,
+				popoverRight,
+				lastTarget,
+				currentlyDragged,
+				zoomParams;
+			chart.igDataChart({
+				width: &quot;100%&quot;,
+				height: &quot;300px&quot;,
+				axes: [
+					{
+						name: &quot;xAxis&quot;,
+						type: &quot;categoryDateTimeX&quot;,
+						dataSource: financialData1,
+						dateTimeMemberPath: &quot;Date&quot;,
+						labelVisibility: &quot;visible&quot;
+					},
+					{
+						name: &quot;yAxis&quot;,
+						type: &quot;numericY&quot;
+					}
+				],
+				series: [
+					{
+						name: &quot;series1&quot;,
+						dataSource: financialData1,
+						title: &quot;Price Series&quot;,
+						type: &quot;financial&quot;,
+						isTransitionInEnabled: true,
+						displayType: &quot;ohlc&quot;,
+						xAxis: &quot;xAxis&quot;,
+						yAxis: &quot;yAxis&quot;,
+						openMemberPath: &quot;Open&quot;,
+						highMemberPath: &quot;High&quot;,
+						lowMemberPath: &quot;Low&quot;,
+						showTooltip: true,
+						tooltipTemplate: &quot;tooltipTemplate&quot;,
+						closeMemberPath: &quot;Close&quot;,
+						thickness: 2,
+						trendLineBrush: &quot;rgba(68, 172, 214, .8)&quot;,
+						trendLineThickness: 5,
+						trendLineType: &quot;exponentialAverage&quot;,
+						negativeBrush: &quot;rgba(198, 45, 54, .8)&quot;
+					},
+					{
+						name: &quot;series2&quot;,
+						dataSource: financialData2,
+						title: &quot;Price Series&quot;,
+						type: &quot;financial&quot;,
+						isTransitionInEnabled: true,
+						xAxis: &quot;xAxis&quot;,
+						yAxis: &quot;yAxis&quot;,
+						openMemberPath: &quot;Open&quot;,
+						highMemberPath: &quot;High&quot;,
+						lowMemberPath: &quot;Low&quot;,
+						closeMemberPath: &quot;Close&quot;,
+						thickness: 2,
+						showTooltip: true,
+						tooltipTemplate: &quot;tooltipTemplate&quot;,
+						trendLineBrush: &quot;rgba(73, 73, 73, .8)&quot;,
+						trendLineThickness: 5,
+						trendLineType: &quot;exponentialAverage&quot;,
+						negativeBrush: &quot;rgba(198, 45, 54, .8)&quot;,
+						displayType: &quot;ohlc&quot;
+					}
+				],
+				horizontalZoomable: true,
+				verticalZoomable: false,
+				windowResponse: &quot;immediate&quot;,
+				refreshCompleted: function (e, ui) {
+					var viewport = chart.igDataChart(&quot;option&quot;, &quot;gridAreaRect&quot;),
+						leftMostValue = chart.igDataChart(&quot;unscaleValue&quot;, &quot;xAxis&quot;, viewport.left),
+						rightMostValue = $(&quot;#chart&quot;).igDataChart(&quot;unscaleValue&quot;, &quot;xAxis&quot;, viewport.left + viewport.width);
+					// get the dates corresponding to the values
+					leftMostValue = new Date(leftMostValue);
+					rightMostValue = new Date(rightMostValue);
+					// set the dates to the popover
+					if (popoverLeft.data(&quot;igPopover&quot;)) {
+						popoverLeft.igPopover(&quot;setContent&quot;, $.ig.formatter(leftMostValue, &quot;date&quot;, &quot;date&quot;));
+					}
+					if (popoverRight.data(&quot;igPopover&quot;)) {
+						popoverRight.igPopover(&quot;setContent&quot;, $.ig.formatter(rightMostValue, &quot;date&quot;, &quot;date&quot;));
+					}
+					zoomParams = {
+						left: ui.chart.actualWindowRect ? ui.chart.actualWindowRect.left : 0.35,
+						width: ui.chart.actualWindowRect ? ui.chart.actualWindowRect.width : 0.30
+					};
+				}
+			});
+			$(&quot;#zoom&quot;).igZoombar({
+				target: &quot;#chart&quot;,
+				zoomWindowMinWidth: 1.2,
+				windowResized: function (evt, ui) {
+					var target = $(evt.originalEvent.target),
+						handle = target.hasClass(&quot;ui-igzoombar-window-handle&quot;) ?
+						target : lastTarget,
+						container = handle.igPopover(&quot;container&quot;).parent().parent();
+					if (target.hasClass(&quot;ui-igzoombar-window-handle&quot;)) {
+						lastTarget = target;
+					}
+					if (currentlyDragged &amp;&amp; handle[0] !== currentlyDragged[0]) {
+						currentlyDragged.igPopover(&quot;hide&quot;);
+					}
+					// show the popover if it&#39;s not already visible
+					if (!container.is(&quot;:visible&quot;)) {
+						handle.igPopover(&quot;show&quot;);
+					}
+					// update popovers position
+					handle.igPopover(&quot;setCoordinates&quot;, {
+						top: handle.offset().top - container.outerHeight(),
+						left: handle.offset().left - container.outerWidth() / 2 + 5
+					});
+					currentlyDragged = handle;
+					if (popoverTimeout &gt; 0) {
+						clearTimeout(popoverTimeout);
+					}
+					popoverTimeout = setTimeout(function () {
+						popoverLeft.igPopover(&quot;hide&quot;);
+						popoverRight.igPopover(&quot;hide&quot;);
+						popoverTimeout = 0;
+					}, 2000);
+					// finally reset the buttonset
+					$(&quot;#buttonset input&quot;).removeAttr(&quot;checked&quot;);               
+					$(&quot;#buttonset&quot;).buttonset(&quot;refresh&quot;);
+				}
+			});
+			var lastSelectedButton;
+			function onClick(button, label) {
+				var newWidth,
+					activeCss = &quot;ui-state-active&quot;,
+					viewport = chart.igDataChart(&quot;option&quot;, &quot;gridAreaRect&quot;),
+					leftMostValue = chart.igDataChart(&quot;unscaleValue&quot;, &quot;xAxis&quot;, viewport.left);
+				if (button === &quot;day&quot;) {
+					newWidth = 24 * 60 * 60 * 1000;
+				} else if (button === &quot;week&quot;) {
+					newWidth = 7 * 24 * 60 * 60 * 1000;
+				} else if (button === &quot;month&quot;) {
+					newWidth = 30 * 24 * 60 * 60 * 1000;
+				}
+				// do not process same selected button twice
+				if (!newWidth || lastSelectedButton === button)
+					return;
+				lastSelectedButton = button;
+				newWidth = chart.igDataChart(&quot;scaleValue&quot;, &quot;xAxis&quot;, new Date(leftMostValue + newWidth));
+				zoombar.igZoombar(&quot;zoom&quot;, zoomParams.left * 100, (newWidth * zoomParams.width / viewport.width) * 100);
+				// verify/fix appearance of active button
+				if (label) {
+					setTimeout(function () {
+						// condition when mouse-click of buttonset failed
+						if (label.className.indexOf(activeCss) &lt; 0) {
+							var old = $(&quot;#buttonset&quot;).find(&quot;.&quot; + activeCss);
+							old.removeClass(activeCss).removeClass(&quot;ui-state-focus&quot;);
+							label.className += &quot; &quot; + activeCss;
+						}
+					}, 40);
+				}
+			}
+			// Note: buttonset has a bug with raising click events.
+			// To get around, use mouseup with check for &quot;LABEL.htmlFor&quot;
+			$(&quot;#buttonset&quot;).buttonset().click(function (evt) {
+				onClick(evt.target.id);
+			}).mouseup(function(evt) {
+				var label = evt.target;
+				if (label.nodeName !== &quot;LABEL&quot;)
+					label = label.parentNode;
+				onClick(label.htmlFor, label);
+			});
+			popoverLeft = $(&quot;#zoom_zoombar_mask_left_handle&quot;);
+			popoverRight = $(&quot;#zoom_zoombar_mask_right_handle&quot;);
+			popoverLeft.igPopover({
+				direction: &quot;top&quot;,
+				showOn: &quot;focus&quot;
+			});
+			popoverRight.igPopover({
+				direction: &quot;top&quot;,
+				showOn: &quot;focus&quot;
+			});
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+         
+            </pre>
+        </div>
+            <div id="zoombarFinancialChartData" class="code-viewer" style="display:none">
+            <pre class="lang-js">
+                    var financialData1 = [{
+	&quot;Index&quot;: 0,
+	&quot;Open&quot;: 1000,
+	&quot;High&quot;: 1025.25,
+	&quot;Low&quot;: 970.25,
+	&quot;Close&quot;: 1025,
+	&quot;Volume&quot;: 1982.25,
+	&quot;Date&quot;: new Date(1262408400000),
+	&quot;DateString&quot;: &quot;1/2/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 25,
+	&quot;ChangePerCent&quot;: 2.5
+}, {
+	&quot;Index&quot;: 1,
+	&quot;Open&quot;: 1025,
+	&quot;High&quot;: 1062.25,
+	&quot;Low&quot;: 1006.25,
+	&quot;Close&quot;: 1057,
+	&quot;Volume&quot;: 1981.5,
+	&quot;Date&quot;: new Date(1262494800000),
+	&quot;DateString&quot;: &quot;1/3/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 32,
+	&quot;ChangePerCent&quot;: 3.1219512195121952
+}, {
+	&quot;Index&quot;: 2,
+	&quot;Open&quot;: 1057,
+	&quot;High&quot;: 1078.5,
+	&quot;Low&quot;: 1019,
+	&quot;Close&quot;: 1058,
+	&quot;Volume&quot;: 1963.25,
+	&quot;Date&quot;: new Date(1262581200000),
+	&quot;DateString&quot;: &quot;1/4/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 1,
+	&quot;ChangePerCent&quot;: 0.0946073793755913
+}, {
+	&quot;Index&quot;: 3,
+	&quot;Open&quot;: 1058,
+	&quot;High&quot;: 1079.75,
+	&quot;Low&quot;: 1027.5,
+	&quot;Close&quot;: 1072,
+	&quot;Volume&quot;: 1986.25,
+	&quot;Date&quot;: new Date(1262667600000),
+	&quot;DateString&quot;: &quot;1/5/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 14,
+	&quot;ChangePerCent&quot;: 1.3232514177693762
+}, {
+	&quot;Index&quot;: 4,
+	&quot;Open&quot;: 1072,
+	&quot;High&quot;: 1098,
+	&quot;Low&quot;: 1048,
+	&quot;Close&quot;: 1056,
+	&quot;Volume&quot;: 1972,
+	&quot;Date&quot;: new Date(1262754000000),
+	&quot;DateString&quot;: &quot;1/6/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -16,
+	&quot;ChangePerCent&quot;: -1.4925373134328357
+}, {
+	&quot;Index&quot;: 5,
+	&quot;Open&quot;: 1056,
+	&quot;High&quot;: 1072.5,
+	&quot;Low&quot;: 1026.75,
+	&quot;Close&quot;: 1043,
+	&quot;Volume&quot;: 1969,
+	&quot;Date&quot;: new Date(1262840400000),
+	&quot;DateString&quot;: &quot;1/7/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -13,
+	&quot;ChangePerCent&quot;: -1.231060606060606
+}, {
+	&quot;Index&quot;: 6,
+	&quot;Open&quot;: 1043,
+	&quot;High&quot;: 1062.5,
+	&quot;Low&quot;: 1024.25,
+	&quot;Close&quot;: 1029,
+	&quot;Volume&quot;: 1956.75,
+	&quot;Date&quot;: new Date(1262926800000),
+	&quot;DateString&quot;: &quot;1/8/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -14,
+	&quot;ChangePerCent&quot;: -1.3422818791946309
+}, {
+	&quot;Index&quot;: 7,
+	&quot;Open&quot;: 1029,
+	&quot;High&quot;: 1063.5,
+	&quot;Low&quot;: 999.5,
+	&quot;Close&quot;: 1011,
+	&quot;Volume&quot;: 1967,
+	&quot;Date&quot;: new Date(1263013200000),
+	&quot;DateString&quot;: &quot;1/9/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -18,
+	&quot;ChangePerCent&quot;: -1.749271137026239
+}, {
+	&quot;Index&quot;: 8,
+	&quot;Open&quot;: 1011,
+	&quot;High&quot;: 1037.75,
+	&quot;Low&quot;: 996,
+	&quot;Close&quot;: 1027,
+	&quot;Volume&quot;: 1995,
+	&quot;Date&quot;: new Date(1263099600000),
+	&quot;DateString&quot;: &quot;1/10/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 16,
+	&quot;ChangePerCent&quot;: 1.5825914935707219
+}, {
+	&quot;Index&quot;: 9,
+	&quot;Open&quot;: 1027,
+	&quot;High&quot;: 1062,
+	&quot;Low&quot;: 997,
+	&quot;Close&quot;: 1026,
+	&quot;Volume&quot;: 1969.75,
+	&quot;Date&quot;: new Date(1263186000000),
+	&quot;DateString&quot;: &quot;1/11/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -1,
+	&quot;ChangePerCent&quot;: -0.097370983446932818
+}, {
+	&quot;Index&quot;: 10,
+	&quot;Open&quot;: 1026,
+	&quot;High&quot;: 1041.5,
+	&quot;Low&quot;: 998.5,
+	&quot;Close&quot;: 1006,
+	&quot;Volume&quot;: 1958.25,
+	&quot;Date&quot;: new Date(1263272400000),
+	&quot;DateString&quot;: &quot;1/12/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -20,
+	&quot;ChangePerCent&quot;: -1.9493177387914229
+}, {
+	&quot;Index&quot;: 11,
+	&quot;Open&quot;: 1006,
+	&quot;High&quot;: 1035.25,
+	&quot;Low&quot;: 978.5,
+	&quot;Close&quot;: 1018,
+	&quot;Volume&quot;: 1947.75,
+	&quot;Date&quot;: new Date(1263358800000),
+	&quot;DateString&quot;: &quot;1/13/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 12,
+	&quot;ChangePerCent&quot;: 1.1928429423459244
+}, {
+	&quot;Index&quot;: 12,
+	&quot;Open&quot;: 1018,
+	&quot;High&quot;: 1035.75,
+	&quot;Low&quot;: 990,
+	&quot;Close&quot;: 1020,
+	&quot;Volume&quot;: 1946,
+	&quot;Date&quot;: new Date(1263445200000),
+	&quot;DateString&quot;: &quot;1/14/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 2,
+	&quot;ChangePerCent&quot;: 0.19646365422396855
+}, {
+	&quot;Index&quot;: 13,
+	&quot;Open&quot;: 1020,
+	&quot;High&quot;: 1050,
+	&quot;Low&quot;: 1003.25,
+	&quot;Close&quot;: 1049,
+	&quot;Volume&quot;: 1940.5,
+	&quot;Date&quot;: new Date(1263531600000),
+	&quot;DateString&quot;: &quot;1/15/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 29,
+	&quot;ChangePerCent&quot;: 2.8431372549019609
+}, {
+	&quot;Index&quot;: 14,
+	&quot;Open&quot;: 1049,
+	&quot;High&quot;: 1062.75,
+	&quot;Low&quot;: 1027.5,
+	&quot;Close&quot;: 1034,
+	&quot;Volume&quot;: 1953.25,
+	&quot;Date&quot;: new Date(1263618000000),
+	&quot;DateString&quot;: &quot;1/16/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -15,
+	&quot;ChangePerCent&quot;: -1.4299332697807436
+}, {
+	&quot;Index&quot;: 15,
+	&quot;Open&quot;: 1034,
+	&quot;High&quot;: 1054.5,
+	&quot;Low&quot;: 1011.75,
+	&quot;Close&quot;: 1022,
+	&quot;Volume&quot;: 1926.25,
+	&quot;Date&quot;: new Date(1263704400000),
+	&quot;DateString&quot;: &quot;1/17/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -12,
+	&quot;ChangePerCent&quot;: -1.1605415860735011
+}, {
+	&quot;Index&quot;: 16,
+	&quot;Open&quot;: 1022,
+	&quot;High&quot;: 1046,
+	&quot;Low&quot;: 994.25,
+	&quot;Close&quot;: 1021,
+	&quot;Volume&quot;: 1956.25,
+	&quot;Date&quot;: new Date(1263790800000),
+	&quot;DateString&quot;: &quot;1/18/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -1,
+	&quot;ChangePerCent&quot;: -0.097847358121330719
+}, {
+	&quot;Index&quot;: 17,
+	&quot;Open&quot;: 1021,
+	&quot;High&quot;: 1056.25,
+	&quot;Low&quot;: 982.75,
+	&quot;Close&quot;: 1001,
+	&quot;Volume&quot;: 1955.25,
+	&quot;Date&quot;: new Date(1263877200000),
+	&quot;DateString&quot;: &quot;1/19/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -20,
+	&quot;ChangePerCent&quot;: -1.9588638589618024
+}, {
+	&quot;Index&quot;: 18,
+	&quot;Open&quot;: 1001,
+	&quot;High&quot;: 1017,
+	&quot;Low&quot;: 979,
+	&quot;Close&quot;: 1014,
+	&quot;Volume&quot;: 1976.25,
+	&quot;Date&quot;: new Date(1263963600000),
+	&quot;DateString&quot;: &quot;1/20/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 13,
+	&quot;ChangePerCent&quot;: 1.2987012987012987
+}, {
+	&quot;Index&quot;: 19,
+	&quot;Open&quot;: 1014,
+	&quot;High&quot;: 1037.75,
+	&quot;Low&quot;: 982.25,
+	&quot;Close&quot;: 1008,
+	&quot;Volume&quot;: 1966.25,
+	&quot;Date&quot;: new Date(1264050000000),
+	&quot;DateString&quot;: &quot;1/21/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -6,
+	&quot;ChangePerCent&quot;: -0.591715976331361
+}, {
+	&quot;Index&quot;: 20,
+	&quot;Open&quot;: 1008,
+	&quot;High&quot;: 1021,
+	&quot;Low&quot;: 983.5,
+	&quot;Close&quot;: 984,
+	&quot;Volume&quot;: 1949.75,
+	&quot;Date&quot;: new Date(1264136400000),
+	&quot;DateString&quot;: &quot;1/22/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -24,
+	&quot;ChangePerCent&quot;: -2.3809523809523809
+}, {
+	&quot;Index&quot;: 21,
+	&quot;Open&quot;: 984,
+	&quot;High&quot;: 1018.75,
+	&quot;Low&quot;: 949.5,
+	&quot;Close&quot;: 994,
+	&quot;Volume&quot;: 1921.25,
+	&quot;Date&quot;: new Date(1264222800000),
+	&quot;DateString&quot;: &quot;1/23/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 10,
+	&quot;ChangePerCent&quot;: 1.0162601626016259
+}, {
+	&quot;Index&quot;: 22,
+	&quot;Open&quot;: 994,
+	&quot;High&quot;: 1018,
+	&quot;Low&quot;: 970.75,
+	&quot;Close&quot;: 971,
+	&quot;Volume&quot;: 1948.5,
+	&quot;Date&quot;: new Date(1264309200000),
+	&quot;DateString&quot;: &quot;1/24/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -23,
+	&quot;ChangePerCent&quot;: -2.3138832997987926
+}, {
+	&quot;Index&quot;: 23,
+	&quot;Open&quot;: 971,
+	&quot;High&quot;: 998.25,
+	&quot;Low&quot;: 948.5,
+	&quot;Close&quot;: 981,
+	&quot;Volume&quot;: 1946.75,
+	&quot;Date&quot;: new Date(1264395600000),
+	&quot;DateString&quot;: &quot;1/25/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 10,
+	&quot;ChangePerCent&quot;: 1.0298661174047374
+}, {
+	&quot;Index&quot;: 24,
+	&quot;Open&quot;: 981,
+	&quot;High&quot;: 995.5,
+	&quot;Low&quot;: 947,
+	&quot;Close&quot;: 991,
+	&quot;Volume&quot;: 1930.5,
+	&quot;Date&quot;: new Date(1264482000000),
+	&quot;DateString&quot;: &quot;1/26/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 10,
+	&quot;ChangePerCent&quot;: 1.019367991845056
+}, {
+	&quot;Index&quot;: 25,
+	&quot;Open&quot;: 991,
+	&quot;High&quot;: 1024,
+	&quot;Low&quot;: 962,
+	&quot;Close&quot;: 970,
+	&quot;Volume&quot;: 1905,
+	&quot;Date&quot;: new Date(1264568400000),
+	&quot;DateString&quot;: &quot;1/27/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -21,
+	&quot;ChangePerCent&quot;: -2.119071644803229
+}, {
+	&quot;Index&quot;: 26,
+	&quot;Open&quot;: 970,
+	&quot;High&quot;: 990.75,
+	&quot;Low&quot;: 942.5,
+	&quot;Close&quot;: 977,
+	&quot;Volume&quot;: 1903.5,
+	&quot;Date&quot;: new Date(1264654800000),
+	&quot;DateString&quot;: &quot;1/28/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 7,
+	&quot;ChangePerCent&quot;: 0.72164948453608246
+}, {
+	&quot;Index&quot;: 27,
+	&quot;Open&quot;: 977,
+	&quot;High&quot;: 993,
+	&quot;Low&quot;: 947.5,
+	&quot;Close&quot;: 992,
+	&quot;Volume&quot;: 1899.75,
+	&quot;Date&quot;: new Date(1264741200000),
+	&quot;DateString&quot;: &quot;1/29/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 15,
+	&quot;ChangePerCent&quot;: 1.5353121801432956
+}, {
+	&quot;Index&quot;: 28,
+	&quot;Open&quot;: 992,
+	&quot;High&quot;: 1009.5,
+	&quot;Low&quot;: 960.5,
+	&quot;Close&quot;: 979,
+	&quot;Volume&quot;: 1889.25,
+	&quot;Date&quot;: new Date(1264827600000),
+	&quot;DateString&quot;: &quot;1/30/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -13,
+	&quot;ChangePerCent&quot;: -1.310483870967742
+}, {
+	&quot;Index&quot;: 29,
+	&quot;Open&quot;: 979,
+	&quot;High&quot;: 1011.75,
+	&quot;Low&quot;: 956.5,
+	&quot;Close&quot;: 994,
+	&quot;Volume&quot;: 1896.75,
+	&quot;Date&quot;: new Date(1264914000000),
+	&quot;DateString&quot;: &quot;1/31/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 15,
+	&quot;ChangePerCent&quot;: 1.5321756894790604
+}, {
+	&quot;Index&quot;: 30,
+	&quot;Open&quot;: 994,
+	&quot;High&quot;: 1027.25,
+	&quot;Low&quot;: 967.25,
+	&quot;Close&quot;: 972,
+	&quot;Volume&quot;: 1875.5,
+	&quot;Date&quot;: new Date(1265000400000),
+	&quot;DateString&quot;: &quot;2/1/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -22,
+	&quot;ChangePerCent&quot;: -2.2132796780684103
+}, {
+	&quot;Index&quot;: 31,
+	&quot;Open&quot;: 972,
+	&quot;High&quot;: 992.75,
+	&quot;Low&quot;: 953,
+	&quot;Close&quot;: 958,
+	&quot;Volume&quot;: 1860.25,
+	&quot;Date&quot;: new Date(1265086800000),
+	&quot;DateString&quot;: &quot;2/2/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -14,
+	&quot;ChangePerCent&quot;: -1.440329218106996
+}, {
+	&quot;Index&quot;: 32,
+	&quot;Open&quot;: 958,
+	&quot;High&quot;: 994,
+	&quot;Low&quot;: 933,
+	&quot;Close&quot;: 972,
+	&quot;Volume&quot;: 1876.5,
+	&quot;Date&quot;: new Date(1265173200000),
+	&quot;DateString&quot;: &quot;2/3/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 14,
+	&quot;ChangePerCent&quot;: 1.4613778705636742
+}, {
+	&quot;Index&quot;: 33,
+	&quot;Open&quot;: 972,
+	&quot;High&quot;: 981,
+	&quot;Low&quot;: 947.75,
+	&quot;Close&quot;: 970,
+	&quot;Volume&quot;: 1885.5,
+	&quot;Date&quot;: new Date(1265259600000),
+	&quot;DateString&quot;: &quot;2/4/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -2,
+	&quot;ChangePerCent&quot;: -0.205761316872428
+}, {
+	&quot;Index&quot;: 34,
+	&quot;Open&quot;: 970,
+	&quot;High&quot;: 1005.5,
+	&quot;Low&quot;: 948.75,
+	&quot;Close&quot;: 955,
+	&quot;Volume&quot;: 1886.25,
+	&quot;Date&quot;: new Date(1265346000000),
+	&quot;DateString&quot;: &quot;2/5/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -15,
+	&quot;ChangePerCent&quot;: -1.5463917525773196
+}, {
+	&quot;Index&quot;: 35,
+	&quot;Open&quot;: 955,
+	&quot;High&quot;: 984,
+	&quot;Low&quot;: 932,
+	&quot;Close&quot;: 958,
+	&quot;Volume&quot;: 1895.25,
+	&quot;Date&quot;: new Date(1265432400000),
+	&quot;DateString&quot;: &quot;2/6/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 3,
+	&quot;ChangePerCent&quot;: 0.31413612565445026
+}, {
+	&quot;Index&quot;: 36,
+	&quot;Open&quot;: 958,
+	&quot;High&quot;: 972.25,
+	&quot;Low&quot;: 918.5,
+	&quot;Close&quot;: 967,
+	&quot;Volume&quot;: 1901.25,
+	&quot;Date&quot;: new Date(1265518800000),
+	&quot;DateString&quot;: &quot;2/7/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 9,
+	&quot;ChangePerCent&quot;: 0.93945720250521914
+}, {
+	&quot;Index&quot;: 37,
+	&quot;Open&quot;: 967,
+	&quot;High&quot;: 992,
+	&quot;Low&quot;: 937.5,
+	&quot;Close&quot;: 960,
+	&quot;Volume&quot;: 1889.75,
+	&quot;Date&quot;: new Date(1265605200000),
+	&quot;DateString&quot;: &quot;2/8/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -7,
+	&quot;ChangePerCent&quot;: -0.72388831437435364
+}, {
+	&quot;Index&quot;: 38,
+	&quot;Open&quot;: 960,
+	&quot;High&quot;: 981.25,
+	&quot;Low&quot;: 935.25,
+	&quot;Close&quot;: 941,
+	&quot;Volume&quot;: 1866,
+	&quot;Date&quot;: new Date(1265691600000),
+	&quot;DateString&quot;: &quot;2/9/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -19,
+	&quot;ChangePerCent&quot;: -1.9791666666666665
+}, {
+	&quot;Index&quot;: 39,
+	&quot;Open&quot;: 941,
+	&quot;High&quot;: 974.5,
+	&quot;Low&quot;: 913.25,
+	&quot;Close&quot;: 916,
+	&quot;Volume&quot;: 1866,
+	&quot;Date&quot;: new Date(1265778000000),
+	&quot;DateString&quot;: &quot;2/10/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -25,
+	&quot;ChangePerCent&quot;: -2.6567481402763016
+}, {
+	&quot;Index&quot;: 40,
+	&quot;Open&quot;: 916,
+	&quot;High&quot;: 933.5,
+	&quot;Low&quot;: 899,
+	&quot;Close&quot;: 904,
+	&quot;Volume&quot;: 1874.5,
+	&quot;Date&quot;: new Date(1265864400000),
+	&quot;DateString&quot;: &quot;2/11/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -12,
+	&quot;ChangePerCent&quot;: -1.3100436681222707
+}, {
+	&quot;Index&quot;: 41,
+	&quot;Open&quot;: 904,
+	&quot;High&quot;: 928.5,
+	&quot;Low&quot;: 886.75,
+	&quot;Close&quot;: 901,
+	&quot;Volume&quot;: 1873.75,
+	&quot;Date&quot;: new Date(1265950800000),
+	&quot;DateString&quot;: &quot;2/12/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -3,
+	&quot;ChangePerCent&quot;: -0.33185840707964603
+}, {
+	&quot;Index&quot;: 42,
+	&quot;Open&quot;: 901,
+	&quot;High&quot;: 942.5,
+	&quot;Low&quot;: 874,
+	&quot;Close&quot;: 916,
+	&quot;Volume&quot;: 1857.25,
+	&quot;Date&quot;: new Date(1266037200000),
+	&quot;DateString&quot;: &quot;2/13/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 15,
+	&quot;ChangePerCent&quot;: 1.6648168701442843
+}, {
+	&quot;Index&quot;: 43,
+	&quot;Open&quot;: 916,
+	&quot;High&quot;: 929.75,
+	&quot;Low&quot;: 887.25,
+	&quot;Close&quot;: 894,
+	&quot;Volume&quot;: 1880.75,
+	&quot;Date&quot;: new Date(1266123600000),
+	&quot;DateString&quot;: &quot;2/14/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -22,
+	&quot;ChangePerCent&quot;: -2.4017467248908297
+}, {
+	&quot;Index&quot;: 44,
+	&quot;Open&quot;: 894,
+	&quot;High&quot;: 908.5,
+	&quot;Low&quot;: 866.75,
+	&quot;Close&quot;: 869,
+	&quot;Volume&quot;: 1868.75,
+	&quot;Date&quot;: new Date(1266210000000),
+	&quot;DateString&quot;: &quot;2/15/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -25,
+	&quot;ChangePerCent&quot;: -2.796420581655481
+}, {
+	&quot;Index&quot;: 45,
+	&quot;Open&quot;: 869,
+	&quot;High&quot;: 898.75,
+	&quot;Low&quot;: 846.25,
+	&quot;Close&quot;: 894,
+	&quot;Volume&quot;: 1884,
+	&quot;Date&quot;: new Date(1266296400000),
+	&quot;DateString&quot;: &quot;2/16/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 25,
+	&quot;ChangePerCent&quot;: 2.8768699654775602
+}, {
+	&quot;Index&quot;: 46,
+	&quot;Open&quot;: 894,
+	&quot;High&quot;: 922.5,
+	&quot;Low&quot;: 871.25,
+	&quot;Close&quot;: 904,
+	&quot;Volume&quot;: 1898.5,
+	&quot;Date&quot;: new Date(1266382800000),
+	&quot;DateString&quot;: &quot;2/17/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 10,
+	&quot;ChangePerCent&quot;: 1.1185682326621924
+}, {
+	&quot;Index&quot;: 47,
+	&quot;Open&quot;: 904,
+	&quot;High&quot;: 921,
+	&quot;Low&quot;: 879.25,
+	&quot;Close&quot;: 893,
+	&quot;Volume&quot;: 1873,
+	&quot;Date&quot;: new Date(1266469200000),
+	&quot;DateString&quot;: &quot;2/18/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -11,
+	&quot;ChangePerCent&quot;: -1.2168141592920354
+}, {
+	&quot;Index&quot;: 48,
+	&quot;Open&quot;: 893,
+	&quot;High&quot;: 917.5,
+	&quot;Low&quot;: 855,
+	&quot;Close&quot;: 882,
+	&quot;Volume&quot;: 1885.5,
+	&quot;Date&quot;: new Date(1266555600000),
+	&quot;DateString&quot;: &quot;2/19/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -11,
+	&quot;ChangePerCent&quot;: -1.2318029115341544
+}, {
+	&quot;Index&quot;: 49,
+	&quot;Open&quot;: 882,
+	&quot;High&quot;: 913,
+	&quot;Low&quot;: 864.25,
+	&quot;Close&quot;: 886,
+	&quot;Volume&quot;: 1872,
+	&quot;Date&quot;: new Date(1266642000000),
+	&quot;DateString&quot;: &quot;2/20/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 4,
+	&quot;ChangePerCent&quot;: 0.45351473922902497
+}];
+
+var financialData2 = [{
+	&quot;Index&quot;: 0,
+	&quot;Open&quot;: 1000,
+	&quot;High&quot;: 1021.5,
+	&quot;Low&quot;: 963.75,
+	&quot;Close&quot;: 1020,
+	&quot;Volume&quot;: 1989,
+	&quot;Date&quot;: new Date(1262408400000),
+	&quot;DateString&quot;: &quot;1/2/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 20,
+	&quot;ChangePerCent&quot;: 2
+}, {
+	&quot;Index&quot;: 1,
+	&quot;Open&quot;: 1020,
+	&quot;High&quot;: 1044,
+	&quot;Low&quot;: 988.5,
+	&quot;Close&quot;: 1029,
+	&quot;Volume&quot;: 1980,
+	&quot;Date&quot;: new Date(1262494800000),
+	&quot;DateString&quot;: &quot;1/3/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 9,
+	&quot;ChangePerCent&quot;: 0.88235294117647056
+}, {
+	&quot;Index&quot;: 2,
+	&quot;Open&quot;: 1029,
+	&quot;High&quot;: 1055.5,
+	&quot;Low&quot;: 1001,
+	&quot;Close&quot;: 1043,
+	&quot;Volume&quot;: 1984.75,
+	&quot;Date&quot;: new Date(1262581200000),
+	&quot;DateString&quot;: &quot;1/4/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 14,
+	&quot;ChangePerCent&quot;: 1.3605442176870748
+}, {
+	&quot;Index&quot;: 3,
+	&quot;Open&quot;: 1043,
+	&quot;High&quot;: 1075,
+	&quot;Low&quot;: 1025,
+	&quot;Close&quot;: 1054,
+	&quot;Volume&quot;: 1972,
+	&quot;Date&quot;: new Date(1262667600000),
+	&quot;DateString&quot;: &quot;1/5/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 11,
+	&quot;ChangePerCent&quot;: 1.0546500479386385
+}, {
+	&quot;Index&quot;: 4,
+	&quot;Open&quot;: 1054,
+	&quot;High&quot;: 1081.25,
+	&quot;Low&quot;: 1034.75,
+	&quot;Close&quot;: 1044,
+	&quot;Volume&quot;: 1991.75,
+	&quot;Date&quot;: new Date(1262754000000),
+	&quot;DateString&quot;: &quot;1/6/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -10,
+	&quot;ChangePerCent&quot;: -0.94876660341555974
+}, {
+	&quot;Index&quot;: 5,
+	&quot;Open&quot;: 1044,
+	&quot;High&quot;: 1056.25,
+	&quot;Low&quot;: 1025,
+	&quot;Close&quot;: 1048,
+	&quot;Volume&quot;: 2014,
+	&quot;Date&quot;: new Date(1262840400000),
+	&quot;DateString&quot;: &quot;1/7/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 4,
+	&quot;ChangePerCent&quot;: 0.38314176245210724
+}, {
+	&quot;Index&quot;: 6,
+	&quot;Open&quot;: 1048,
+	&quot;High&quot;: 1067.75,
+	&quot;Low&quot;: 1009.75,
+	&quot;Close&quot;: 1026,
+	&quot;Volume&quot;: 2020,
+	&quot;Date&quot;: new Date(1262926800000),
+	&quot;DateString&quot;: &quot;1/8/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -22,
+	&quot;ChangePerCent&quot;: -2.0992366412213741
+}, {
+	&quot;Index&quot;: 7,
+	&quot;Open&quot;: 1026,
+	&quot;High&quot;: 1048,
+	&quot;Low&quot;: 996.5,
+	&quot;Close&quot;: 1014,
+	&quot;Volume&quot;: 2017.5,
+	&quot;Date&quot;: new Date(1263013200000),
+	&quot;DateString&quot;: &quot;1/9/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -12,
+	&quot;ChangePerCent&quot;: -1.1695906432748537
+}, {
+	&quot;Index&quot;: 8,
+	&quot;Open&quot;: 1014,
+	&quot;High&quot;: 1032,
+	&quot;Low&quot;: 980.5,
+	&quot;Close&quot;: 1022,
+	&quot;Volume&quot;: 2011.75,
+	&quot;Date&quot;: new Date(1263099600000),
+	&quot;DateString&quot;: &quot;1/10/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 8,
+	&quot;ChangePerCent&quot;: 0.78895463510848129
+}, {
+	&quot;Index&quot;: 9,
+	&quot;Open&quot;: 1022,
+	&quot;High&quot;: 1050.25,
+	&quot;Low&quot;: 989.5,
+	&quot;Close&quot;: 1036,
+	&quot;Volume&quot;: 2013,
+	&quot;Date&quot;: new Date(1263186000000),
+	&quot;DateString&quot;: &quot;1/11/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 14,
+	&quot;ChangePerCent&quot;: 1.36986301369863
+}, {
+	&quot;Index&quot;: 10,
+	&quot;Open&quot;: 1036,
+	&quot;High&quot;: 1054.25,
+	&quot;Low&quot;: 1021.25,
+	&quot;Close&quot;: 1044,
+	&quot;Volume&quot;: 2005.75,
+	&quot;Date&quot;: new Date(1263272400000),
+	&quot;DateString&quot;: &quot;1/12/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 8,
+	&quot;ChangePerCent&quot;: 0.77220077220077221
+}, {
+	&quot;Index&quot;: 11,
+	&quot;Open&quot;: 1044,
+	&quot;High&quot;: 1062.5,
+	&quot;Low&quot;: 1012.75,
+	&quot;Close&quot;: 1024,
+	&quot;Volume&quot;: 2024.25,
+	&quot;Date&quot;: new Date(1263358800000),
+	&quot;DateString&quot;: &quot;1/13/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -20,
+	&quot;ChangePerCent&quot;: -1.9157088122605364
+}, {
+	&quot;Index&quot;: 12,
+	&quot;Open&quot;: 1024,
+	&quot;High&quot;: 1049.25,
+	&quot;Low&quot;: 1001.25,
+	&quot;Close&quot;: 1006,
+	&quot;Volume&quot;: 2020,
+	&quot;Date&quot;: new Date(1263445200000),
+	&quot;DateString&quot;: &quot;1/14/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -18,
+	&quot;ChangePerCent&quot;: -1.7578125
+}, {
+	&quot;Index&quot;: 13,
+	&quot;Open&quot;: 1006,
+	&quot;High&quot;: 1013.75,
+	&quot;Low&quot;: 983.5,
+	&quot;Close&quot;: 1007,
+	&quot;Volume&quot;: 2011.75,
+	&quot;Date&quot;: new Date(1263531600000),
+	&quot;DateString&quot;: &quot;1/15/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 1,
+	&quot;ChangePerCent&quot;: 0.09940357852882703
+}, {
+	&quot;Index&quot;: 14,
+	&quot;Open&quot;: 1007,
+	&quot;High&quot;: 1034.25,
+	&quot;Low&quot;: 986.75,
+	&quot;Close&quot;: 1027,
+	&quot;Volume&quot;: 1986.25,
+	&quot;Date&quot;: new Date(1263618000000),
+	&quot;DateString&quot;: &quot;1/16/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 20,
+	&quot;ChangePerCent&quot;: 1.9860973187686197
+}, {
+	&quot;Index&quot;: 15,
+	&quot;Open&quot;: 1027,
+	&quot;High&quot;: 1048,
+	&quot;Low&quot;: 995,
+	&quot;Close&quot;: 996,
+	&quot;Volume&quot;: 1969.75,
+	&quot;Date&quot;: new Date(1263704400000),
+	&quot;DateString&quot;: &quot;1/17/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -31,
+	&quot;ChangePerCent&quot;: -3.0185004868549172
+}, {
+	&quot;Index&quot;: 16,
+	&quot;Open&quot;: 996,
+	&quot;High&quot;: 1020,
+	&quot;Low&quot;: 976.75,
+	&quot;Close&quot;: 976,
+	&quot;Volume&quot;: 1945.25,
+	&quot;Date&quot;: new Date(1263790800000),
+	&quot;DateString&quot;: &quot;1/18/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -20,
+	&quot;ChangePerCent&quot;: -2.0080321285140563
+}, {
+	&quot;Index&quot;: 17,
+	&quot;Open&quot;: 976,
+	&quot;High&quot;: 999.5,
+	&quot;Low&quot;: 955.75,
+	&quot;Close&quot;: 979,
+	&quot;Volume&quot;: 1938.75,
+	&quot;Date&quot;: new Date(1263877200000),
+	&quot;DateString&quot;: &quot;1/19/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 3,
+	&quot;ChangePerCent&quot;: 0.30737704918032788
+}, {
+	&quot;Index&quot;: 18,
+	&quot;Open&quot;: 979,
+	&quot;High&quot;: 997.75,
+	&quot;Low&quot;: 957.5,
+	&quot;Close&quot;: 975,
+	&quot;Volume&quot;: 1948.25,
+	&quot;Date&quot;: new Date(1263963600000),
+	&quot;DateString&quot;: &quot;1/20/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -4,
+	&quot;ChangePerCent&quot;: -0.40858018386108275
+}, {
+	&quot;Index&quot;: 19,
+	&quot;Open&quot;: 975,
+	&quot;High&quot;: 987.75,
+	&quot;Low&quot;: 938.25,
+	&quot;Close&quot;: 949,
+	&quot;Volume&quot;: 1960.5,
+	&quot;Date&quot;: new Date(1264050000000),
+	&quot;DateString&quot;: &quot;1/21/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -26,
+	&quot;ChangePerCent&quot;: -2.666666666666667
+}, {
+	&quot;Index&quot;: 20,
+	&quot;Open&quot;: 949,
+	&quot;High&quot;: 970.5,
+	&quot;Low&quot;: 924,
+	&quot;Close&quot;: 946,
+	&quot;Volume&quot;: 1972.75,
+	&quot;Date&quot;: new Date(1264136400000),
+	&quot;DateString&quot;: &quot;1/22/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -3,
+	&quot;ChangePerCent&quot;: -0.31612223393045313
+}, {
+	&quot;Index&quot;: 21,
+	&quot;Open&quot;: 946,
+	&quot;High&quot;: 972.75,
+	&quot;Low&quot;: 927,
+	&quot;Close&quot;: 944,
+	&quot;Volume&quot;: 1970.75,
+	&quot;Date&quot;: new Date(1264222800000),
+	&quot;DateString&quot;: &quot;1/23/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -2,
+	&quot;ChangePerCent&quot;: -0.21141649048625794
+}, {
+	&quot;Index&quot;: 22,
+	&quot;Open&quot;: 944,
+	&quot;High&quot;: 975.5,
+	&quot;Low&quot;: 930.25,
+	&quot;Close&quot;: 960,
+	&quot;Volume&quot;: 1948.75,
+	&quot;Date&quot;: new Date(1264309200000),
+	&quot;DateString&quot;: &quot;1/24/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 16,
+	&quot;ChangePerCent&quot;: 1.6949152542372881
+}, {
+	&quot;Index&quot;: 23,
+	&quot;Open&quot;: 960,
+	&quot;High&quot;: 999.25,
+	&quot;Low&quot;: 925.5,
+	&quot;Close&quot;: 957,
+	&quot;Volume&quot;: 1965,
+	&quot;Date&quot;: new Date(1264395600000),
+	&quot;DateString&quot;: &quot;1/25/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -3,
+	&quot;ChangePerCent&quot;: -0.3125
+}, {
+	&quot;Index&quot;: 24,
+	&quot;Open&quot;: 957,
+	&quot;High&quot;: 991.5,
+	&quot;Low&quot;: 928.75,
+	&quot;Close&quot;: 949,
+	&quot;Volume&quot;: 1948,
+	&quot;Date&quot;: new Date(1264482000000),
+	&quot;DateString&quot;: &quot;1/26/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -8,
+	&quot;ChangePerCent&quot;: -0.8359456635318705
+}, {
+	&quot;Index&quot;: 25,
+	&quot;Open&quot;: 949,
+	&quot;High&quot;: 968.5,
+	&quot;Low&quot;: 924,
+	&quot;Close&quot;: 929,
+	&quot;Volume&quot;: 1956.25,
+	&quot;Date&quot;: new Date(1264568400000),
+	&quot;DateString&quot;: &quot;1/27/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -20,
+	&quot;ChangePerCent&quot;: -2.1074815595363541
+}, {
+	&quot;Index&quot;: 26,
+	&quot;Open&quot;: 929,
+	&quot;High&quot;: 948.25,
+	&quot;Low&quot;: 899,
+	&quot;Close&quot;: 905,
+	&quot;Volume&quot;: 1950,
+	&quot;Date&quot;: new Date(1264654800000),
+	&quot;DateString&quot;: &quot;1/28/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -24,
+	&quot;ChangePerCent&quot;: -2.5834230355220669
+}, {
+	&quot;Index&quot;: 27,
+	&quot;Open&quot;: 905,
+	&quot;High&quot;: 917.25,
+	&quot;Low&quot;: 888.25,
+	&quot;Close&quot;: 900,
+	&quot;Volume&quot;: 1937.25,
+	&quot;Date&quot;: new Date(1264741200000),
+	&quot;DateString&quot;: &quot;1/29/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -5,
+	&quot;ChangePerCent&quot;: -0.55248618784530379
+}, {
+	&quot;Index&quot;: 28,
+	&quot;Open&quot;: 900,
+	&quot;High&quot;: 923.75,
+	&quot;Low&quot;: 885,
+	&quot;Close&quot;: 905,
+	&quot;Volume&quot;: 1955.5,
+	&quot;Date&quot;: new Date(1264827600000),
+	&quot;DateString&quot;: &quot;1/30/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 5,
+	&quot;ChangePerCent&quot;: 0.55555555555555558
+}, {
+	&quot;Index&quot;: 29,
+	&quot;Open&quot;: 905,
+	&quot;High&quot;: 922,
+	&quot;Low&quot;: 889.5,
+	&quot;Close&quot;: 920,
+	&quot;Volume&quot;: 1967.25,
+	&quot;Date&quot;: new Date(1264914000000),
+	&quot;DateString&quot;: &quot;1/31/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 15,
+	&quot;ChangePerCent&quot;: 1.6574585635359116
+}, {
+	&quot;Index&quot;: 30,
+	&quot;Open&quot;: 920,
+	&quot;High&quot;: 950.75,
+	&quot;Low&quot;: 893.75,
+	&quot;Close&quot;: 941,
+	&quot;Volume&quot;: 1968.75,
+	&quot;Date&quot;: new Date(1265000400000),
+	&quot;DateString&quot;: &quot;2/1/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 21,
+	&quot;ChangePerCent&quot;: 2.2826086956521738
+}, {
+	&quot;Index&quot;: 31,
+	&quot;Open&quot;: 941,
+	&quot;High&quot;: 951,
+	&quot;Low&quot;: 911,
+	&quot;Close&quot;: 935,
+	&quot;Volume&quot;: 1973,
+	&quot;Date&quot;: new Date(1265086800000),
+	&quot;DateString&quot;: &quot;2/2/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -6,
+	&quot;ChangePerCent&quot;: -0.6376195536663124
+}, {
+	&quot;Index&quot;: 32,
+	&quot;Open&quot;: 935,
+	&quot;High&quot;: 944.5,
+	&quot;Low&quot;: 924.5,
+	&quot;Close&quot;: 924,
+	&quot;Volume&quot;: 1982.75,
+	&quot;Date&quot;: new Date(1265173200000),
+	&quot;DateString&quot;: &quot;2/3/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -11,
+	&quot;ChangePerCent&quot;: -1.1764705882352942
+}, {
+	&quot;Index&quot;: 33,
+	&quot;Open&quot;: 924,
+	&quot;High&quot;: 943.5,
+	&quot;Low&quot;: 909.25,
+	&quot;Close&quot;: 923,
+	&quot;Volume&quot;: 2001.25,
+	&quot;Date&quot;: new Date(1265259600000),
+	&quot;DateString&quot;: &quot;2/4/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -1,
+	&quot;ChangePerCent&quot;: -0.10822510822510822
+}, {
+	&quot;Index&quot;: 34,
+	&quot;Open&quot;: 923,
+	&quot;High&quot;: 949,
+	&quot;Low&quot;: 895,
+	&quot;Close&quot;: 929,
+	&quot;Volume&quot;: 2000.75,
+	&quot;Date&quot;: new Date(1265346000000),
+	&quot;DateString&quot;: &quot;2/5/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 6,
+	&quot;ChangePerCent&quot;: 0.65005417118093178
+}, {
+	&quot;Index&quot;: 35,
+	&quot;Open&quot;: 929,
+	&quot;High&quot;: 957.75,
+	&quot;Low&quot;: 906.25,
+	&quot;Close&quot;: 935,
+	&quot;Volume&quot;: 1987.25,
+	&quot;Date&quot;: new Date(1265432400000),
+	&quot;DateString&quot;: &quot;2/6/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 6,
+	&quot;ChangePerCent&quot;: 0.64585575888051672
+}, {
+	&quot;Index&quot;: 36,
+	&quot;Open&quot;: 935,
+	&quot;High&quot;: 965.25,
+	&quot;Low&quot;: 913,
+	&quot;Close&quot;: 927,
+	&quot;Volume&quot;: 1973.25,
+	&quot;Date&quot;: new Date(1265518800000),
+	&quot;DateString&quot;: &quot;2/7/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -8,
+	&quot;ChangePerCent&quot;: -0.85561497326203206
+}, {
+	&quot;Index&quot;: 37,
+	&quot;Open&quot;: 927,
+	&quot;High&quot;: 953.25,
+	&quot;Low&quot;: 913.5,
+	&quot;Close&quot;: 944,
+	&quot;Volume&quot;: 1974.25,
+	&quot;Date&quot;: new Date(1265605200000),
+	&quot;DateString&quot;: &quot;2/8/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 17,
+	&quot;ChangePerCent&quot;: 1.8338727076591153
+}, {
+	&quot;Index&quot;: 38,
+	&quot;Open&quot;: 944,
+	&quot;High&quot;: 957.75,
+	&quot;Low&quot;: 923.75,
+	&quot;Close&quot;: 923,
+	&quot;Volume&quot;: 1962,
+	&quot;Date&quot;: new Date(1265691600000),
+	&quot;DateString&quot;: &quot;2/9/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -21,
+	&quot;ChangePerCent&quot;: -2.2245762711864407
+}, {
+	&quot;Index&quot;: 39,
+	&quot;Open&quot;: 923,
+	&quot;High&quot;: 951.25,
+	&quot;Low&quot;: 903.5,
+	&quot;Close&quot;: 912,
+	&quot;Volume&quot;: 1970.5,
+	&quot;Date&quot;: new Date(1265778000000),
+	&quot;DateString&quot;: &quot;2/10/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -11,
+	&quot;ChangePerCent&quot;: -1.1917659804983749
+}, {
+	&quot;Index&quot;: 40,
+	&quot;Open&quot;: 912,
+	&quot;High&quot;: 929.75,
+	&quot;Low&quot;: 888.25,
+	&quot;Close&quot;: 896,
+	&quot;Volume&quot;: 1959.25,
+	&quot;Date&quot;: new Date(1265864400000),
+	&quot;DateString&quot;: &quot;2/11/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -16,
+	&quot;ChangePerCent&quot;: -1.7543859649122806
+}, {
+	&quot;Index&quot;: 41,
+	&quot;Open&quot;: 896,
+	&quot;High&quot;: 921.75,
+	&quot;Low&quot;: 885.5,
+	&quot;Close&quot;: 915,
+	&quot;Volume&quot;: 1942.5,
+	&quot;Date&quot;: new Date(1265950800000),
+	&quot;DateString&quot;: &quot;2/12/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 19,
+	&quot;ChangePerCent&quot;: 2.1205357142857144
+}, {
+	&quot;Index&quot;: 42,
+	&quot;Open&quot;: 915,
+	&quot;High&quot;: 926,
+	&quot;Low&quot;: 883.25,
+	&quot;Close&quot;: 902,
+	&quot;Volume&quot;: 1937.5,
+	&quot;Date&quot;: new Date(1266037200000),
+	&quot;DateString&quot;: &quot;2/13/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -13,
+	&quot;ChangePerCent&quot;: -1.4207650273224044
+}, {
+	&quot;Index&quot;: 43,
+	&quot;Open&quot;: 902,
+	&quot;High&quot;: 923.5,
+	&quot;Low&quot;: 868,
+	&quot;Close&quot;: 897,
+	&quot;Volume&quot;: 1941.25,
+	&quot;Date&quot;: new Date(1266123600000),
+	&quot;DateString&quot;: &quot;2/14/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -5,
+	&quot;ChangePerCent&quot;: -0.55432372505543237
+}, {
+	&quot;Index&quot;: 44,
+	&quot;Open&quot;: 897,
+	&quot;High&quot;: 922,
+	&quot;Low&quot;: 877.5,
+	&quot;Close&quot;: 920,
+	&quot;Volume&quot;: 1927,
+	&quot;Date&quot;: new Date(1266210000000),
+	&quot;DateString&quot;: &quot;2/15/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 23,
+	&quot;ChangePerCent&quot;: 2.5641025641025639
+}, {
+	&quot;Index&quot;: 45,
+	&quot;Open&quot;: 920,
+	&quot;High&quot;: 961.5,
+	&quot;Low&quot;: 903.25,
+	&quot;Close&quot;: 923,
+	&quot;Volume&quot;: 1923.25,
+	&quot;Date&quot;: new Date(1266296400000),
+	&quot;DateString&quot;: &quot;2/16/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 3,
+	&quot;ChangePerCent&quot;: 0.32608695652173914
+}, {
+	&quot;Index&quot;: 46,
+	&quot;Open&quot;: 923,
+	&quot;High&quot;: 948.25,
+	&quot;Low&quot;: 891.25,
+	&quot;Close&quot;: 934,
+	&quot;Volume&quot;: 1940.25,
+	&quot;Date&quot;: new Date(1266382800000),
+	&quot;DateString&quot;: &quot;2/17/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 11,
+	&quot;ChangePerCent&quot;: 1.1917659804983749
+}, {
+	&quot;Index&quot;: 47,
+	&quot;Open&quot;: 934,
+	&quot;High&quot;: 958.75,
+	&quot;Low&quot;: 915,
+	&quot;Close&quot;: 932,
+	&quot;Volume&quot;: 1946,
+	&quot;Date&quot;: new Date(1266469200000),
+	&quot;DateString&quot;: &quot;2/18/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: -2,
+	&quot;ChangePerCent&quot;: -0.21413276231263384
+}, {
+	&quot;Index&quot;: 48,
+	&quot;Open&quot;: 932,
+	&quot;High&quot;: 948,
+	&quot;Low&quot;: 903,
+	&quot;Close&quot;: 938,
+	&quot;Volume&quot;: 1942.25,
+	&quot;Date&quot;: new Date(1266555600000),
+	&quot;DateString&quot;: &quot;2/19/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 6,
+	&quot;ChangePerCent&quot;: 0.64377682403433478
+}, {
+	&quot;Index&quot;: 49,
+	&quot;Open&quot;: 938,
+	&quot;High&quot;: 965.25,
+	&quot;Low&quot;: 923.25,
+	&quot;Close&quot;: 947,
+	&quot;Volume&quot;: 1905.5,
+	&quot;Date&quot;: new Date(1266642000000),
+	&quot;DateString&quot;: &quot;2/20/2010&quot;,
+	&quot;Category&quot;: null,
+	&quot;Change&quot;: 9,
+	&quot;ChangePerCent&quot;: 0.95948827292110883
+}];
+  
+            </pre>
+        </div>
+                </div>
+
+<aside class="codeViewerButton codeViewerCollapsed">Code Viewer</aside>
+
+<aside id="codeViewerPopup">
+    <div style="text-align: right; position: absolute; z-index: 1; height: 1px; width: 100%">
+        <span class="codeViewerPopupHideButton codeViewerButton">Back to Sample</span>
+    </div>
+    <div id="codeViewerPopupAccordion">
+                       <h3>HTML</h3>
+            <div id="zoombarFinancialChartFullHtml_copy" class="codeViewerPopupAccordionDiv"></div>
+                    <h3>Data</h3>
+            <div id="zoombarFinancialChartData_copy" class="codeViewerPopupAccordionDiv"></div>
+                    </div>
+</aside>
+                <aside id="learning" class="row">
+        <div>
+            <h3>API Reference</h3>
+            <ul>
+                    <li class="contents-list-control"><a href="http://help.infragistics.com/jQuery/2015.2/ui.igzoombar" target="_blank">ui.igzoombar</a></li>
+                    <li class="contents-list-control"><a href="http://help.infragistics.com/jQuery/2015.2/ui.igzoombar#options:target" target="_blank">target</a></li>
+                    <li class="contents-list-control"><a href="http://help.infragistics.com/jQuery/2015.2/ui.igzoombar#options:zoomWindowMinWidth" target="_blank">zoomWindowMinWidth</a></li>
+                    <li class="contents-list-control"><a href="http://help.infragistics.com/jQuery/2015.2/ui.igzoombar#events:windowResized" target="_blank">windowResized</a></li>
+            </ul>
+        </div>
+            <div>
+            <h3>Help Topics</h3>
+            <ul>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/igzoombar-landingpage" target="_blank">Zoombar Help Overview</a></li>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/adding-igzoombar" target="_blank">Adding igZoombar</a></li>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/configuring-igzoombar" target="_blank">Configuring igZoombar</a></li>
+            </ul>
+        </div>
+            <div>
+            <h3>Community</h3>
+            <ul>
+                <li class="contents-list-control"><a href="http://www.infragistics.com/community/forums/815.aspx" target="_blank">Zoombar Forum</a></li>
+            </ul>
+        </div>
+    <br>
+</aside>
+                <br>
+			</div>
+        </section>
+    </div>
+</article>
+</section>
+
+                </div>
+            </div>
+            <footer class="row footerArea">
+                <div class="footerIcon">
+                    <a href="http://www.infragistics.com">
+                        <img src="./../images/footerIcon.PNG"></img>
+                    </a>
+                </div>
+                <nav class="footerNav">
+                <a href="http://www.infragistics.com/legal/license/">LICENSE AGREEMENT</a>|
+                <a href="http://www.infragistics.com/about-us/contact-us/">CONTACT US</a>|
+                <a href="http://www.infragistics.com/help/">GET HELP</a>|
+                <a href="http://www.infragistics.com/about-us/">MEET US</a>|
+                <a href="http://www.infragistics.com/legal/privacy/">PRIVACY AGREEMENT</a>|
+                <a href="http://www.infragistics.com">SITE MAP</a>|
+                <a href="http://www.infragistics.com/legal/legal-information">LEGAL INFORMATION</a>
+                </nav>
+            </footer>
+        </div>
+    </body>
+</html>

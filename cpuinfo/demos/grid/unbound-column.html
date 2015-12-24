@@ -1,0 +1,3362 @@
+﻿<!DOCTYPE html>
+<!--[if lte IE 8]>
+<html class="OldIE no-js">
+<![endif]-->
+<html class="no-js">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta charset='utf-8'>
+        <meta http-equiv="x-ua-compatible" content="IE=Edge">
+        <title>Unbound Column Sample - Unbound Column with Grid Control - Ignite UI™</title>
+        <meta name="description" content="The sample demonstrates how to add and configure unbound columns in igGrid.    The unbound values of column “Promotion Expired Date” are set initially using a list of dates.    Column “IsPromotion” is using databound client event to set unbound values.    Column “Total” is using formula to calculate the multiplication of the values from columns “Unit Price” and “Units in Stock”.    When updating the values in “Unit Price” and “Units in Stock”, the change is reflected to Total column.">
+        <meta name="keywords" content="Unbound Column, Grid, HTML5, html 5, javascript, Infragistics, user experience, user interface, presentation layer, asp.net mvc controls, web applications, NetAdvantage jQuery controls, IgniteUI, Ignite UI, client-side JavaScript, data visualization, ui components, ui controls, user interface, jQuery Controls">
+        <link rel="shortcut icon" type="image/ico" href="./../images/favicon.ico"></link>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'></link>    
+        <link href="./../../css/themes/infragistics/infragistics.theme.css" rel="stylesheet"></link>
+        <link href="./../../css/structure/infragistics.css" rel="stylesheet"></link>
+
+        <link href="./../css/all.css" rel="stylesheet"></link>
+        
+
+        <!--[if lte IE 7]>
+            <link href="./../css/sb-legacy.css" rel="stylesheet" />
+            <script src="./../js/json2.js"></script> 
+        <![endif]-->
+
+        <script type="text/javascript" src="./../js/all.js"></script>
+        
+
+        <script type="text/javascript">
+            var MyAppUrlSettings = {
+                SampleContentURL: '/aspnet/Home/Sample',
+                hostname: '/'
+            }
+        </script>
+        
+    <script type="text/javascript" src="./../js/sb-sample.js"></script>
+
+
+
+    
+
+    
+    
+        
+
+    
+    
+    
+
+    
+    <script src="./../../js/infragistics.core.js" type="text/javascript"></script>
+    <script src="./../../js/infragistics.lob.js" type="text/javascript"></script>
+    
+
+
+
+
+
+        
+    </head>
+    <body>
+        <div id="wrapperDiv">
+            <div id="sampleBrowserContainer" class="sbContainer">
+                <header class="ui-helper-clearfix row sbHeader">
+                    <div class="headerIcon headerIcon_click">
+                        <img src="./../images/headerIcon.PNG"></img>
+                    </div>
+                </header>
+                <nav id="controlsMenu" class="hamburgerMenu">
+    <ul>
+                <li class="navSampleApp navSampleTag"><div class="navCategory">
+            <div class="navCategoryTitle"><a href="./../application-samples.html" target="">Application Samples</a></div>
+        </div></li>        
+        <li class="navSampleApp navSampleTag"><div class="navCategory">
+            <div class="navCategoryTitle"><a href="./../getting-started.html" target="">Getting Started</a></div>
+        </div></li>        
+        <li class="navSampleApp navSampleTag"><div class="navCategory">
+            <div class="navCategoryTitle"><a href="http://designer.igniteui.com" target="_blank">Page Designer</a></div>
+        </div></li>        
+        <li><div class="navCategory">
+            <div class="navCategoryTitle igsb-expanded">jQuery Controls<span class="nav-icon"></span></div>
+            <div class="navCategoryFeatures">
+					<div class="searchContainer">
+						<span class="searchFieldContainer" unselectable="on">
+							<span class="searchIcon" unselectable="on"></span><span class="searchHint" unselectable="on">Search samples</span><input id="searchField"></input><span unselectable="on" class="searchClearIcon"></span>
+						</span>
+						<span class="searchToggleContainer">
+							<span class="searchToggleLabel">Show:</span>
+							<span class="searchButtonContainer">
+								<span class="searchToggleButton searchToggleAll searchToggleSelected">All Samples</span><span class="searchToggleButton searchToggleNew">New/Updated</span>
+							</span>
+						</span>
+					</div>
+					<div id="menuSamplesContainer" style="overflow: auto">
+						        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-data-grids"><span class="nav-icon"></span>Data Grids</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Data Binding</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/bind-grid-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Features</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/feature-chooser.html">
+                <span class="igsb-sampleTitle">Feature Chooser</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/feature-persistence.html">
+                <span class="igsb-sampleTitle">Feature Persistence</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/history.html">
+                <span class="igsb-sampleTitle">History.js Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/cell-merging.html">
+                <span class="igsb-sampleTitle">Cell Merging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/unbound-column.html">
+                <span class="igsb-sampleTitle">Unbound Column</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/selection.html">
+                <span class="igsb-sampleTitle">Selection</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/row-selectors.html">
+                <span class="igsb-sampleTitle">Row Selectors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/filtering.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Filtering</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-fixing.html">
+                <span class="igsb-sampleTitle">Column Fixing</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/sorting-local.html">
+                <span class="igsb-sampleTitle">Sorting (Local)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/paging.html">
+                <span class="igsb-sampleTitle">Paging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grouping.html">
+                <span class="igsb-sampleTitle">Grouping with summaries</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grouping-customization.html">
+                <span class="igsb-sampleTitle">Grouping Customization</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/summaries.html">
+                <span class="igsb-sampleTitle">Summaries</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/summaries-custom.html">
+                <span class="igsb-sampleTitle">Custom Summaries</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/tooltips.html">
+                <span class="igsb-sampleTitle">Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-hiding.html">
+                <span class="igsb-sampleTitle">Column Hiding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-resizing.html">
+                <span class="igsb-sampleTitle">Column Resizing</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-moving.html">
+                <span class="igsb-sampleTitle">Column Moving</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/multi-column-headers.html">
+                <span class="igsb-sampleTitle">Multi-Column Headers</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Responsive Web Design</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/responsive-web-design-mode.html">
+                <span class="igsb-sampleTitle">Responsive Web Design Mode</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/responsive-vertical-rendering.html">
+                <span class="igsb-sampleTitle">Responsive Vertical Rendering</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/twitter-bootstrap.html">
+                <span class="igsb-sampleTitle">Twitter Bootstrap</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/responsive-single-column-template.html">
+                <span class="igsb-sampleTitle">Responsive Single Column Template</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Grid Excel Exporter</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-basic-grid.html">
+                <span class="igsb-sampleTitle">Export Basic Grid to Excel</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-feature-rich-grid.html">
+                <span class="igsb-sampleTitle">Exporting Grid to Excel with Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-client-events.html">
+                <span class="igsb-sampleTitle">Customizing Grid Excel Export</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/export-grid-loading-indicator.html">
+                <span class="igsb-sampleTitle">Exporting Grid to Excel with Progress Indicator</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Templates and Layout</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/row-edit-dialog.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Row Edit Dialog</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/editing-custom-editor-provider.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Editing: Custom Editor Provider</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/jsrender-integration.html">
+                <span class="igsb-sampleTitle">JsRender Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/auto-generate-columns.html">
+                <span class="igsb-sampleTitle">Auto-Generate Columns</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/checkbox-column.html">
+                <span class="igsb-sampleTitle">Checkbox Column</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-template.html">
+                <span class="igsb-sampleTitle">Column Template</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/configure-text-alignment.html">
+                <span class="igsb-sampleTitle">Configure Text Alignment</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grid-layout.html">
+                <span class="igsb-sampleTitle">Grid Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-format-function.html">
+                <span class="igsb-sampleTitle">Column Format Function</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/column-formats.html">
+                <span class="igsb-sampleTitle">Column Formats</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">API Usage</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/editing-api-events.html">
+                <span class="igsb-sampleTitle">Editing API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/grid-api-events.html">
+                <span class="igsb-sampleTitle">Grid API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Performance</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../grid/virtualization-fixed.html">
+                <span class="igsb-sampleTitle">Virtualization (Fixed)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../grid/virtualization-continuous.html">
+                <span class="igsb-sampleTitle">Virtualization (Continuous)</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Hierarchical Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../hierarchical-grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Data Binding</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/bind-hgrid-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Features</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/cell-merging.html">
+                <span class="igsb-sampleTitle">Cell Merging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/unbound-column.html">
+                <span class="igsb-sampleTitle">Unbound Column</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/row-edit-dialog.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Row Edit Dialog</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/selection.html">
+                <span class="igsb-sampleTitle">Selection</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/row-selectors.html">
+                <span class="igsb-sampleTitle">Row Selectors</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">API Usage</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/hgrid-api-events.html">
+                <span class="igsb-sampleTitle">Hierarchical Grid API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navSampleGroup">
+            <div class="navSampleGroupTitle">Grid Excel Exporter</div>
+            <ul class="navSamplesList">                
+                        <li class="navSample navSampleTag">
+                            <a href="./../hierarchical-grid/export-hierarchical-grid.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Export Hierarchical Grid to Excel</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Tree Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../tree-grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/file-explorer.html">
+                <span class="igsb-sampleTitle">File Explorer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/balance-sheet.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Balance Sheet</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/row-selectors.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Row Selectors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/paging.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Paging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/export-to-excel.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Export TreeGrid to Excel</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree-grid/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-olap-pivot"><span class="nav-icon"></span>OLAP Pivot</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Pivot Data Selector</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pivot-data-selector/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pivot-data-selector/binding-to-flat-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-data-selector/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Pivot Grid</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pivot-grid/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/binding-to-flat-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/binding-to-xmla-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Xmla Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/custom-drag-drop-validation.html">
+                <span class="igsb-sampleTitle">Custom Move Validation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/drag-drop-custom-elements.html">
+                <span class="igsb-sampleTitle">Drag Drop Custom Elements</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/expand-members.html">
+                <span class="igsb-sampleTitle">Expand Members</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/chart-integration.html">
+                <span class="igsb-sampleTitle">Presenting Olap data with igDataChart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/layout-modes.html">
+                <span class="igsb-sampleTitle">Layout Modes</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/sorting.html">
+                <span class="igsb-sampleTitle">Sorting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/all-grid-features.html">
+                <span class="igsb-sampleTitle">All Grid Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/angular-with-flat-data-source.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS with Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-grid/angular-with-xmla-data-source.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS with XMLA Data Source</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Pivot View</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pivot-view/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pivot-view/binding-to-flat-data-source.html">
+                <span class="igsb-sampleTitle">Binding to Flat Data Source</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-view/binding-to-xmla-data-source.html">
+                <span class="igsb-sampleTitle">Binding to XMLA to Show KPIs</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pivot-view/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-data-visualization"><span class="nav-icon"></span>Data Visualization</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Data Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../data-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/binding-real-time-data.html">
+                <span class="igsb-sampleTitle">Binding Real-Time Data</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/binding-high-volume-data.html">
+                <span class="igsb-sampleTitle">Binding High Volume Data</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/bind-data-chart-with-ko.html">
+                <span class="igsb-sampleTitle">Bind Data Chart with KnockoutJS</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/edit-chart-items-with-knockout.html">
+                <span class="igsb-sampleTitle">Edit Chart Items with KnockoutJS</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/axis-title.html">
+                <span class="igsb-sampleTitle">Axis Title</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/bar-and-column-series.html">
+                <span class="igsb-sampleTitle">Bar and Column Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-series.html">
+                <span class="igsb-sampleTitle">Category Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-highlight-layer.html">
+                <span class="igsb-sampleTitle">Category Highlight Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-item-highlight-layer.html">
+                <span class="igsb-sampleTitle">Category Item Highlight Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-tooltip-layer.html">
+                <span class="igsb-sampleTitle">Category Tooltip Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/crosshair-layer.html">
+                <span class="igsb-sampleTitle">Crosshair Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/item-tooltip-layer.html">
+                <span class="igsb-sampleTitle">Item Tooltip Layer</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/multiple-layers.html">
+                <span class="igsb-sampleTitle">Multiple Layers</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/category-xaxis-intervals.html">
+                <span class="igsb-sampleTitle">CategoryXAxis Intervals</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/numeric-xaxis-intervals.html">
+                <span class="igsb-sampleTitle">NumericXAxis Intervals</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/series-tooltips.html">
+                <span class="igsb-sampleTitle">Series Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/series-highlighting.html">
+                <span class="igsb-sampleTitle">Series Highlighting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/series-highlighting-financial.html">
+                <span class="igsb-sampleTitle">Series Highlighting (Financial)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/custom-series-highlighting.html">
+                <span class="igsb-sampleTitle">Custom Series Highlighting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/polar-series.html">
+                <span class="igsb-sampleTitle">Polar Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/radial-series.html">
+                <span class="igsb-sampleTitle">Radial Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/range-category-series.html">
+                <span class="igsb-sampleTitle">Range Category Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/scatter-series.html">
+                <span class="igsb-sampleTitle">Scatter Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/financial-indicators.html">
+                <span class="igsb-sampleTitle">Financial Indicators</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/financial-series.html">
+                <span class="igsb-sampleTitle">Financial Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/stacked-series.html">
+                <span class="igsb-sampleTitle">Stacked Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-title.html">
+                <span class="igsb-sampleTitle">Chart Title and Subtitle</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-navigation.html">
+                <span class="igsb-sampleTitle">Chart Navigation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-elements.html">
+                <span class="igsb-sampleTitle">Chart Elements</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/chart-fill-gradients.html">
+                <span class="igsb-sampleTitle">Chart Fill Gradients</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/composite-chart.html">
+                <span class="igsb-sampleTitle">Composite Chart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/drop-shadows.html">
+                <span class="igsb-sampleTitle">Drop Shadows</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/motion-framework.html">
+                <span class="igsb-sampleTitle">Motion Framework</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/transition-animation.html">
+                <span class="igsb-sampleTitle">Transition Animation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/transition-animation-financial.html">
+                <span class="igsb-sampleTitle">Transition Animation (Financial)</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-chart/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Pie Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../pie-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/layout-configuration.html">
+                <span class="igsb-sampleTitle">Layout Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../pie-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Doughnut Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../doughnut-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/bind-json.html">
+                <span class="igsb-sampleTitle">Bind to JSON</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/configure-legend.html">
+                <span class="igsb-sampleTitle">Configure Legend</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/other-category.html">
+                <span class="igsb-sampleTitle">Other Category</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/labels-tooltips.html">
+                <span class="igsb-sampleTitle">Labels and Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../doughnut-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Funnel Chart</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../funnel-chart/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/funnel-chart.html">
+                <span class="igsb-sampleTitle">Funnel Chart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/slice-selection.html">
+                <span class="igsb-sampleTitle">Slice Selection</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/styling.html">
+                <span class="igsb-sampleTitle">Styling</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/bezier-curve-and-tooltips.html">
+                <span class="igsb-sampleTitle">Bezier Curve And Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../funnel-chart/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Radial Gauge</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../radial-gauge/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/api-usage.html">
+                <span class="igsb-sampleTitle">API Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/drag-needle.html">
+                <span class="igsb-sampleTitle">Needle Dragging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/motion-framework.html">
+                <span class="igsb-sampleTitle">Gauge Animation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/gauge-needle.html">
+                <span class="igsb-sampleTitle">Gauge Needle</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/label-settings.html">
+                <span class="igsb-sampleTitle">Label Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/range.html">
+                <span class="igsb-sampleTitle">Range</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/scale-settings.html">
+                <span class="igsb-sampleTitle">Scale Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/tickmarks.html">
+                <span class="igsb-sampleTitle">Tickmarks</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-gauge/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Sparkline</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../sparkline/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/bind-json.html">
+                <span class="igsb-sampleTitle">Bind to JSON</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/bind-to-remote-data.html">
+                <span class="igsb-sampleTitle">Bind to Remote Data</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/chart-types.html">
+                <span class="igsb-sampleTitle">Chart Types</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/sparkline-in-grid.html">
+                <span class="igsb-sampleTitle">Sparkline in Grid</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/normal-range-and-trend-lines.html">
+                <span class="igsb-sampleTitle">Normal Range and Trend Lines</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/tooltips-and-markers.html">
+                <span class="igsb-sampleTitle">Tooltips and Markers</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/visual-customization.html">
+                <span class="igsb-sampleTitle">Visual Customization</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../sparkline/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Bullet Graph</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../bullet-graph/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/basic-configuration.html">
+                <span class="igsb-sampleTitle">Basic Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/animated-transitions.html">
+                <span class="igsb-sampleTitle">Animated Transitions</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/scale-labeling-settings.html">
+                <span class="igsb-sampleTitle">Scale Labeling Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/tick-marks-settings.html">
+                <span class="igsb-sampleTitle">Tick Marks Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/range-settings.html">
+                <span class="igsb-sampleTitle">Range Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/performance-bar-settings.html">
+                <span class="igsb-sampleTitle">Performance Bar Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/vertical-orientation.html">
+                <span class="igsb-sampleTitle">Vertical Orientation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/grid-integration.html">
+                <span class="igsb-sampleTitle">Grid Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/tooltip-settings.html">
+                <span class="igsb-sampleTitle">ToolTip Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../bullet-graph/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Linear Gauge</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../linear-gauge/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/basic-configuration.html">
+                <span class="igsb-sampleTitle">Basic Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/scale-settings.html">
+                <span class="igsb-sampleTitle">Scale Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/range-settings.html">
+                <span class="igsb-sampleTitle">Range Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/grid-integration.html">
+                <span class="igsb-sampleTitle">Grid Integration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/animated-transitions.html">
+                <span class="igsb-sampleTitle">Animated Transitions</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/needle-settings.html">
+                <span class="igsb-sampleTitle">Needle Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/vertical-horizontal-orientation.html">
+                <span class="igsb-sampleTitle">Vertical Orientation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/needle-dragging.html">
+                <span class="igsb-sampleTitle">Needle Dragging</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../linear-gauge/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Map</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../map/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../map/bing-maps.html">
+                <span class="igsb-sampleTitle">Bing Maps</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/openstreet-maps.html">
+                <span class="igsb-sampleTitle">OpenStreet Maps</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-high-density-scatter-series.html">
+                <span class="igsb-sampleTitle">Geographic High Density Scatter Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-symbol-series.html">
+                <span class="igsb-sampleTitle">Geographic Symbol Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-shapes-series.html">
+                <span class="igsb-sampleTitle">Geographic Shapes Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-polyline-series.html">
+                <span class="igsb-sampleTitle">Geographic Polyline Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-scatter-area.html">
+                <span class="igsb-sampleTitle">Geographic Scatter Area Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/geo-contour-line.html">
+                <span class="igsb-sampleTitle">Geographic Contour Line Series</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/map-tooltips.html">
+                <span class="igsb-sampleTitle">Map Tooltips</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/marker-template.html">
+                <span class="igsb-sampleTitle">Marker Template</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../map/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Barcode</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../barcode/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../barcode/basic-configuration.html">
+                <span class="igsb-sampleTitle">Basic Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/configuring-the-qr-code-specific-settings.html">
+                <span class="igsb-sampleTitle">Configuring the QR-Code-Specific Settings</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/qr-barcode-dimensions.html">
+                <span class="igsb-sampleTitle">QR Barcode Dimensions</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/configuring-colors.html">
+                <span class="igsb-sampleTitle">Configuring Colors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../barcode/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Zoombar</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../zoombar/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../zoombar/financial-chart.html">
+                <span class="igsb-sampleTitle">Zoombar Financial Chart</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../zoombar/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-layout"><span class="nav-icon"></span>Layout</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Layout Manager</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../layout-manager/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/border-layout-markup.html">
+                <span class="igsb-sampleTitle">Border Layout from HTML markup</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/border-layout.html">
+                <span class="igsb-sampleTitle">Border Layout - Initializing with JavaScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/column-layout-markup.html">
+                <span class="igsb-sampleTitle">Responsive Column Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/flow-layout.html">
+                <span class="igsb-sampleTitle">Responsive Flow Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/grid-layout.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Grid Layout with colspan and rowspan Support</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/vertical-layout.html">
+                <span class="igsb-sampleTitle">Responsive Vertical Layout</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../layout-manager/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Splitter</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../splitter/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../splitter/basic-vertical-splitter.html">
+                <span class="igsb-sampleTitle">Basic Vertical Splitter</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/basic-horizontal-splitter.html">
+                <span class="igsb-sampleTitle">Basic Horizontal Splitter</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/nested-splitters.html">
+                <span class="igsb-sampleTitle">Nested Splitters</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/api-events-splitter.html">
+                <span class="igsb-sampleTitle">Splitter API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../splitter/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Tile Manager</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../tile-manager/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/leading-tile.html">
+                <span class="igsb-sampleTitle">Leading Tile Configuration</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/bind-json.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Binding to JSON</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/item-configurations.html">
+                <span class="igsb-sampleTitle">Item Configurations</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tile-manager/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-editors"><span class="nav-icon"></span>Editors</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Combo Box</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../combo/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../combo/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/bind-combo-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/selection-and-checkboxes.html">
+                <span class="igsb-sampleTitle">Selection and Checkboxes</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/editing.html">
+                    <span class="controlItemStatus igsb-status-upd">Updated</span>
+                <span class="igsb-sampleTitle">Editing</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/filtering.html">
+                <span class="igsb-sampleTitle">Filtering</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/load-on-demand.html">
+                <span class="igsb-sampleTitle">Load-On-Demand</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/virtualization.html">
+                <span class="igsb-sampleTitle">Virtualization</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/templates.html">
+                <span class="igsb-sampleTitle">Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/cascading-combos.html">
+                <span class="igsb-sampleTitle">Cascading Combos</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/keyboard-navigation.html">
+                <span class="igsb-sampleTitle">Keyboard Navigation</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/grid-with-combo-editor.html">
+                <span class="igsb-sampleTitle">Grid with Combo Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/grouping.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Grouping</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../combo/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Editors</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../editors/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../editors/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/currency-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Currency Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/percent-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Percent Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-and-time-formats.html">
+                <span class="igsb-sampleTitle">Date and Time Formats</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/localizing-editors.html">
+                <span class="igsb-sampleTitle">Localizing Editors</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/bind-editors-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/text-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">New Text Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/credit.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Credit</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/numeric-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Numeric Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/mask-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Mask Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/mask-editor-basic.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Mask Editor Basic Sample</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/checkbox-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Checkbox Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-editor.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Date Editor</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-picker-new.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Reservation Form</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../editors/date-picker-overview.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">DatePicker Overview</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">HTML Editor</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../html-editor/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/custom-icons-and-styles.html">
+                <span class="igsb-sampleTitle">Custom Icons and Styles</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/custom-toolbars-and-buttons.html">
+                <span class="igsb-sampleTitle">Custom Toolbars and Buttons</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/standalone-toolbar.html">
+                <span class="igsb-sampleTitle">Standalone Toolbar</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/edit-content.html">
+                <span class="igsb-sampleTitle">Edit Content</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../html-editor/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Split Button</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../split-button/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../split-button/change-shapes.html">
+                <span class="igsb-sampleTitle">Split button basics</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../split-button/api-and-events.html">
+                <span class="igsb-sampleTitle">Api and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../split-button/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Notifier</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../notifier/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../notifier/basic-usage.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../notifier/inline-messages.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Inline messages</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../notifier/with-igEditors.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Notifier with igEditors</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Validator</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../validator/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../validator/basic-usage.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-frameworks"><span class="nav-icon"></span>Frameworks</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Infragistics Loader</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../loader/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../loader/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/download-all-features.html">
+                <span class="igsb-sampleTitle">Download All Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/dynamic-download.html">
+                <span class="igsb-sampleTitle">Dynamic Download</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/multiple-resources.html">
+                <span class="igsb-sampleTitle">Multiple Resources</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../loader/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Data Source</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../data-source/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../data-source/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/mashup.html">
+                <span class="igsb-sampleTitle">Mashup</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/odata.html">
+                <span class="igsb-sampleTitle">OData</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../data-source/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Javascript Excel</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../javascript-excel-library/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../javascript-excel-library/excel-table.html">
+                <span class="igsb-sampleTitle">Excel Table</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../javascript-excel-library/excel-formatting.html">
+                <span class="igsb-sampleTitle">Excel Formatting</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../javascript-excel-library/excel-formulas.html">
+                <span class="igsb-sampleTitle">Excel Formulas</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Templating Engine</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../templating-engine/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/grid-column-template.html">
+                <span class="igsb-sampleTitle">Grid Column Template</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/conditional-templates.html">
+                <span class="igsb-sampleTitle">Conditional Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/nested-templates.html">
+                <span class="igsb-sampleTitle">Nested Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../templating-engine/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-interactions"><span class="nav-icon"></span>Interactions</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Tree</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../tree/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../tree/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/html-binding.html">
+                <span class="igsb-sampleTitle">HTML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/xml-binding.html">
+                <span class="igsb-sampleTitle">XML Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/bind-tree-with-ko.html">
+                <span class="igsb-sampleTitle">KnockoutJS Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/drag-and-drop-single-tree.html">
+                <span class="igsb-sampleTitle">Drag and Drop - Single Tree</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/drag-and-drop-multiple-trees.html">
+                <span class="igsb-sampleTitle">Drag and Drop - Multiple Trees</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../tree/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Dialog Window</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../dialog-window/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/icons.html">
+                <span class="igsb-sampleTitle">Icons</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/loading-external-page.html">
+                <span class="igsb-sampleTitle">Loading External Page</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/modal-dialog.html">
+                <span class="igsb-sampleTitle">Modal Dialog</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../dialog-window/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">File Upload</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../file-upload/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/multiple-upload.html">
+                <span class="igsb-sampleTitle">Multiple Upload</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/progress-information.html">
+                <span class="igsb-sampleTitle">Progress Information</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/api-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../file-upload/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Popover</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../popover/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../popover/basic-popover.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../popover/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Rating</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../rating/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../rating/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/precision.html">
+                <span class="igsb-sampleTitle">Precision</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/custom-items.html">
+                <span class="igsb-sampleTitle">Custom Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/custom-styles.html">
+                <span class="igsb-sampleTitle">Custom Styles</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../rating/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Video Player</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../video-player/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../video-player/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/common-features.html">
+                <span class="igsb-sampleTitle">Common Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/related-videos.html">
+                <span class="igsb-sampleTitle">Related Videos</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/bookmarks.html">
+                <span class="igsb-sampleTitle">Bookmarks</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/banner-advertisements.html">
+                <span class="igsb-sampleTitle">Banner Advertisements</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/commercials-support.html">
+                <span class="igsb-sampleTitle">Commercials Support</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../video-player/angular.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">AngularJS</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Radial Menu</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../radial-menu/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/button-items.html">
+                <span class="igsb-sampleTitle">Button Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/color-items.html">
+                <span class="igsb-sampleTitle">Color Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/configure-items.html">
+                <span class="igsb-sampleTitle">Configure Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/numeric-items.html">
+                <span class="igsb-sampleTitle">Numeric Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../radial-menu/typescript.html">
+                    <span class="controlItemStatus igsb-status-new">New</span>
+                <span class="igsb-sampleTitle">TypeScript</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-mobile-phone"><span class="nav-icon"></span>Mobile Phone</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">List View</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../mobile-list-view/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/json-binding.html">
+                <span class="igsb-sampleTitle">JSON Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/bind-to-rest-service.html">
+                <span class="igsb-sampleTitle">Bind to REST Service</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/dynamic-binding.html">
+                <span class="igsb-sampleTitle">Dynamic Binding</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/list-dividers.html">
+                <span class="igsb-sampleTitle">List Dividers</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/sort-group-presets.html">
+                <span class="igsb-sampleTitle">Sort and Group Presets</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/search.html">
+                <span class="igsb-sampleTitle">Search</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/filter-presets.html">
+                <span class="igsb-sampleTitle">Filter Presets</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/remote-features.html">
+                <span class="igsb-sampleTitle">Remote Features</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/custom-groups.html">
+                <span class="igsb-sampleTitle">Custom Groups</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/templates.html">
+                <span class="igsb-sampleTitle">Templates</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-list-view/api-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+        <li class="navControl">
+            <div class="navControlTitle">Rating</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../mobile-rating/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../mobile-rating/basic-usage.html">
+                <span class="igsb-sampleTitle">Basic Usage</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-rating/custom-items.html">
+                <span class="igsb-sampleTitle">Custom Items</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../mobile-rating/api-and-events.html">
+                <span class="igsb-sampleTitle">API and Events</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+        <div class="navCategoryFeature">
+            <div class="navControlHeader igsb-theming"><span class="nav-icon"></span>Theming</div>
+            <ul class="navControlsList">
+                        <li class="navControl">
+            <div class="navControlTitle">Themes</div>
+            <ul class="navSampleGroupsList navSamplesList">
+                <li class="navSample navSampleTag"><a href="./../themes/overview.html">
+                    <span class="igsb-sampleTitle">Overview</span></a></li>
+                        <li class="navSample navSampleTag">
+                            <a href="./../themes/metro.html">
+                <span class="igsb-sampleTitle">Metro theme</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/ios.html">
+                <span class="igsb-sampleTitle">iOS theme</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-default.html">
+                <span class="igsb-sampleTitle">Bootstrap Default</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-superhero.html">
+                <span class="igsb-sampleTitle">Bootstrap Superhero</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-flatly.html">
+                <span class="igsb-sampleTitle">Bootstrap Flatly</span>
+                </a>
+        </li>
+        <li class="navSample navSampleTag">
+                            <a href="./../themes/bootstrap-yeti.html">
+                <span class="igsb-sampleTitle">Bootstrap Yeti</span>
+                </a>
+        </li>
+
+            </ul>
+        </li>
+
+            </ul>
+        </div>
+
+					</div>
+            </div>
+        </div></li>
+
+    </ul>
+</nav>
+
+                <div id="contentLayer" style="display: none;"></div>
+                <div id="mainContainer" class="sb-layout ui-helper-clearfix">
+                    <div class="tempContainer"></div>
+                    <div class="menu-bar">
+                        <div id="hamburger_click">
+                            <div id="hamburger">
+                                <img src="./../images/hamburgerIcon.png"></img>
+                            </div>
+                            <label>Menu</label>
+                        </div>
+                        
+                        <a href="#" class="tablet-size-logo headerIcon_click"></a>
+                        <a href="#" class="phone-size-logo headerIcon_click"></a>
+                        
+                    </div>
+                    
+
+<section class="row sample-page main-content ui-helper-clearfix">
+    <div id="controlInfo">        
+<span id="sampleControlIcon" class="igsb-sampleControlIcon igsb-grid"></span>
+
+        <span id="control-title">Grid</span>        
+    </div>
+<article class="ui-helper-clearfix">
+    <div id="sample">
+        <section>
+            <div id="sampleNavigation" class="ui-helper-clearfix">
+                <div id="sbPrevNextButtons">
+                    <span id="sampleNavigatePrev"></span>
+                    <span id="sampleNavigateNext"></span>
+                </div>                
+                    <h1 id="sample-title" class="pageTitle">Unbound Column</h1>
+			</div>
+            <div id="dvLoading" class="loaderCss" style="display: none"></div>
+
+            <div class="sampleCtpLabel" style="display: none">This sample uses CTP (Community Technical Preview) features. The API and behavior may change when these features are released with full support.</div>
+            <div id="sampleContainer" class="ui-helper-clearfix">
+                <div class="igsb-running-sample sb-min-tablet-portrait">
+   
+
+    <!-- Target element for the igGrid -->
+    <table id="grid10">
+    </table>    
+
+    <!--Sample JSON Data-->
+    <script src="./../js-data/northwindProducts.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            var _isDataBound = false;
+
+            /*----------------- Event Examples -------------------------*/
+
+            $("#grid10").on("iggridupdatingdatadirty", function (event, ui) {
+                $("#grid10").igGrid("saveChanges");
+                return false;
+            });            
+
+            $("#grid10").on("iggriddatabound", function (event, ui) {
+
+                if (_isDataBound === false) {
+                    _isDataBound = true;
+                } else {
+                    return;
+                }
+
+                var i, grid = ui.owner,
+                       ds = grid.dataSource,
+                       data = ds.data(),
+                       dataLength = data.length;
+
+                for (i = 0; i < dataLength; i++) {
+                    if (data[i]["UnitPrice"] * data[i]["UnitsInStock"] < 1000) {
+                        data[i]["IsPromotion"] = true;
+                    }
+                    else {
+                        data[i]["IsPromotion"] = false;
+                    }
+                }
+            });
+
+            $("#grid10").on("iggridupdatingeditrowended", function (event, ui) {
+                var unitPrice = ui.values["UnitPrice"];
+                var unitsInStock = ui.values["UnitsInStock"];
+                var totalValue = (unitPrice * unitsInStock) || ui.values["Total"];
+                $("#grid10").igGridUpdating("setCellValue", ui.rowID, "Total", totalValue);
+
+                if (totalValue < 1000) {
+                    $("#grid10").igGridUpdating("setCellValue", ui.rowID, "IsPromotion", true);
+                }
+                else {
+                    $("#grid10").igGridUpdating("setCellValue", ui.rowID, "IsPromotion", false);
+                }
+            });
+
+            /*----------------- Instantiation -------------------------*/
+
+            $("#grid10").igGrid({
+                primaryKey: "ProductID",
+                width: "100%",
+                autoGenerateColumns: false,
+                autoCommit: true,
+                dataSourceType: "json",
+                responseDataKey: "results",
+                columns: [
+                    { headerText: "Product ID", key: "ProductID", dataType: "number" },
+                    { headerText: "Product Name", key: "ProductName", dataType: "string" },
+                    { headerText: "Units in Stock", key: "UnitsInStock", dataType: "number" },
+                    { headerText: "Unit Price", key: "UnitPrice", dataType: "number", format: "currency" },
+                    {
+                        headerText: "Promotion Exp Date", key: "PromotionExpDate", dataType: "date", unbound: true, format: "date",
+                        unboundValues: [new Date("4/24/2012"), new Date("8/24/2012"), new Date("6/24/2012"), new Date("7/24/2012"), new Date("9/24/2012"), new Date("10/24/2012"), new Date("11/24/2012")]
+                    },
+                    { headerText: "Is Promotion", key: "IsPromotion", dataType: "bool", unbound: true, format: "checkbox" },
+                    {
+                        headerText: "Total Price", key: "Total", dataType: "number", unbound: true, format: "currency",
+                        formula: function CalculateTotal(data, grid) { return data["UnitPrice"] * data["UnitsInStock"]; }
+                    }
+                ],
+                features:
+                [
+                    {
+                        name: "Responsive",
+                        enableVerticalRendering: false,
+                        columnSettings: [
+                            {
+                                columnKey: "ProductID",
+                                classes: "ui-hidden-tablet"
+                            }
+                        ]
+                    },
+                    {
+                        name: "Paging",
+                        type: "local",
+                        pageSize: 5
+                    },
+                    {
+                        name: "Updating",
+                        editMode: "row",
+                        enableAddRow: false,
+                        enableDeleteRow: true,
+                        columnSettings: [
+							{
+								columnKey: "ProductID",
+								readOnly: true
+							},
+                            {
+                                columnKey: "Total",
+                                editorType: "numeric",
+                                readOnly: true
+                            },
+                            {
+                                columnKey: "IsPromotion",
+                                editorType: "bool",
+                                readOnly: true
+                            }
+                        ]
+                    }
+                ],
+                dataSource: northwindProducts
+            });
+        });
+    </script>
+    </div>
+    <div class="igsb-width-msg sb-min-tablet-portrait">
+        <div class="igsb-width-msg-inner">
+            <p>This sample is designed for a larger screen size.</p>
+            <br>
+            <p>On mobile, try rotating your screen, <a href="./../htmlsamples/grid/unbound-column.html">view full size</a>, or <a href="mailto:?subject=Unbound Column Sample - Unbound Column with Grid Control - Ignite UI™&body=http://localhost:10666/grid/unbound-column.html">email to another device.</a></p>
+        </div>
+    </div>
+
+            </div>
+            <div class="igsb-sample-desc">
+                The sample demonstrates how to add and configure unbound columns in igGrid.
+    The unbound values of column “Promotion Expired Date” are set initially using a list of dates.
+    Column “IsPromotion” is using databound client event to set unbound values.
+    Column “Total” is using formula to calculate the multiplication of the values from columns “Unit Price” and “Units in Stock”.
+    When updating the values in “Unit Price” and “Units in Stock”, the change is reflected to Total column.
+    
+            </div>
+            
+			<div id="bottomSection">			    
+                <h2 class="pageTitle">Code View</h2>
+                <div class="jq-ui-tabs igsb-tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <div id="JSFiddle">
+            <a href="http://jsfiddle.net/gh/get/jquery/1.9.1/igniteuisamples/jsfiddle-samples/tree/master/EN/HtmlSamples/grid/unbound-column/" target="_blank">Show In JsFiddle</a>
+        </div>
+	 <span class="codeViewerSelectAll" onclick="selectAllClick(this)">Select All</span>
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                        <li class="ui-state-default ui-corner-top"><a href="#gridUnboUndColumnFullHtml">HTML</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#gridUnboUndColumnData">Data</a></li>
+                    </ul>
+    
+                    <div id="gridUnboUndColumnFullHtml" class="code-viewer" style="display:none">
+            <pre class="prettyprint lang-html">
+                    &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+
+    &lt;!-- Ignite UI Required Combined CSS Files --&gt;
+    &lt;link href=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/css/themes/infragistics/infragistics.theme.css&quot; rel=&quot;stylesheet&quot; /&gt;
+    &lt;link href=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/css/structure/infragistics.css&quot; rel=&quot;stylesheet&quot; /&gt;    
+
+    &lt;script src=&quot;http://modernizr.com/downloads/modernizr-latest.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://code.jquery.com/ui/1.10.3/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;!-- Ignite UI Required Combined JavaScript Files --&gt;
+    &lt;script src=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/js/infragistics.core.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://cdn-na.infragistics.com/igniteui/2015.2/latest/js/infragistics.lob.js&quot;&gt;&lt;/script&gt;
+    
+&lt;/head&gt;
+&lt;body&gt;   
+
+    &lt;!-- Target element for the igGrid --&gt;
+    &lt;table id=&quot;grid10&quot;&gt;
+    &lt;/table&gt;    
+
+    &lt;!--Sample JSON Data--&gt;
+    &lt;script src=&quot;../../data-files/northwindProducts.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+        $(function () {
+
+            var _isDataBound = false;
+
+            /*----------------- Event Examples -------------------------*/
+
+            $(&quot;#grid10&quot;).on(&quot;iggridupdatingdatadirty&quot;, function (event, ui) {
+                $(&quot;#grid10&quot;).igGrid(&quot;saveChanges&quot;);
+                return false;
+            });            
+
+            $(&quot;#grid10&quot;).on(&quot;iggriddatabound&quot;, function (event, ui) {
+
+                if (_isDataBound === false) {
+                    _isDataBound = true;
+                } else {
+                    return;
+                }
+
+                var i, grid = ui.owner,
+                       ds = grid.dataSource,
+                       data = ds.data(),
+                       dataLength = data.length;
+
+                for (i = 0; i &lt; dataLength; i++) {
+                    if (data[i][&quot;UnitPrice&quot;] * data[i][&quot;UnitsInStock&quot;] &lt; 1000) {
+                        data[i][&quot;IsPromotion&quot;] = true;
+                    }
+                    else {
+                        data[i][&quot;IsPromotion&quot;] = false;
+                    }
+                }
+            });
+
+            $(&quot;#grid10&quot;).on(&quot;iggridupdatingeditrowended&quot;, function (event, ui) {
+                var unitPrice = ui.values[&quot;UnitPrice&quot;];
+                var unitsInStock = ui.values[&quot;UnitsInStock&quot;];
+                var totalValue = (unitPrice * unitsInStock) || ui.values[&quot;Total&quot;];
+                $(&quot;#grid10&quot;).igGridUpdating(&quot;setCellValue&quot;, ui.rowID, &quot;Total&quot;, totalValue);
+
+                if (totalValue &lt; 1000) {
+                    $(&quot;#grid10&quot;).igGridUpdating(&quot;setCellValue&quot;, ui.rowID, &quot;IsPromotion&quot;, true);
+                }
+                else {
+                    $(&quot;#grid10&quot;).igGridUpdating(&quot;setCellValue&quot;, ui.rowID, &quot;IsPromotion&quot;, false);
+                }
+            });
+
+            /*----------------- Instantiation -------------------------*/
+
+            $(&quot;#grid10&quot;).igGrid({
+                primaryKey: &quot;ProductID&quot;,
+                width: &quot;100%&quot;,
+                autoGenerateColumns: false,
+                autoCommit: true,
+                dataSourceType: &quot;json&quot;,
+                responseDataKey: &quot;results&quot;,
+                columns: [
+                    { headerText: &quot;Product ID&quot;, key: &quot;ProductID&quot;, dataType: &quot;number&quot; },
+                    { headerText: &quot;Product Name&quot;, key: &quot;ProductName&quot;, dataType: &quot;string&quot; },
+                    { headerText: &quot;Units in Stock&quot;, key: &quot;UnitsInStock&quot;, dataType: &quot;number&quot; },
+                    { headerText: &quot;Unit Price&quot;, key: &quot;UnitPrice&quot;, dataType: &quot;number&quot;, format: &quot;currency&quot; },
+                    {
+                        headerText: &quot;Promotion Exp Date&quot;, key: &quot;PromotionExpDate&quot;, dataType: &quot;date&quot;, unbound: true, format: &quot;date&quot;,
+                        unboundValues: [new Date(&quot;4/24/2012&quot;), new Date(&quot;8/24/2012&quot;), new Date(&quot;6/24/2012&quot;), new Date(&quot;7/24/2012&quot;), new Date(&quot;9/24/2012&quot;), new Date(&quot;10/24/2012&quot;), new Date(&quot;11/24/2012&quot;)]
+                    },
+                    { headerText: &quot;Is Promotion&quot;, key: &quot;IsPromotion&quot;, dataType: &quot;bool&quot;, unbound: true, format: &quot;checkbox&quot; },
+                    {
+                        headerText: &quot;Total Price&quot;, key: &quot;Total&quot;, dataType: &quot;number&quot;, unbound: true, format: &quot;currency&quot;,
+                        formula: function CalculateTotal(data, grid) { return data[&quot;UnitPrice&quot;] * data[&quot;UnitsInStock&quot;]; }
+                    }
+                ],
+                features:
+                [
+                    {
+                        name: &quot;Responsive&quot;,
+                        enableVerticalRendering: false,
+                        columnSettings: [
+                            {
+                                columnKey: &quot;ProductID&quot;,
+                                classes: &quot;ui-hidden-tablet&quot;
+                            }
+                        ]
+                    },
+                    {
+                        name: &quot;Paging&quot;,
+                        type: &quot;local&quot;,
+                        pageSize: 5
+                    },
+                    {
+                        name: &quot;Updating&quot;,
+                        editMode: &quot;row&quot;,
+                        enableAddRow: false,
+                        enableDeleteRow: true,
+                        columnSettings: [
+							{
+								columnKey: &quot;ProductID&quot;,
+								readOnly: true
+							},
+                            {
+                                columnKey: &quot;Total&quot;,
+                                editorType: &quot;numeric&quot;,
+                                readOnly: true
+                            },
+                            {
+                                columnKey: &quot;IsPromotion&quot;,
+                                editorType: &quot;bool&quot;,
+                                readOnly: true
+                            }
+                        ]
+                    }
+                ],
+                dataSource: northwindProducts
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+         
+            </pre>
+        </div>
+            <div id="gridUnboUndColumnData" class="code-viewer" style="display:none">
+            <pre class="lang-js">
+                    var northwindProducts = {
+ &quot;results&quot;: [{
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(1)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 1,
+		&quot;ProductName&quot;: &quot;Chai&quot;,
+		&quot;SupplierID&quot;: 1,
+		&quot;CategoryID&quot;: 1,
+		&quot;QuantityPerUnit&quot;: &quot;10 boxes x 20 bags&quot;,
+		&quot;UnitPrice&quot;: &quot;18.0000&quot;,
+		&quot;UnitsInStock&quot;: 39,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 10,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(1)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(1)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(1)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(2)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 2,
+		&quot;ProductName&quot;: &quot;Chang&quot;,
+		&quot;SupplierID&quot;: 1,
+		&quot;CategoryID&quot;: 1,
+		&quot;QuantityPerUnit&quot;: &quot;24 - 12 oz bottles&quot;,
+		&quot;UnitPrice&quot;: &quot;19.0000&quot;,
+		&quot;UnitsInStock&quot;: 17,
+		&quot;UnitsOnOrder&quot;: 40,
+		&quot;ReorderLevel&quot;: 25,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(2)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(2)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(2)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(3)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 3,
+		&quot;ProductName&quot;: &quot;Aniseed Syrup&quot;,
+		&quot;SupplierID&quot;: 1,
+		&quot;CategoryID&quot;: 2,
+		&quot;QuantityPerUnit&quot;: &quot;12 - 550 ml bottles&quot;,
+		&quot;UnitPrice&quot;: &quot;10.0000&quot;,
+		&quot;UnitsInStock&quot;: 13,
+		&quot;UnitsOnOrder&quot;: 70,
+		&quot;ReorderLevel&quot;: 25,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(3)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(3)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(3)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(4)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 4,
+		&quot;ProductName&quot;: &quot;Chef Anton&#39;s Cajun Seasoning&quot;,
+		&quot;SupplierID&quot;: 2,
+		&quot;CategoryID&quot;: 2,
+		&quot;QuantityPerUnit&quot;: &quot;48 - 6 oz jars&quot;,
+		&quot;UnitPrice&quot;: &quot;22.0000&quot;,
+		&quot;UnitsInStock&quot;: 53,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(4)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(4)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(4)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(5)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 5,
+		&quot;ProductName&quot;: &quot;Chef Anton&#39;s Gumbo Mix&quot;,
+		&quot;SupplierID&quot;: 2,
+		&quot;CategoryID&quot;: 2,
+		&quot;QuantityPerUnit&quot;: &quot;36 boxes&quot;,
+		&quot;UnitPrice&quot;: &quot;21.3500&quot;,
+		&quot;UnitsInStock&quot;: 0,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: true,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(5)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(5)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(5)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(6)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 6,
+		&quot;ProductName&quot;: &quot;Grandma&#39;s Boysenberry Spread&quot;,
+		&quot;SupplierID&quot;: 3,
+		&quot;CategoryID&quot;: 2,
+		&quot;QuantityPerUnit&quot;: &quot;12 - 8 oz jars&quot;,
+		&quot;UnitPrice&quot;: &quot;25.0000&quot;,
+		&quot;UnitsInStock&quot;: 120,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 25,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(6)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(6)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(6)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(7)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 7,
+		&quot;ProductName&quot;: &quot;Uncle Bob&#39;s Organic Dried Pears&quot;,
+		&quot;SupplierID&quot;: 3,
+		&quot;CategoryID&quot;: 7,
+		&quot;QuantityPerUnit&quot;: &quot;12 - 1 lb pkgs.&quot;,
+		&quot;UnitPrice&quot;: &quot;30.0000&quot;,
+		&quot;UnitsInStock&quot;: 15,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 10,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(7)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(7)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(7)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(8)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 8,
+		&quot;ProductName&quot;: &quot;Northwoods Cranberry Sauce&quot;,
+		&quot;SupplierID&quot;: 3,
+		&quot;CategoryID&quot;: 2,
+		&quot;QuantityPerUnit&quot;: &quot;12 - 12 oz jars&quot;,
+		&quot;UnitPrice&quot;: &quot;40.0000&quot;,
+		&quot;UnitsInStock&quot;: 6,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(8)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(8)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(8)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(9)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 9,
+		&quot;ProductName&quot;: &quot;Mishi Kobe Niku&quot;,
+		&quot;SupplierID&quot;: 4,
+		&quot;CategoryID&quot;: 6,
+		&quot;QuantityPerUnit&quot;: &quot;18 - 500 g pkgs.&quot;,
+		&quot;UnitPrice&quot;: &quot;97.0000&quot;,
+		&quot;UnitsInStock&quot;: 29,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: true,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(9)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(9)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(9)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(10)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 10,
+		&quot;ProductName&quot;: &quot;Ikura&quot;,
+		&quot;SupplierID&quot;: 4,
+		&quot;CategoryID&quot;: 8,
+		&quot;QuantityPerUnit&quot;: &quot;12 - 200 ml jars&quot;,
+		&quot;UnitPrice&quot;: &quot;31.0000&quot;,
+		&quot;UnitsInStock&quot;: 31,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(10)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(10)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(10)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(11)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 11,
+		&quot;ProductName&quot;: &quot;Queso Cabrales&quot;,
+		&quot;SupplierID&quot;: 5,
+		&quot;CategoryID&quot;: 4,
+		&quot;QuantityPerUnit&quot;: &quot;1 kg pkg.&quot;,
+		&quot;UnitPrice&quot;: &quot;21.0000&quot;,
+		&quot;UnitsInStock&quot;: 22,
+		&quot;UnitsOnOrder&quot;: 30,
+		&quot;ReorderLevel&quot;: 30,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(11)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(11)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(11)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(12)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 12,
+		&quot;ProductName&quot;: &quot;Queso Manchego La Pastora&quot;,
+		&quot;SupplierID&quot;: 5,
+		&quot;CategoryID&quot;: 4,
+		&quot;QuantityPerUnit&quot;: &quot;10 - 500 g pkgs.&quot;,
+		&quot;UnitPrice&quot;: &quot;38.0000&quot;,
+		&quot;UnitsInStock&quot;: 86,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(12)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(12)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(12)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(13)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 13,
+		&quot;ProductName&quot;: &quot;Konbu&quot;,
+		&quot;SupplierID&quot;: 6,
+		&quot;CategoryID&quot;: 8,
+		&quot;QuantityPerUnit&quot;: &quot;2 kg box&quot;,
+		&quot;UnitPrice&quot;: &quot;6.0000&quot;,
+		&quot;UnitsInStock&quot;: 24,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 5,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(13)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(13)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(13)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(14)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 14,
+		&quot;ProductName&quot;: &quot;Tofu&quot;,
+		&quot;SupplierID&quot;: 6,
+		&quot;CategoryID&quot;: 7,
+		&quot;QuantityPerUnit&quot;: &quot;40 - 100 g pkgs.&quot;,
+		&quot;UnitPrice&quot;: &quot;23.2500&quot;,
+		&quot;UnitsInStock&quot;: 35,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(14)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(14)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(14)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(15)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 15,
+		&quot;ProductName&quot;: &quot;Genen Shouyu&quot;,
+		&quot;SupplierID&quot;: 6,
+		&quot;CategoryID&quot;: 2,
+		&quot;QuantityPerUnit&quot;: &quot;24 - 250 ml bottles&quot;,
+		&quot;UnitPrice&quot;: &quot;15.5000&quot;,
+		&quot;UnitsInStock&quot;: 39,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 5,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(15)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(15)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(15)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(16)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 16,
+		&quot;ProductName&quot;: &quot;Pavlova&quot;,
+		&quot;SupplierID&quot;: 7,
+		&quot;CategoryID&quot;: 3,
+		&quot;QuantityPerUnit&quot;: &quot;32 - 500 g boxes&quot;,
+		&quot;UnitPrice&quot;: &quot;17.4500&quot;,
+		&quot;UnitsInStock&quot;: 29,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 10,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(16)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(16)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(16)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(17)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 17,
+		&quot;ProductName&quot;: &quot;Alice Mutton&quot;,
+		&quot;SupplierID&quot;: 7,
+		&quot;CategoryID&quot;: 6,
+		&quot;QuantityPerUnit&quot;: &quot;20 - 1 kg tins&quot;,
+		&quot;UnitPrice&quot;: &quot;39.0000&quot;,
+		&quot;UnitsInStock&quot;: 0,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: true,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(17)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(17)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(17)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(18)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 18,
+		&quot;ProductName&quot;: &quot;Carnarvon Tigers&quot;,
+		&quot;SupplierID&quot;: 7,
+		&quot;CategoryID&quot;: 8,
+		&quot;QuantityPerUnit&quot;: &quot;16 kg pkg.&quot;,
+		&quot;UnitPrice&quot;: &quot;62.5000&quot;,
+		&quot;UnitsInStock&quot;: 42,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(18)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(18)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(18)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(19)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 19,
+		&quot;ProductName&quot;: &quot;Teatime Chocolate Biscuits&quot;,
+		&quot;SupplierID&quot;: 8,
+		&quot;CategoryID&quot;: 3,
+		&quot;QuantityPerUnit&quot;: &quot;10 boxes x 12 pieces&quot;,
+		&quot;UnitPrice&quot;: &quot;9.2000&quot;,
+		&quot;UnitsInStock&quot;: 25,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 5,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(19)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(19)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(19)/Supplier&quot;
+			}
+		}
+	}, {
+		&quot;__metadata&quot;: {
+			&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(20)&quot;,
+			&quot;type&quot;: &quot;NorthwindModel.Product&quot;
+		},
+		&quot;ProductID&quot;: 20,
+		&quot;ProductName&quot;: &quot;Sir Rodney&#39;s Marmalade&quot;,
+		&quot;SupplierID&quot;: 8,
+		&quot;CategoryID&quot;: 3,
+		&quot;QuantityPerUnit&quot;: &quot;30 gift boxes&quot;,
+		&quot;UnitPrice&quot;: &quot;81.0000&quot;,
+		&quot;UnitsInStock&quot;: 40,
+		&quot;UnitsOnOrder&quot;: 0,
+		&quot;ReorderLevel&quot;: 0,
+		&quot;Discontinued&quot;: false,
+		&quot;Category&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(20)/Category&quot;
+			}
+		},
+		&quot;Order_Details&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(20)/Order_Details&quot;
+			}
+		},
+		&quot;Supplier&quot;: {
+			&quot;__deferred&quot;: {
+				&quot;uri&quot;: &quot;http://services.odata.org/Northwind/Northwind.svc/Products(20)/Supplier&quot;
+			}
+		}
+	}]
+};
+  
+            </pre>
+        </div>
+                </div>
+
+<aside class="codeViewerButton codeViewerCollapsed">Code Viewer</aside>
+
+<aside id="codeViewerPopup">
+    <div style="text-align: right; position: absolute; z-index: 1; height: 1px; width: 100%">
+        <span class="codeViewerPopupHideButton codeViewerButton">Back to Sample</span>
+    </div>
+    <div id="codeViewerPopupAccordion">
+                       <h3>HTML</h3>
+            <div id="gridUnboUndColumnFullHtml_copy" class="codeViewerPopupAccordionDiv"></div>
+                    <h3>Data</h3>
+            <div id="gridUnboUndColumnData_copy" class="codeViewerPopupAccordionDiv"></div>
+                    </div>
+</aside>
+                <aside id="learning" class="row">
+        <div>
+            <h3>API Reference</h3>
+            <ul>
+                    <li class="contents-list-control"><a href="http://help.infragistics.com/jQuery/2015.2/ui.igGrid" target="_blank">ui.igGrid</a></li>
+                    <li class="contents-list-control"><a href="http://help.infragistics.com/jQuery/2015.2/ui.iggrid#options:columns.unbound" target="_blank">columns.unbound</a></li>
+                    <li class="contents-list-control"><a href="http://help.infragistics.com/jQuery/2015.2/ui.iggrid#options:columns.unboundValues" target="_blank">columns.unboundValues</a></li>
+            </ul>
+        </div>
+            <div>
+            <h3>Help Topics</h3>
+            <ul>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/iggrid" target="_blank">Grid Help Overview</a></li>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/iggrid-unboundcolumns-overview" target="_blank">Unbound Columns Overview (igGrid)</a></li>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/iggrid-unboundcolumns-setting-column-as-unbound" target="_blank">Setting a Column as Unbound (igGrid)</a></li>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/iggrid-unboundcolumns-populating-with-data-overview" target="_blank">Populating Unbound Columns Overview (igGrid)</a></li>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/iggrid-unboundcolumns-rendering-calculated-values" target="_blank">Rendering Calculated Values (Unbound Columns, igGrid)</a></li>
+                    <li class="contents-list-control"><a href="http://www.igniteui.com/help/iggrid-unboundcolumns-optimize-performance" target="_blank">Optimizing Performance (Unbound Columns, igGrid)</a></li>
+            </ul>
+        </div>
+            <div>
+            <h3>Community</h3>
+            <ul>
+                <li class="contents-list-control"><a href="http://www.infragistics.com/community/forums/499.aspx" target="_blank">Grid Forum</a></li>
+            </ul>
+        </div>
+    <br>
+</aside>
+                <br>
+			</div>
+        </section>
+    </div>
+</article>
+</section>
+
+                </div>
+            </div>
+            <footer class="row footerArea">
+                <div class="footerIcon">
+                    <a href="http://www.infragistics.com">
+                        <img src="./../images/footerIcon.PNG"></img>
+                    </a>
+                </div>
+                <nav class="footerNav">
+                <a href="http://www.infragistics.com/legal/license/">LICENSE AGREEMENT</a>|
+                <a href="http://www.infragistics.com/about-us/contact-us/">CONTACT US</a>|
+                <a href="http://www.infragistics.com/help/">GET HELP</a>|
+                <a href="http://www.infragistics.com/about-us/">MEET US</a>|
+                <a href="http://www.infragistics.com/legal/privacy/">PRIVACY AGREEMENT</a>|
+                <a href="http://www.infragistics.com">SITE MAP</a>|
+                <a href="http://www.infragistics.com/legal/legal-information">LEGAL INFORMATION</a>
+                </nav>
+            </footer>
+        </div>
+    </body>
+</html>

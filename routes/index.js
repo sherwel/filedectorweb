@@ -8,5 +8,8 @@ router.get('/', function(req, res, next) {
 router.get('/test', function(req, res, next) {
   res.render('test', { title: 'Express',username:'',password:'' });
 });
-
+router.get('/systeminfo', function(req, res, next) {
+	
+  res.render('cpu', { title: 'Express',username:'',password:'' });
+})
 module.exports = router;

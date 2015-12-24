@@ -1,0 +1,53 @@
+﻿#mainContainer {
+    /*width: 1000px;*/
+}
+
+#gettingStarted .gs-vid-left, #gettingStarted .gs-desc-left,
+#gettingStarted .gs-vid-right, #gettingStarted .gs-desc-right {
+    /*width: 470px;*/
+    width: 45%;
+}
+
+#prodNav #controls a {
+    padding: 3px 0px 3px 0px;
+    margin-left: 0px !important;
+}
+
+#prodNav section a {
+    padding: 3px 0px 3px 0px;
+    /*margin-left: 20px;*/
+}
+
+.externalSites {
+    font-size: 12px;
+    padding: 0 25px 0 25px !important;
+}
+
+.control-group {
+    padding-left: 50px !important;
+}
+
+.control-group > ul > li{
+    padding: 0px !important;
+}
+
+.col35 {
+    width: 27.5% !important;
+    padding: 20px 20px 20px 20px  !important;
+}
+
+.col65 {
+    width: 40.5% !important;
+}
+
+.scSampleDetailsQR {
+    width: 200px;
+}
+
+.info-area {
+    height: 350px;
+}
+
+.empty-li {
+    display: none;
+}

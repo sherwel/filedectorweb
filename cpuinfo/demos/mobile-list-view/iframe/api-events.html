@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="../../css/jqm/jquery.mobile.structure.min.css" rel="stylesheet"></link>
+
+    <!-- Required Ignite UI Mobile Combined CSS Files -->
+    <link href="../../../mobile/css/structure/infragistics.mobile.css" rel="stylesheet"></link>
+    <link href="../../../mobile/css/themes/ios/infragistics.mobile.theme.css" rel="stylesheet"></link>
+
+    <script src="../../js/jqm/jquery.min.js" type="text/javascript"></script>
+    <script src="../../js/jqm/jquery.mobile.min.js" type="text/javascript"></script>
+
+    <!-- Required Ignite UI Mobile Combined JavaScript File -->
+    <script src="../../../mobile/js/infragistics.mobile.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).on("pageinit", "div:jqmData(role='page')", function (e) {
+ $(e.target).on("focus", function (e) {
+ e.preventDefault(); 
+}); 
+});
+</script>
+<script type="text/javascript" src="../../js/modernizr.min.js"></script>
+<script type="text/javascript" src="../../js/infragistics.ui.sbscroll.js"></script></head>
+<body>
+    <div data-role="page">
+        <script>
+
+            //Bind to jQuery Mobile page init event.
+            $(document).bind("pageinit", function () {
+
+                $("#listViewExpandButton").bind("click", function () {
+                    //This method expands and collapses the sort/filter tray
+                    $("#listViewExpand").igListView("rootWidget").toggleSearchArea();
+                });
+            });
+
+        </script>
+
+        <div data-role="content">
+            <style type="text/css">
+                /*This css is to hide the sort/filter tray*/
+                .ui-iglist-tray-collapse {
+                    display: none;
+                }
+
+                .ui-iglist-tray-footer-collapsed {
+                    display: none;
+                }
+
+                /* Hides the clear button for IE */
+                input[data-type="search"]::-ms-clear {
+                    display: none;
+                }
+            </style>
+
+            <!--Sample JSON Data-->
+            <script type="text/javascript" src="../../js-data/mobile/nw-products.js"></script>
+
+            <div style="margin-bottom: 30px">
+                <div id="listViewExpandButton" data-role="button">Expand Presets</div>
+            </div>
+
+            <ul id="listViewExpand" data-role="iglistview" data-image-mode="none" data-auto-generate-layouts="False" data-bindings-text-key="ProductName" data-bindings-description-key="CategoryName" data-data-source="northwindProducts" data-data-source-type="json" data-filtering="true" data-filtering-name="Filtering" data-sorting="true" data-sorting-auto-generate-sort-presets="true" data-sorting-name="Sorting" data-sorting-presets='[ {"text":"Product Name","sortedFields":[ {"fieldName":"ProductName"} ]}, {"text":"Category","sortedFields":[ {"fieldName":"CategoryName"} ]} ]'>
+            </ul>
+
+        </div>
+    </div>
+
+</body>
+</html>

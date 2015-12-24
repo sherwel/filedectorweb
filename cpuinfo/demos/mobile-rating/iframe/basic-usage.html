@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="../../css/jqm/jquery.mobile.structure.min.css" rel="stylesheet"></link>
+
+    <!-- Required Ignite UI Mobile Combined CSS Files -->
+    <link href="../../../mobile/css/structure/infragistics.mobile.css" rel="stylesheet"></link>
+    <link href="../../../mobile/css/themes/ios6/infragistics.mobile.theme.css" rel="stylesheet"></link>
+
+    <script src="../../js/jqm/jquery.min.js" type="text/javascript"></script>
+    <script src="../../js/jqm/jquery.mobile.min.js" type="text/javascript"></script>
+
+    <!-- Required Ignite UI Mobile Combined JavaScript File -->
+    <script src="../../../mobile/js/infragistics.mobile.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).on("pageinit", "div:jqmData(role='page')", function (e) {
+ $(e.target).on("focus", function (e) {
+ e.preventDefault(); 
+}); 
+});
+</script>
+<script type="text/javascript" src="../../js/modernizr.min.js"></script>
+<script type="text/javascript" src="../../js/infragistics.ui.sbscroll.js"></script></head>
+<body>
+    <div data-role="page">
+        <style>
+            H3 {
+                margin: 0 0 .2em 0;
+            }
+
+            #htmlRating {
+                margin: 0 0 1.7em 0;
+            }
+        </style>
+        <script>
+
+            $(function () {
+                $("#scriptRating").igRating({
+                    value: 3
+                });
+            });
+
+        </script>
+
+        <div data-role="content">
+            <h3>HTML Data Attributes</h3>
+            <div id="htmlRating" data-role="igrating" data-value="2"></div>
+            <h3>Dynamic Instantiation</h3>
+            <div id="scriptRating"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

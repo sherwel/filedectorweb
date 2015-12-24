@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="./../css/jqm/jquery.mobile.structure.min.css" rel="stylesheet"></link>
+
+    <!-- Required Ignite UI Mobile Combined CSS Files -->
+    <link href="./../../mobile/css/structure/infragistics.mobile.css" rel="stylesheet"></link>
+    <link href="./../../mobile/css/themes/ios6/infragistics.mobile.theme.css" rel="stylesheet"></link>  
+
+    <script src="./../js/jqm/jquery.min.js" type="text/javascript"></script>
+    <script src="./../js/jqm/jquery.mobile.min.js" type="text/javascript"></script>
+
+    <!-- Required Ignite UI Mobile Combined JavaScript File -->
+    <script src="./../../mobile/js/infragistics.mobile.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).on("pageinit", "div:jqmData(role='page')", function (e) {
+ $(e.target).on("focus", function (e) {
+ e.preventDefault(); 
+}); 
+});
+</script>
+<script type="text/javascript" src="../js/modernizr.min.js"></script>
+<script type="text/javascript" src="../js/infragistics.ui.sbscroll.js"></script></head>
+<body>
+    <div data-role="page">
+        <div data-role="content">
+
+            <ul id="mobileListView" data-role="iglistview" data-icon-mode="thumbnail" data-filtering="true">
+                <li>
+                    <img src="./../images/samples/nw/employees/2.png"></img>
+                    <h2>Fuller, Andrew</h2>
+                    (206) 555-9482
+                </li>
+                <li>
+                    <img src="./../images/samples/nw/employees/3.png"></img>
+                    <h2>Leverling, Janet</h2>
+                    (206) 555-3412
+                </li>
+                <li>
+                    <img src="./../images/samples/nw/employees/4.png"></img>
+                    <h2>Peacock, Margaret</h2>
+                    (206) 555-8122
+                </li>
+                <li>
+                    <img src="./../images/samples/nw/employees/5.png"></img>
+                    <h2>Buchanan, Steven</h2>
+                    (71) 555-4848
+                </li>
+                <li>
+                    <img src="./../images/samples/nw/employees/6.png"></img>
+                    <h2>Suyama, Michael</h2>
+                    (71) 555-7773
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+</html>

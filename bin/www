@@ -20,12 +20,47 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+var io = require("socket.io").listen(server);
+var os = require("os");
+var osUtils = require("os-utils");
+var interval = -1;
+var currCPU = 0;
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
+
+io.sockets.on('connection', function () {//连接事件
+    if (interval < 0) {
+        interval = setInterval(function () {
+            var freeMem = os.freemem();
+            var totalMem = os.totalmem();
+            io.sockets.emit("cpuUpdate", {
+                cpuUsage: currCPU * 100.0,
+                freeMem: freeMem,
+                totalMem: totalMem,
+                usedMem: totalMem - freeMem
+            });
+        }, 10);//每隔10ms取系统数据
+    }
+});
+
+function updateCPU() {
+    setTimeout(function () {
+        osUtils.cpuUsage(function (value) {
+            currCPU = value;
+            
+            updateCPU();
+        });
+    }, 0);
+}
+updateCPU();
+
+console.log("服务器已启动");
+
+
+
 server.on('error', onError);
 server.on('listening', onListening);
 
